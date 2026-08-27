@@ -1,0 +1,7 @@
+# Secrets / config locale (NE PAS publier)
+.mcp.json
+.claude/
+# Fichiers système Windows / OneDrive
+desktop.ini
+Thumbs.db
+.thumbnail
