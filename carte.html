@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Carte — Aba’a Mvoé Lodge | Akanda, Libreville</title>
+<meta name="description" content="La carte d’Aba’a Mvoé Lodge : cuisine de terroir, cocktails et sélection de cave — Akanda, Libreville.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="La Carte — Aba’a Mvoé Lodge">
+<meta property="og:description" content="Le goût du terroir — Aba’a Mvoé Lodge, Akanda, Libreville.">
+<meta property="og:image" content="assets/gastronomy-board.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .menu-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,7vw,100px);align-items:end;margin-bottom:clamp(54px,8vw,96px)}
+  .menu-intro h2{font-size:clamp(42px,6vw,78px);line-height:.94}.menu-intro-copy{max-width:520px;color:var(--fg-dim);line-height:1.8}
+  .menu-note{display:flex;align-items:center;gap:14px;margin-top:22px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}.menu-note:before{content:"";width:34px;height:1px;background:currentColor}
+  .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(50px,8vw,110px) clamp(42px,8vw,120px)}
+  .menu-block-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding-bottom:18px;margin-bottom:4px;border-bottom:1px solid rgba(213,164,100,.55)}
+  .menu-block-index{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--gold)}.menu-block h3{font-family:var(--serif);font-size:clamp(30px,3vw,42px);font-weight:300}
+  .menu-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 18px;padding:20px 0;border-bottom:1px solid rgba(245,239,230,.09)}
+  .menu-item-name{font-family:var(--serif);font-size:21px;color:var(--fg)}.menu-item-price{padding-top:4px;font-size:11px;letter-spacing:.08em;color:var(--gold);white-space:nowrap}.menu-item-price:after{content:" FCFA"}
+  .menu-item-desc{grid-column:1/-1;max-width:470px;color:var(--fg-dimmer);font-size:12px;line-height:1.65}
+  .menu-pairing{margin-top:clamp(68px,9vw,120px);display:grid;grid-template-columns:1fr 1fr;min-height:420px;background:var(--bg-alt);border:1px solid rgba(245,239,230,.09)}.menu-pairing-media{min-height:340px}.menu-pairing-media img{width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
+  .menu-pairing-copy{padding:clamp(36px,6vw,78px);display:flex;flex-direction:column;justify-content:center}.menu-pairing-copy h3{margin:14px 0 16px;font-family:var(--serif);font-size:clamp(34px,4vw,56px);font-weight:300;line-height:1}.menu-pairing-copy p{color:var(--fg-dim);line-height:1.75}
+  .menu-section-tag{display:block;margin:clamp(64px,8vw,100px) 0 clamp(32px,5vw,50px)}.menu-grid + .menu-section-tag{margin-top:clamp(64px,8vw,100px)}
+  @media(max-width:760px){.menu-intro,.menu-grid,.menu-pairing{grid-template-columns:1fr}.menu-grid{gap:56px}.menu-pairing-media{min-height:280px}}
+</style>
+</head>
+<body data-page="carte">
+
+<header class="site-header">
+  <a href="index.html" class="brand"><img src="assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></a>
+  <nav class="nav-links" aria-label="Navigation principale">
+    <a href="club.html" data-page="club">Le Lodge</a>
+    <div class="nav-drop">
+      <a href="experience.html" data-page="experience">Expériences</a>
+      <div class="nav-drop-panel">
+        <a href="cigares.html" data-page="cigares">Le Foyer</a>
+        <a href="spiritueux.html" data-page="spiritueux">Cave & Terroir</a>
+        <a href="carte.html" data-page="carte">La Carte</a>
+        <a href="table.html" data-page="table">La Table</a>
+        <a href="poolside.html" data-page="poolside">Piscine & Nature</a>
+      </div>
+    </div>
+    <a href="evenements.html" data-page="evenements">Événements</a>
+    <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="cercle.html" data-page="cercle">Hébergement</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" data-reserve="membership" data-track="reserve_header" class="nav-cta">Réserver</a>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-head">
+    <span class="brand"><img src="assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></span>
+    <button class="mobile-menu-close" aria-label="Fermer le menu">×</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html" data-page="home">Accueil</a>
+    <a href="club.html" data-page="club">Le Lodge</a>
+    <a href="experience.html" data-page="experience">Expériences</a>
+    <a href="cigares.html" data-page="cigares" class="is-sub">Le Foyer</a>
+    <a href="spiritueux.html" data-page="spiritueux" class="is-sub">Cave & Terroir</a>
+    <a href="carte.html" data-page="carte" class="is-sub">La Carte</a>
+    <a href="table.html" data-page="table" class="is-sub">La Table</a>
+    <a href="poolside.html" data-page="poolside" class="is-sub">Piscine & Nature</a>
+    <a href="evenements.html" data-page="evenements">Événements</a>
+    <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="cercle.html" data-page="cercle">Hébergement</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver un séjour</a>
+</div>
+
+<main>
+
+  <section class="page-hero">
+    <div class="page-hero-media"><img src="assets/gastronomy-board.png" alt="La carte d’Aba’a Mvoé Lodge"></div>
+    <div class="page-hero-scrim"></div>
+    <div class="page-hero-body">
+      <div class="page-hero-crumb"><i></i><span>La Carte</span></div>
+      <h1 class="page-hero-title">Le goût<br><em>du terroir.</em></h1>
+      <p class="page-hero-lede">Sélection resserrée, prix indicatifs — la carte complète est présentée à table.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="frame">
+      <div class="menu-intro reveal" data-reveal><div><span class="eyebrow">Menu Aba'a</span><h2>Le goût de la maison,<br><em>à partager.</em></h2></div><div><p class="menu-intro-copy">Une cuisine de partage inspirée du littoral et de la forêt gabonaise, des cocktails signature et une sélection pensée pour prolonger la soirée au coin du feu.</p><span class="menu-note">Sur réservation</span></div></div>
+
+      <span class="eyebrow menu-section-tag">La Cuisine</span>
+      <div class="menu-grid">
+        <article class="menu-block reveal" data-reveal><div class="menu-block-head"><h3>Entrées</h3><span class="menu-block-index">01</span></div>
+          <div class="menu-item"><span class="menu-item-name">Carpaccio de poisson</span><span class="menu-item-price">12 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Tartare de saumon</span><span class="menu-item-price">13 000</span><span class="menu-item-desc">Avocat, mangue, graine de sésame.</span></div>
+          <div class="menu-item"><span class="menu-item-name">Salade de la mer</span><span class="menu-item-price">16 000</span><span class="menu-item-desc">Feuilles de chêne, crevettes, saumon fumé, avocat, croûtons, câpres.</span></div>
+          <div class="menu-item"><span class="menu-item-name">Cassolette de Saint-Jacques</span><span class="menu-item-price">18 000</span><span class="menu-item-desc">Noix de Saint-Jacques, crevettes, champignons de Paris, crème légère.</span></div></article>
+        <article class="menu-block reveal" data-reveal><div class="menu-block-head"><h3>Plats</h3><span class="menu-block-index">02</span></div>
+          <div class="menu-item"><span class="menu-item-name">Poêlée de gambas persillade</span><span class="menu-item-price">18 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Filet de capitaine aux fines herbes</span><span class="menu-item-price">14 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Côtelettes d'agneau aux champignons de Paris</span><span class="menu-item-price">22 000</span></div>
+          <div class="menu-item" style="border-bottom:0"><span class="menu-item-name">Magret de canard à l'orange</span><span class="menu-item-price">28 000</span><span class="menu-item-desc">Sur un lit de purée de patate douce. <em style="font-style:italic;color:var(--fg-dimmer)">— Accompagnements : haricots verts / alloco / pomme sautée.</em></span></div></article>
+        <article class="menu-block reveal" data-reveal><div class="menu-block-head"><h3>Tapas</h3><span class="menu-block-index">03</span></div>
+          <div class="menu-item"><span class="menu-item-name">Beignets de crevettes</span><span class="menu-item-price">8 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Nems de poulet</span><span class="menu-item-price">7 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Trio mini burger</span><span class="menu-item-price">6 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">L'onctueux club sandwich &amp; potatoes</span><span class="menu-item-price">14 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Pilon de poulet sauce Olébé <small class="menu-item-badge">Signature</small></span><span class="menu-item-price">11 000</span><span class="menu-item-desc">Graines de sésame &amp; broche d'alloco.</span></div>
+          <div class="menu-item"><span class="menu-item-name">Plateau snack à partager (3 / 6 pers.)</span><span class="menu-item-price">25 000 / 55 000</span><span class="menu-item-desc">Minis burgers, feuilletés de saucisse, minis pizzas, pilons sauce Olébé, brochettes mozzarella-tomate, brochettes d'alloco.</span></div>
+          <div class="menu-item"><span class="menu-item-name">Plateau de charcuterie (3 / 6 pers.)</span><span class="menu-item-price">28 000 / 58 000</span></div></article>
+        <article class="menu-block reveal" data-reveal><div class="menu-block-head"><h3>Desserts</h3><span class="menu-block-index">04</span></div>
+          <div class="menu-item"><span class="menu-item-name">Tartelette de pommes</span><span class="menu-item-price">6 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Duo de verrines caramel beurre salé</span><span class="menu-item-price">8 000</span></div>
+          <div class="menu-item"><span class="menu-item-name">Flan caramel à la banane</span><span class="menu-item-price">8 000</span></div></article>
+      </div>
+
+      <span class="eyebrow menu-section-tag">Le Bar</span>
+      <div class="menu-grid">
+        <article class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>Apéritifs</h4><span class="menu-block-index">01</span></div>
+          <div class="price-list-cols"><span></span><span>Verre</span><span>Bouteille</span></div>
+          <div class="price-row"><span class="price-row-name">Malibu</span><span class="price-row-price">8 000</span><span class="price-row-price">70 000</span></div>
+          <div class="price-row"><span class="price-row-name">Martini blanc</span><span class="price-row-price">8 000</span><span class="price-row-price">70 000</span></div>
+          <div class="price-row"><span class="price-row-name">Baileys</span><span class="price-row-price">8 000</span><span class="price-row-price">70 000</span></div>
+        </article>
+        <article class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>Bières</h4><span class="menu-block-index">02</span></div>
+          <div class="price-row"><span class="price-row-name">Heineken</span><span class="price-row-price">5 000</span></div>
+          <div class="price-row"><span class="price-row-name">Despérados</span><span class="price-row-price">5 000</span></div>
+          <div class="price-row"><span class="price-row-name">Ice</span><span class="price-row-price">5 000</span></div>
+        </article>
+        <article class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>Cocktails</h4><span class="menu-block-index">03</span></div>
+          <div class="price-row"><span class="price-row-name">Virgin Passion Glaciale</span><span class="price-row-price">13 500</span></div>
+          <div class="price-row"><span class="price-row-name">Mojito Mint</span><span class="price-row-price">13 500</span></div>
+          <div class="price-row"><span class="price-row-name">Hollywood</span><span class="price-row-price">13 500</span></div>
+          <div class="price-row"><span class="price-row-name">Frozen Passion Fruit Margarita</span><span class="price-row-price">15 000</span></div>
+          <div class="price-row"><span class="price-row-name">Litchi-Rita</span><span class="price-row-price">12 500</span></div>
+          <div class="price-row"><span class="price-row-name">Martini crémeux pistache</span><span class="price-row-price">15 000</span></div>
+          <div class="price-row"><span class="price-row-name">Passion des Îles</span><span class="price-row-price">13 500</span></div>
+          <div class="price-row"><span class="price-row-name">Rose Pétal</span><span class="price-row-price">15 500</span></div>
+        </article>
+        <article class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>Mocktails</h4><span class="menu-block-index">04</span></div>
+          <div class="price-row"><span class="price-row-name">Virgin Passion Glaciale</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Mojito Mint</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Virgin Colada</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Passion des Îles</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Hollywood</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Rose Pétal</span><span class="price-row-price">12 000</span></div>
+          <div class="price-row"><span class="price-row-name">Virgin Ginger</span><span class="price-row-price">12 000</span></div>
+        </article>
+      </div>
+
+      <div class="menu-pairing reveal" data-reveal><div class="menu-pairing-media"><img src="assets/cigars-table.png" alt="Verre et cigare servis au coin du feu"></div><div class="menu-pairing-copy"><span class="eyebrow">L'accord Aba'a</span><h3>Un verre.<br><em>Un feu.</em></h3><p>Laissez notre équipe composer un accord sur mesure entre la cave et Le Foyer. Retrouvez toute la sélection de vins, spiritueux et cigares dans notre Cave &amp; Terroir.</p><a href="spiritueux.html" class="card-cta" style="margin-top:26px">Découvrir la Cave &amp; Terroir <span>→</span></a></div></div>
+      <p class="lede reveal" data-reveal style="margin-top:42px">Prix exprimés en FCFA. Menu sur réservation — merci de signaler vos allergies à notre équipe. <a href="#" data-reserve="table" data-track="reserve_carte">Réserver une table <span>→</span></a></p>
+    </div>
+  </section>
+
+  <section class="fcta">
+    <img src="assets/gastronomy.png" alt="Table dressée, Aba’a Mvoé Lodge">
+    <div class="fcta-body">
+      <span class="fcta-kicker">La Table</span>
+      <h2 class="fcta-title">Une table.<br>Un verre.</h2>
+      <div class="btn-row">
+        <a href="table.html" class="btn btn-solid">Découvrir La Table <span>→</span></a>
+        <a href="#" data-reserve="table" data-track="reserve_carte_final" class="btn btn-line">Réserver <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr-top">
+    <div class="ftr-brand"><span class="ftr-word">ABA’A</span><span class="ftr-word-sub">Mvoé Lodge</span></div>
+    <span class="ftr-tag">Hébergement · Gastronomie · Bien-être · Événements</span>
+  </div>
+  <div class="ftr-news">
+    <div>
+      <span class="ftr-label">Newsletter</span>
+      <p>Les nouvelles du lodge, les arrivées en cuisine et les événements privés — une fois par mois, pas plus.</p>
+    </div>
+    <div>
+      <form class="ftr-news-form" data-newsletter-form>
+        <input type="email" name="email" required placeholder="Votre email">
+        <button type="submit">S'inscrire →</button>
+      </form>
+      <span class="form-sent" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:#D5A464">Merci — vous êtes inscrit(e) à la newsletter Aba’a.</span>
+    </div>
+  </div>
+  <div class="ftr-mid">
+    <div>
+      <span class="ftr-label">Visit</span>
+      <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
+      <a class="ftr-link" href="https://www.google.com/maps/search/?api=1&query=Aba%27a%20Mvo%C3%A9%20Lodge%20Akanda%20Libreville%20Gabon" target="_blank" rel="noopener">Google Maps →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Contact</span>
+      <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+      <a class="ftr-link" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite plus d’informations.">WhatsApp →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Follow</span>
+      <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Explore</span>
+      <a class="ftr-link" href="club.html">Le Lodge</a>
+      <a class="ftr-link" href="experience.html">Expériences</a>
+      <a class="ftr-link" href="carte.html">La Carte</a>
+      <a class="ftr-link" href="evenements.html">Événements</a>
+      <a class="ftr-link" href="privatisation.html">Privatisation</a>
+      <a class="ftr-link" href="cercle.html">Hébergement</a>
+      <a class="ftr-link" href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="ftr-bottom">
+    <span>© 2026 Aba’a Mvoé Lodge — Tous droits réservés</span>
+    <span>« Entrez, vous êtes chez vous. »</span>
+  </div>
+</footer>
+
+<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab">WA</a>
+
+<div class="mcta">
+  <div class="mcta-inner">
+    <a href="#" data-reserve="membership" data-track="reserve_sticky">Réserver</a>
+    <a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour.">WhatsApp</a>
+  </div>
+</div>
+
+<div class="rsv-overlay"></div>
+<div class="rsv-drawer" role="dialog" aria-modal="true" aria-labelledby="rsv-title">
+  <div class="rsv-head">
+    <button class="rsv-back">← <span>Fermer</span></button>
+    <span class="rsv-brand">Aba’a Mvoé Lodge</span>
+  </div>
+  <div class="rsv-body">
+    <span class="rsv-kicker">Réservation</span>
+    <h2 class="rsv-title" id="rsv-title">Votre table vous attend.</h2>
+    <div class="rsv-context" style="display:none">
+      <div><span>Soirée</span><strong class="rsv-context-event"></strong></div>
+      <div><span>Date</span><strong class="rsv-context-date"></strong></div>
+    </div>
+    <form class="rsv-form">
+      <label class="field"><span>Nom</span><input name="nom" placeholder="Votre nom"></label>
+      <label class="field"><span>Téléphone</span><input name="tel" placeholder="+241 …"></label>
+      <div class="rsv-row">
+        <label class="field"><span>Date</span><input name="date" type="date"></label>
+        <label class="field"><span>Heure</span><input name="heure" type="time"></label>
+      </div>
+      <label class="field"><span>Personnes</span>
+        <div class="rsv-stepper">
+          <button type="button" class="rsv-pax-dec" aria-label="Moins de personnes">−</button>
+          <span class="rsv-pax-val">2</span>
+          <button type="button" class="rsv-pax-inc" aria-label="Plus de personnes">+</button>
+        </div>
+      </label>
+      <label class="field"><span>Message</span><textarea name="message" rows="2" placeholder="Occasion, salon souhaité, préférences…"></textarea></label>
+      <button type="submit" class="rsv-submit">Demander une réservation</button>
+      <span class="rsv-or">— ou —</span>
+      <a class="rsv-wa" href="#" target="_blank" rel="noopener">● Continuer sur WhatsApp →</a>
+    </form>
+    <div class="rsv-sent" style="display:none">
+      <span class="rsv-sent-title">Demande envoyée</span>
+      <p class="rsv-sent-text"></p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

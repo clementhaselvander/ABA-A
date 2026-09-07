@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Foyer — Aba’a Mvoé Lodge | Akanda, Libreville</title>
+<meta name="description" content="Le Foyer d’Aba’a Mvoé Lodge : veillées autour du feu, cigares choisis et récits du soir — Akanda, Libreville.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Le Foyer — Aba’a Mvoé Lodge">
+<meta property="og:description" content="Le feu qui accueille — Aba’a Mvoé Lodge, Akanda, Libreville.">
+<meta property="og:image" content="assets/cigar-macro.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .beats { display: flex; flex-direction: column; gap: 14px; }
+  .beats span { font-family: var(--serif); font-style: italic; font-size: 19px; color: rgba(245,239,230,.72); }
+  .ritual-row { display: flex; flex-wrap: wrap; border-top: 1px solid var(--line-strong); }
+  .ritual-item { flex: 1 1 200px; padding: 24px 24px 24px 0; border-right: 1px solid var(--line); display: flex; gap: 14px; align-items: baseline; }
+  .ritual-item:last-child { border-right: 0; }
+  .ritual-num { font-family: var(--serif); font-size: 13px; color: var(--gold-dark); }
+  .ritual-name { display: block; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--fg); }
+  .ritual-sub { display: block; margin-top: 4px; font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--fg-dimmer); }
+  @media (max-width: 760px) { .ritual-item { border-right: 0; border-bottom: 1px solid var(--line); flex: 1 1 100%; padding: 18px 0; } }
+</style>
+</head>
+<body data-page="cigares">
+
+<header class="site-header">
+  <a href="index.html" class="brand"><img src="assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></a>
+  <nav class="nav-links" aria-label="Navigation principale">
+    <a href="club.html" data-page="club">Le Lodge</a>
+    <div class="nav-drop">
+      <a href="experience.html" data-page="experience">Expériences</a>
+      <div class="nav-drop-panel">
+        <a href="cigares.html" data-page="cigares">Le Foyer</a>
+        <a href="spiritueux.html" data-page="spiritueux">Cave & Terroir</a>
+        <a href="carte.html" data-page="carte">La Carte</a>
+        <a href="table.html" data-page="table">La Table</a>
+        <a href="poolside.html" data-page="poolside">Piscine & Nature</a>
+      </div>
+    </div>
+    <a href="evenements.html" data-page="evenements">Événements</a>
+    <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="cercle.html" data-page="cercle">Hébergement</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" data-reserve="membership" data-track="reserve_header" class="nav-cta">Réserver</a>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-head">
+    <span class="brand"><img src="assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></span>
+    <button class="mobile-menu-close" aria-label="Fermer le menu">×</button>
+  </div>
+  <nav aria-label="Navigation mobile">
+    <a href="index.html" data-page="home">Accueil</a>
+    <a href="club.html" data-page="club">Le Lodge</a>
+    <a href="experience.html" data-page="experience">Expériences</a>
+    <a href="cigares.html" data-page="cigares" class="is-sub">Le Foyer</a>
+    <a href="spiritueux.html" data-page="spiritueux" class="is-sub">Cave & Terroir</a>
+    <a href="carte.html" data-page="carte" class="is-sub">La Carte</a>
+    <a href="table.html" data-page="table" class="is-sub">La Table</a>
+    <a href="poolside.html" data-page="poolside" class="is-sub">Piscine & Nature</a>
+    <a href="evenements.html" data-page="evenements">Événements</a>
+    <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="cercle.html" data-page="cercle">Hébergement</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver un séjour</a>
+</div>
+
+<main>
+
+  <section class="page-hero">
+    <div class="page-hero-media"><img src="assets/cigar-macro.png" alt="Le feu du Foyer, Aba’a Mvoé Lodge"></div>
+    <div class="page-hero-scrim"></div>
+    <div class="page-hero-body">
+      <div class="page-hero-crumb"><i></i><span>03 — Le Foyer · The Hearth</span></div>
+      <h1 class="page-hero-title">Le feu<br><em>qui accueille.</em></h1>
+      <p class="page-hero-lede">À Aba'a, le feu ne se presse pas. Vous non plus.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="frame grid-2" style="align-items:center">
+      <div class="beats reveal" data-reveal>
+        <span>Accueillir.</span><span>Partager.</span><span>Ralentir.</span><span>Veiller.</span>
+      </div>
+      <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:16/11">
+        <video src="assets/cigar-ritual.mp4" poster="assets/cigar-macro.png" autoplay muted loop playsinline preload="metadata" aria-label="Veillée autour du feu, Aba’a Mvoé Lodge" style="width:100%;height:100%;object-fit:cover"></video>
+      </div>
+    </div>
+    <div class="frame ritual-row reveal" data-reveal>
+      <div class="ritual-item"><span class="ritual-num">01</span><span><span class="ritual-name">Choose</span><span class="ritual-sub">Le choix, sans hâte.</span></span></div>
+      <div class="ritual-item"><span class="ritual-num">02</span><span><span class="ritual-name">Cut</span><span class="ritual-sub">Le geste, précis.</span></span></div>
+      <div class="ritual-item"><span class="ritual-num">03</span><span><span class="ritual-name">Light</span><span class="ritual-sub">Le feu, partagé.</span></span></div>
+      <div class="ritual-item"><span class="ritual-num">04</span><span><span class="ritual-name">Savour</span><span class="ritual-sub">Le temps, retrouvé.</span></span></div>
+    </div>
+    <div class="frame stat-row reveal" data-reveal style="margin-top:44px">
+      <div><span class="stat-val">40+</span><span class="stat-label">Références</span></div>
+      <div><span class="stat-val">70%</span><span class="stat-label">Humidité</span></div>
+      <div><span class="stat-val">04</span><span class="stat-label">Accords</span></div>
+      <div><span class="stat-val">Dès 18h</span><span class="stat-label">Le Foyer</span></div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="frame grid-2" style="align-items:center">
+      <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:4/5">
+        <img src="assets/cigars-cohiba-humidor.png" alt="Le fumoir d’Aba’a Mvoé Lodge" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="reveal" data-reveal>
+        <span class="eyebrow">Le Fumoir</span>
+        <h2>Chaque veillée<br><em>commence par un feu.</em></h2>
+        <p class="lede" style="margin-top:18px">Une cave climatisée à 70% d'humidité, une sélection resserrée de cigares d'origine — Cuba, République Dominicaine, Nicaragua — proposée par notre maître de maison, à savourer au coin du feu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="frame">
+      <div class="reveal" data-reveal style="max-width:560px;margin-bottom:40px">
+        <span class="eyebrow">Boutique du Foyer · Vente en ligne</span>
+        <h2>L'excellence,<br><em>livrée jusqu'à vous.</em></h2>
+        <p class="lede" style="margin-top:18px">Composez votre sélection ci-dessous : retrait gratuit au Foyer dès 18h, ou livraison à Akanda, Libreville et Owendo.</p>
+      </div>
+      <div class="grid-2">
+        <div class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>République Dominicaine</h4></div>
+          <div class="price-row" data-cigar data-name="Arturo Fuente Opus X Double Robusto" data-price="65000"><span class="price-row-name">Arturo Fuente Opus X Double Robusto</span><span class="price-row-price">65 000</span><button type="button" class="cigar-add" aria-label="Ajouter Arturo Fuente Opus X Double Robusto au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Arturo Fuente Opus X Belicoso XXX" data-price="55000"><span class="price-row-name">Arturo Fuente Opus X Belicoso XXX</span><span class="price-row-price">55 000</span><button type="button" class="cigar-add" aria-label="Ajouter Arturo Fuente Opus X Belicoso XXX au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Arturo Fuente Gran Reserva Canones" data-price="35000"><span class="price-row-name">Arturo Fuente Gran Reserva Canones</span><span class="price-row-price">35 000</span><button type="button" class="cigar-add" aria-label="Ajouter Arturo Fuente Gran Reserva Canones au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="E.P Carrillo Pledge Lonsdale" data-price="35000"><span class="price-row-name">E.P Carrillo Pledge Lonsdale</span><span class="price-row-price">35 000</span><button type="button" class="cigar-add" aria-label="Ajouter E.P Carrillo Pledge Lonsdale au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="E.P Carrillo Encore El Primero" data-price="35000"><span class="price-row-name">E.P Carrillo Encore El Primero</span><span class="price-row-price">35 000</span><button type="button" class="cigar-add" aria-label="Ajouter E.P Carrillo Encore El Primero au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="PDR Flores y R 10th Anniv Gran Toro" data-price="35000"><span class="price-row-name">PDR Flores y R 10th Anniv Gran Toro</span><span class="price-row-price">35 000</span><button type="button" class="cigar-add" aria-label="Ajouter PDR Flores y R 10th Anniv Gran Toro au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Vigafina 54" data-price="28000"><span class="price-row-name">Vigafina 54</span><span class="price-row-price">28 000</span><button type="button" class="cigar-add" aria-label="Ajouter Vigafina 54 au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="PDR Gran Toro" data-price="30000"><span class="price-row-name">PDR Gran Toro</span><span class="price-row-price">30 000</span><button type="button" class="cigar-add" aria-label="Ajouter PDR Gran Toro au panier">+</button></div>
+        </div>
+        <div class="price-block reveal" data-reveal>
+          <div class="price-list-head"><h4>Cuba</h4></div>
+          <div class="price-row" data-cigar data-name="Cohiba Cigarillos" data-price="12000"><span class="price-row-name">Cohiba Cigarillos</span><span class="price-row-price">12 000</span><button type="button" class="cigar-add" aria-label="Ajouter Cohiba Cigarillos au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Cohiba Robustos" data-price="70000"><span class="price-row-name">Cohiba Robustos</span><span class="price-row-price">70 000</span><button type="button" class="cigar-add" aria-label="Ajouter Cohiba Robustos au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Cohiba Siglo I AT" data-price="40000"><span class="price-row-name">Cohiba Siglo I AT</span><span class="price-row-price">40 000</span><button type="button" class="cigar-add" aria-label="Ajouter Cohiba Siglo I AT au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Cohiba Genius Maduro 5" data-price="100000"><span class="price-row-name">Cohiba Genius Maduro 5</span><span class="price-row-price">100 000</span><button type="button" class="cigar-add" aria-label="Ajouter Cohiba Genius Maduro 5 au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Cohiba Pirámides Extra" data-price="115000"><span class="price-row-name">Cohiba Pirámides Extra</span><span class="price-row-price">115 000</span><button type="button" class="cigar-add" aria-label="Ajouter Cohiba Pirámides Extra au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Hoyo de Monterrey Epicure" data-price="30000"><span class="price-row-name">Hoyo de Monterrey Epicure</span><span class="price-row-price">30 000</span><button type="button" class="cigar-add" aria-label="Ajouter Hoyo de Monterrey Epicure au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Hoyo de Monterrey de San Juan" data-price="38000"><span class="price-row-name">Hoyo de Monterrey de San Juan</span><span class="price-row-price">38 000</span><button type="button" class="cigar-add" aria-label="Ajouter Hoyo de Monterrey de San Juan au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Hoyo de Monterrey de José Gener" data-price="42000"><span class="price-row-name">Hoyo de Monterrey de José Gener</span><span class="price-row-price">42 000</span><button type="button" class="cigar-add" aria-label="Ajouter Hoyo de Monterrey de José Gener au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Montecristo Open Eagle" data-price="40000"><span class="price-row-name">Montecristo Open Eagle</span><span class="price-row-price">40 000</span><button type="button" class="cigar-add" aria-label="Ajouter Montecristo Open Eagle au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Partagás Série D4" data-price="30000"><span class="price-row-name">Partagás Série D4</span><span class="price-row-price">30 000</span><button type="button" class="cigar-add" aria-label="Ajouter Partagás Série D4 au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Partagás Solomones" data-price="80000"><span class="price-row-name">Partagás Solomones</span><span class="price-row-price">80 000</span><button type="button" class="cigar-add" aria-label="Ajouter Partagás Solomones au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Roméo y Julieta Wide Churchill" data-price="42000"><span class="price-row-name">Roméo y Julieta Wide Churchill</span><span class="price-row-price">42 000</span><button type="button" class="cigar-add" aria-label="Ajouter Roméo y Julieta Wide Churchill au panier">+</button></div>
+          <div class="price-row" data-cigar data-name="Trinidad Vigía" data-price="76000"><span class="price-row-name">Trinidad Vigía</span><span class="price-row-price">76 000</span><button type="button" class="cigar-add" aria-label="Ajouter Trinidad Vigía au panier">+</button></div>
+        </div>
+      </div>
+      <p class="lede reveal" data-reveal style="margin-top:30px">Prix exprimés en FCFA. <a href="carte.html">Voir toute la carte <span>→</span></a></p>
+      <div class="frame ritual-row reveal" data-reveal style="padding:0;margin-top:30px">
+        <div class="ritual-item"><span class="ritual-num">◈</span><span><span class="ritual-name">Retrait</span><span class="ritual-sub">Gratuit, au Foyer, dès 18h.</span></span></div>
+        <div class="ritual-item"><span class="ritual-num">◈</span><span><span class="ritual-name">Zones livrées</span><span class="ritual-sub">Akanda · Libreville · Owendo.</span></span></div>
+        <div class="ritual-item"><span class="ritual-num">◈</span><span><span class="ritual-name">Délai</span><span class="ritual-sub">Sous 24 à 48h.</span></span></div>
+        <div class="ritual-item"><span class="ritual-num">◈</span><span><span class="ritual-name">Frais</span><span class="ritual-sub">5 000–8 000 FCFA, offerts dès 150 000 FCFA.</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="frame grid-2" style="align-items:center">
+      <div class="reveal" data-reveal>
+        <span class="eyebrow">L'Accord du Soir</span>
+        <h2>Quand le feu<br><em>rencontre le verre.</em></h2>
+        <a href="spiritueux.html" class="card-cta" style="display:inline-block;margin-top:18px">Cave &amp; Terroir <span>→</span></a>
+      </div>
+      <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:3/4;max-width:320px">
+        <img src="assets/spirits-bottle.png" alt="Un verre servi au coin du feu, Aba’a Mvoé Lodge" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+  </section>
+
+  <section class="fcta">
+    <img src="assets/cigars-table.png" alt="Le Foyer, Aba’a Mvoé Lodge">
+    <div class="fcta-body">
+      <span class="fcta-kicker">The Hearth</span>
+      <h2 class="fcta-title">Prenez<br>le temps.</h2>
+      <div class="btn-row">
+        <a href="#" data-reserve="membership" data-track="reserve_cigares" class="btn btn-solid">Réserver un séjour <span>→</span></a>
+        <a href="evenements.html" class="btn btn-line">Voir les Événements <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr-top">
+    <div class="ftr-brand"><span class="ftr-word">ABA’A</span><span class="ftr-word-sub">Mvoé Lodge</span></div>
+    <span class="ftr-tag">Hébergement · Gastronomie · Bien-être · Événements</span>
+  </div>
+  <div class="ftr-news">
+    <div>
+      <span class="ftr-label">Newsletter</span>
+      <p>Les nouvelles du lodge, les arrivées en cuisine et les événements privés — une fois par mois, pas plus.</p>
+    </div>
+    <div>
+      <form class="ftr-news-form" data-newsletter-form>
+        <input type="email" name="email" required placeholder="Votre email">
+        <button type="submit">S'inscrire →</button>
+      </form>
+      <span class="form-sent" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:#D5A464">Merci — vous êtes inscrit(e) à la newsletter Aba’a.</span>
+    </div>
+  </div>
+  <div class="ftr-mid">
+    <div>
+      <span class="ftr-label">Visit</span>
+      <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
+      <a class="ftr-link" href="https://www.google.com/maps/search/?api=1&query=Aba%27a%20Mvo%C3%A9%20Lodge%20Akanda%20Libreville%20Gabon" target="_blank" rel="noopener">Google Maps →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Contact</span>
+      <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+      <a class="ftr-link" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite plus d’informations.">WhatsApp →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Follow</span>
+      <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Explore</span>
+      <a class="ftr-link" href="club.html">Le Lodge</a>
+      <a class="ftr-link" href="experience.html">Expériences</a>
+      <a class="ftr-link" href="carte.html">La Carte</a>
+      <a class="ftr-link" href="evenements.html">Événements</a>
+      <a class="ftr-link" href="privatisation.html">Privatisation</a>
+      <a class="ftr-link" href="cercle.html">Hébergement</a>
+      <a class="ftr-link" href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="ftr-bottom">
+    <span>© 2026 Aba’a Mvoé Lodge — Tous droits réservés</span>
+    <span>« Entrez, vous êtes chez vous. »</span>
+  </div>
+</footer>
+
+<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab">WA</a>
+
+<div class="mcta">
+  <div class="mcta-inner">
+    <a href="#" data-reserve="membership" data-track="reserve_sticky">Réserver</a>
+    <a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour.">WhatsApp</a>
+  </div>
+</div>
+
+<div class="rsv-overlay"></div>
+<div class="rsv-drawer" role="dialog" aria-modal="true" aria-labelledby="rsv-title">
+  <div class="rsv-head">
+    <button class="rsv-back">← <span>Fermer</span></button>
+    <span class="rsv-brand">Aba’a Mvoé Lodge</span>
+  </div>
+  <div class="rsv-body">
+    <span class="rsv-kicker">Réservation</span>
+    <h2 class="rsv-title" id="rsv-title">Votre table vous attend.</h2>
+    <div class="rsv-context" style="display:none">
+      <div><span>Soirée</span><strong class="rsv-context-event"></strong></div>
+      <div><span>Date</span><strong class="rsv-context-date"></strong></div>
+    </div>
+    <form class="rsv-form">
+      <label class="field"><span>Nom</span><input name="nom" placeholder="Votre nom"></label>
+      <label class="field"><span>Téléphone</span><input name="tel" placeholder="+241 …"></label>
+      <div class="rsv-row">
+        <label class="field"><span>Date</span><input name="date" type="date"></label>
+        <label class="field"><span>Heure</span><input name="heure" type="time"></label>
+      </div>
+      <label class="field"><span>Personnes</span>
+        <div class="rsv-stepper">
+          <button type="button" class="rsv-pax-dec" aria-label="Moins de personnes">−</button>
+          <span class="rsv-pax-val">2</span>
+          <button type="button" class="rsv-pax-inc" aria-label="Plus de personnes">+</button>
+        </div>
+      </label>
+      <label class="field"><span>Message</span><textarea name="message" rows="2" placeholder="Occasion, salon souhaité, préférences…"></textarea></label>
+      <button type="submit" class="rsv-submit">Demander une réservation</button>
+      <span class="rsv-or">— ou —</span>
+      <a class="rsv-wa" href="#" target="_blank" rel="noopener">● Continuer sur WhatsApp →</a>
+    </form>
+    <div class="rsv-sent" style="display:none">
+      <span class="rsv-sent-title">Demande envoyée</span>
+      <p class="rsv-sent-text"></p>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="cart-fab" aria-label="Voir le panier du Foyer"><span>Panier</span><span class="cart-fab-count">0</span></button>
+
+<div class="cart-overlay"></div>
+<div class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="cart-head">
+    <button class="cart-back">← <span>Fermer</span></button>
+    <span class="cart-brand">Aba’a Mvoé Lodge</span>
+  </div>
+  <div class="cart-body">
+    <span class="cart-kicker">Boutique du Foyer</span>
+    <h2 class="cart-title" id="cart-title">Votre sélection.</h2>
+    <p class="cart-empty">Votre panier est vide — ajoutez un cigare depuis la sélection ci-dessus.</p>
+    <div class="cart-list"></div>
+    <div class="cart-totals">
+      <div class="cart-totals-row"><span>Sous-total</span><span class="cart-subtotal-val">0 FCFA</span></div>
+      <div class="cart-totals-row cart-fee-row" style="display:none"><span>Livraison</span><span class="cart-fee-val">0 FCFA</span></div>
+      <div class="cart-totals-row is-total"><span>Total</span><span class="cart-total-val">0 FCFA</span></div>
+    </div>
+    <form class="cart-form" style="display:none">
+      <div class="cart-mode-row">
+        <input type="radio" class="pill-radio" name="cart-mode" id="cart-mode-retrait" value="retrait" checked>
+        <label class="pill" for="cart-mode-retrait">Retrait au Foyer</label>
+        <input type="radio" class="pill-radio" name="cart-mode" id="cart-mode-livraison" value="livraison">
+        <label class="pill" for="cart-mode-livraison">Livraison à domicile</label>
+      </div>
+      <div class="cart-address-field" style="display:none">
+        <label class="field"><span>Zone</span>
+          <select name="zone">
+            <option value="akanda">Akanda</option>
+            <option value="libreville">Libreville centre</option>
+            <option value="owendo">Owendo</option>
+          </select>
+        </label>
+        <label class="field" style="margin-top:14px"><span>Adresse</span><textarea name="adresse" rows="2" placeholder="Quartier, repères, étage…"></textarea></label>
+      </div>
+      <label class="field"><span>Nom</span><input name="nom" placeholder="Votre nom"></label>
+      <label class="field"><span>Téléphone</span><input name="tel" placeholder="+241 …"></label>
+      <button type="submit" class="cart-submit">Commander via WhatsApp</button>
+      <span class="cart-or">— confirmation immédiate —</span>
+      <a class="cart-wa" href="#" style="display:none"></a>
+    </form>
+    <div class="cart-sent" style="display:none">
+      <span class="cart-sent-title">Commande envoyée</span>
+      <p>L’équipe Aba’a confirme votre commande, l’heure de retrait ou le créneau de livraison par WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

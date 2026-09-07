@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: remplacer [domaine-de-production] par le domaine réel une fois le site déployé (cf. index.html).
+Sitemap: https://[domaine-de-production]/sitemap.xml
