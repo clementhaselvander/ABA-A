@@ -11,6 +11,21 @@
 <meta property="og:image" content="assets/lounge-wide.png">
 <meta property="og:locale" content="fr_FR">
 <!-- TODO: ajouter <link rel="canonical" href="https://[domaine-de-production]/contact.html"> une fois le site déployé. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Aba’a Mvoé Lodge",
+  "image": "assets/lounge-wide.png",
+  "description": "Nous trouver et réserver — Aba’a Mvoé Lodge, Akanda, Libreville.",
+  "address": { "@type": "PostalAddress", "streetAddress": "Bord de mer", "addressLocality": "Akanda", "addressRegion": "Libreville", "addressCountry": "GA" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
+  "telephone": "+241 66 83 63 54",
+  "email": "audemengome@gmail.com",
+  "sameAs": ["https://www.instagram.com/abaa.mvoelodge/"],
+  "priceRange": "$$$"
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +58,7 @@
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
   <div class="nav-right">
+    <div class="nav-lang"><span class="is-active">FR</span><i>/</i><a href="en/contact.html" data-track="lang_en">EN</a></div>
     <a href="#" data-reserve="membership" data-track="reserve_header" class="nav-cta">Réserver</a>
     <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
   </div>
@@ -66,13 +82,14 @@
     <a href="privatisation.html" data-page="privatisation">Privatisation</a>
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
+  <div class="mobile-lang"><span class="is-active">FR</span><i>/</i><a href="en/contact.html">EN</a></div>
   <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver un séjour</a>
 </div>
 
 <main>
 
   <section class="page-hero">
-    <div class="page-hero-media"><img src="assets/lounge-wide.png" alt="Aba’a Mvoé Lodge, Akanda"></div>
+    <div class="page-hero-media"><img src="assets/lounge-wide.png" alt="Aba’a Mvoé Lodge, Akanda" fetchpriority="high"></div>
     <div class="page-hero-scrim"></div>
     <div class="page-hero-body">
       <div class="page-hero-crumb"><i></i><span>10 — Nous trouver</span></div>
@@ -87,7 +104,7 @@
           <div><div class="ctc-info-label">Adresse</div><div class="ctc-info-val">Bord de mer, Akanda<br>Libreville, Gabon</div></div>
           <div><div class="ctc-info-label">Réception</div><div class="ctc-info-val">Ouvert toute l'année<br>Réception 24h/24</div></div>
           <div><div class="ctc-info-label">Téléphone</div><a class="ctc-info-val" href="tel:+24166836354" style="color:#F5EFE6">+241 66 83 63 54</a></div>
-          <div><div class="ctc-info-label">Email</div><a class="ctc-info-val" href="mailto:audemengome@gmail.com" style="color:#F5EFE6">audemengome@gmail.com</a></div>
+          <div><div class="ctc-info-label">Courriel</div><a class="ctc-info-val" href="mailto:audemengome@gmail.com" style="color:#F5EFE6">audemengome@gmail.com</a></div>
           <div><div class="ctc-info-label">Instagram</div><a class="ctc-info-val" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" style="color:#F5EFE6">@abaa.mvoelodge</a></div>
         </div>
       </div>
@@ -120,7 +137,7 @@
         <label class="field field-wide"><span>Message</span><textarea name="message" rows="3" placeholder="Occasion, salon souhaité, préférences…"></textarea></label>
         <div class="form-foot">
           <button type="submit" class="btn btn-solid">Envoyer la demande <span>→</span></button>
-          <span class="form-sent">Demande transmise — merci.</span>
+          <span class="form-sent">WhatsApp s’est ouvert dans un nouvel onglet — envoyez le message pour transmettre votre demande.</span>
         </div>
       </form>
     </div>
@@ -135,34 +152,35 @@
   </div>
   <div class="ftr-news">
     <div>
-      <span class="ftr-label">Newsletter</span>
+      <span class="ftr-label">Actualités</span>
       <p>Les nouvelles du lodge, les arrivées en cuisine et les événements privés — une fois par mois, pas plus.</p>
     </div>
     <div>
       <form class="ftr-news-form" data-newsletter-form>
-        <input type="email" name="email" required placeholder="Votre email">
-        <button type="submit">S'inscrire →</button>
+        <input type="email" name="email" placeholder="Bientôt disponible" disabled aria-disabled="true">
+        <button type="submit" disabled aria-disabled="true">Bientôt →</button>
       </form>
-      <span class="form-sent" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:#D5A464">Merci — vous êtes inscrit(e) à la newsletter Aba’a.</span>
+      <span class="form-note" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:rgba(245,239,230,.5)">Inscription bientôt disponible — contactez-nous via WhatsApp pour recevoir nos actualités.</span>
     </div>
   </div>
   <div class="ftr-mid">
     <div>
-      <span class="ftr-label">Visit</span>
+      <span class="ftr-label">Adresse</span>
       <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
       <a class="ftr-link" href="https://www.google.com/maps/search/?api=1&query=Aba%27a%20Mvo%C3%A9%20Lodge%20Akanda%20Libreville%20Gabon" target="_blank" rel="noopener">Google Maps →</a>
     </div>
     <div>
       <span class="ftr-label">Contact</span>
       <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+      <a class="ftr-link" href="mailto:audemengome@gmail.com">audemengome@gmail.com</a>
       <a class="ftr-link" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite plus d’informations.">WhatsApp →</a>
     </div>
     <div>
-      <span class="ftr-label">Follow</span>
+      <span class="ftr-label">Réseaux</span>
       <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
     </div>
     <div>
-      <span class="ftr-label">Explore</span>
+      <span class="ftr-label">Découvrir</span>
       <a class="ftr-link" href="club.html">Le Lodge</a>
       <a class="ftr-link" href="experience.html">Expériences</a>
       <a class="ftr-link" href="carte.html">La Carte</a>
@@ -177,7 +195,7 @@
   </div>
 </footer>
 
-<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab">WA</a>
+<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.05 2C6.527 2 2.05 6.477 2.05 12c0 1.82.487 3.578 1.41 5.127L2 22l5.02-1.42A9.94 9.94 0 0 0 12.05 22c5.523 0 10-4.477 10-10S17.573 2 12.05 2zm0 18.2a8.15 8.15 0 0 1-4.174-1.145l-.291-.174-3.06.802.786-2.986-.198-.301A8.19 8.19 0 0 1 3.85 12c0-4.529 3.673-8.2 8.2-8.2 4.528 0 8.2 3.671 8.2 8.2s-3.672 8.2-8.2 8.2z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a8.415 8.415 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>
 
 <div class="mcta">
   <div class="mcta-inner">
@@ -219,7 +237,7 @@
       <a class="rsv-wa" href="#" target="_blank" rel="noopener">● Continuer sur WhatsApp →</a>
     </form>
     <div class="rsv-sent" style="display:none">
-      <span class="rsv-sent-title">Demande envoyée</span>
+      <span class="rsv-sent-title">Presque terminé</span>
       <p class="rsv-sent-text"></p>
     </div>
   </div>

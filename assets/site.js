@@ -6,6 +6,7 @@
   'use strict';
 
   var WHATSAPP_NUMBER = '24166836354';
+  var LANG = (document.documentElement.lang || 'fr').toLowerCase().indexOf('en') === 0 ? 'en' : 'fr';
 
   /* TODO: remplacer G-XXXXXXXXXX par l'ID de mesure GA4 réel une fois le compte Analytics créé. */
   var GA_ID = 'G-XXXXXXXXXX';
@@ -120,12 +121,22 @@
   }
 
   /* ---------- réservation (drawer) ---------- */
-  var COPY = {
-    table: { kicker: 'Réservation', title: 'Votre table vous attend.', submit: 'Demander une réservation', placeholder: 'Occasion, préférences, allergies…', confirm: 'L’équipe Aba’a reviendra vers vous pour confirmer votre réservation.' },
-    event: { kicker: 'Aba’a Événements', title: 'Réserver ce moment.', submit: 'Demander une réservation', placeholder: 'Précisions sur votre venue…', confirm: 'L’équipe Aba’a reviendra vers vous pour confirmer votre réservation.' },
-    membership: { kicker: 'Séjour', title: 'Réserver votre séjour.', submit: 'Demander une réservation', placeholder: 'Dates souhaitées, type de suite, occasion…', confirm: 'L’équipe Aba’a reviendra vers vous pour confirmer votre séjour.' },
-    privatisation: { kicker: 'Privatisation', title: 'Privatiser Aba’a.', submit: 'Envoyer ma demande', placeholder: 'Occasion, espace souhaité, préférences…', confirm: 'L’équipe Aba’a reviendra vers vous au sujet de votre événement privé.' }
+  var COPY_FR = {
+    table: { kicker: 'Réservation', title: 'Votre table vous attend.', submit: 'Demander une réservation', placeholder: 'Occasion, préférences, allergies…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre réservation.' },
+    event: { kicker: 'Aba’a Événements', title: 'Réserver ce moment.', submit: 'Demander une réservation', placeholder: 'Précisions sur votre venue…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre réservation.' },
+    membership: { kicker: 'Séjour', title: 'Réserver votre séjour.', submit: 'Demander une réservation', placeholder: 'Dates souhaitées, type de suite, occasion…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre séjour.' },
+    privatisation: { kicker: 'Privatisation', title: 'Privatiser Aba’a.', submit: 'Envoyer ma demande', placeholder: 'Occasion, espace souhaité, préférences…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous au sujet de votre événement privé.' }
   };
+  var COPY_EN = {
+    table: { kicker: 'Reservation', title: 'Your table awaits.', submit: 'Request a reservation', placeholder: 'Occasion, preferences, allergies…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your reservation.' },
+    event: { kicker: 'Aba’a Events', title: 'Reserve this moment.', submit: 'Request a reservation', placeholder: 'Details about your visit…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your reservation.' },
+    membership: { kicker: 'Stay', title: 'Reserve your stay.', submit: 'Request a reservation', placeholder: 'Preferred dates, suite type, occasion…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your stay.' },
+    privatisation: { kicker: 'Private hire', title: 'Book Aba’a exclusively.', submit: 'Send my request', placeholder: 'Occasion, space wanted, preferences…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you about your private event.' }
+  };
+  var COPY = LANG === 'en' ? COPY_EN : COPY_FR;
+  var RSV_LABELS = LANG === 'en'
+    ? { greeting: { table: 'Hello Aba’a Mvoé Lodge, I would like to reserve a table.', membership: 'Hello Aba’a Mvoé Lodge, I would like to reserve a stay.', privatisation: 'Hello Aba’a Mvoé Lodge, I would like to book the lodge exclusively.', event: 'Hello Aba’a Mvoé Lodge, I would like to reserve for ' }, name: 'Name', guests: 'Guests', date: 'Date', time: 'Time', phone: 'Phone' }
+    : { greeting: { table: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.', membership: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour.', privatisation: 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le lodge.', event: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' }, name: 'Nom', guests: 'Personnes', date: 'Date', time: 'Heure', phone: 'Tél' };
 
   function setupReserveDrawer() {
     var overlay = document.querySelector('.rsv-overlay');
@@ -153,11 +164,11 @@
     function refreshWa() {
       var f = {};
       formEl.querySelectorAll('input,textarea').forEach(function (el) { if (el.name) f[el.name] = el.value; });
-      var head = 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.';
-      if (reserveType === 'membership') head = 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour.';
-      else if (reserveType === 'privatisation') head = 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le lodge.';
-      else if (reserveEventName) head = 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' + reserveEventName + (reserveEventDate ? ' (' + reserveEventDate + ')' : '') + '.';
-      var details = [f.nom && 'Nom: ' + f.nom, 'Personnes: ' + pax, f.date && 'Date: ' + f.date, f.heure && 'Heure: ' + f.heure, f.tel && 'Tél: ' + f.tel, f.message && f.message].filter(Boolean).join(' · ');
+      var head = RSV_LABELS.greeting.table;
+      if (reserveType === 'membership') head = RSV_LABELS.greeting.membership;
+      else if (reserveType === 'privatisation') head = RSV_LABELS.greeting.privatisation;
+      else if (reserveEventName) head = RSV_LABELS.greeting.event + reserveEventName + (reserveEventDate ? ' (' + reserveEventDate + ')' : '') + '.';
+      var details = [f.nom && RSV_LABELS.name + ': ' + f.nom, RSV_LABELS.guests + ': ' + pax, f.date && RSV_LABELS.date + ': ' + f.date, f.heure && RSV_LABELS.time + ': ' + f.heure, f.tel && RSV_LABELS.phone + ': ' + f.tel, f.message && f.message].filter(Boolean).join(' · ');
       if (waLink) waLink.href = waUrl(details ? head + ' ' + details : head);
     }
 
@@ -229,12 +240,16 @@
         refreshWa();
         formEl.style.display = 'none';
         if (sentEl) sentEl.style.display = '';
-        window.open(waLink ? waLink.href : waUrl('Bonjour Aba’a Mvoé Lodge.'), '_blank', 'noopener');
+        window.open(waLink ? waLink.href : waUrl(LANG === 'en' ? 'Hello Aba’a Mvoé Lodge.' : 'Bonjour Aba’a Mvoé Lodge.'), '_blank', 'noopener');
       });
     }
   }
 
   /* ---------- boutique du foyer (panier cigares + livraison) ---------- */
+  var CART_LABELS = LANG === 'en'
+    ? { less: 'Less', more: 'More', remove: 'Remove', free: 'Free', delivery: 'Delivery', pickup: 'Pickup at The Hearth', greeting: 'Hello Aba’a Mvoé Lodge, I would like to order from The Hearth:', mode: 'Method', zone: 'Zone', address: 'Address', subtotal: 'Subtotal', total: 'Total', name: 'Name', phone: 'Phone' }
+    : { less: 'Moins', more: 'Plus', remove: 'Retirer', free: 'Offerte', delivery: 'Livraison', pickup: 'Retrait au Foyer', greeting: 'Bonjour Aba’a Mvoé Lodge, je souhaite commander au Foyer :', mode: 'Mode', zone: 'Zone', address: 'Adresse', subtotal: 'Sous-total', total: 'Total', name: 'Nom', phone: 'Tél' };
+
   function setupCigarCart() {
     var rows = document.querySelectorAll('.price-row[data-cigar]');
     var fab = document.querySelector('.cart-fab');
@@ -324,16 +339,16 @@
           var ctrl = document.createElement('div');
           ctrl.className = 'cart-item-ctrl';
           var dec = document.createElement('button');
-          dec.type = 'button'; dec.textContent = '−'; dec.setAttribute('aria-label', 'Moins');
+          dec.type = 'button'; dec.textContent = '−'; dec.setAttribute('aria-label', CART_LABELS.less);
           var qtySpan = document.createElement('span');
           qtySpan.className = 'cart-item-qty'; qtySpan.textContent = item.qty;
           var inc = document.createElement('button');
-          inc.type = 'button'; inc.textContent = '+'; inc.setAttribute('aria-label', 'Plus');
+          inc.type = 'button'; inc.textContent = '+'; inc.setAttribute('aria-label', CART_LABELS.more);
           ctrl.appendChild(dec); ctrl.appendChild(qtySpan); ctrl.appendChild(inc);
           var priceSpan = document.createElement('span');
           priceSpan.className = 'cart-item-price'; priceSpan.textContent = fmt(item.price * item.qty);
           var rm = document.createElement('button');
-          rm.type = 'button'; rm.className = 'cart-item-rm'; rm.textContent = '×'; rm.setAttribute('aria-label', 'Retirer');
+          rm.type = 'button'; rm.className = 'cart-item-rm'; rm.textContent = '×'; rm.setAttribute('aria-label', CART_LABELS.remove);
           dec.addEventListener('click', function () { setQty(item.name, item.qty - 1); });
           inc.addEventListener('click', function () { setQty(item.name, item.qty + 1); });
           rm.addEventListener('click', function () { setQty(item.name, 0); });
@@ -349,7 +364,7 @@
       var mode = currentMode();
       if (subtotalEl) subtotalEl.textContent = fmt(sub) + ' FCFA';
       if (feeRow) feeRow.style.display = mode === 'livraison' ? '' : 'none';
-      if (feeEl) feeEl.textContent = (mode === 'livraison' && fee === 0) ? 'Offerte' : fmt(fee) + ' FCFA';
+      if (feeEl) feeEl.textContent = (mode === 'livraison' && fee === 0) ? CART_LABELS.free : fmt(fee) + ' FCFA';
       if (totalEl) totalEl.textContent = fmt(sub + fee) + ' FCFA';
       if (addressField) addressField.style.display = mode === 'livraison' ? '' : 'none';
 
@@ -363,18 +378,18 @@
       var mode = currentMode();
       var sub = subtotal();
       var fee = deliveryFee();
-      var lines = ['Bonjour Aba’a Mvoé Lodge, je souhaite commander au Foyer :'];
+      var lines = [CART_LABELS.greeting];
       cart.forEach(function (item) { lines.push('- ' + item.qty + 'x ' + item.name + ' (' + fmt(item.price * item.qty) + ' FCFA)'); });
-      lines.push('Mode: ' + (mode === 'livraison' ? 'Livraison' : 'Retrait au Foyer'));
+      lines.push(CART_LABELS.mode + ': ' + (mode === 'livraison' ? CART_LABELS.delivery : CART_LABELS.pickup));
       if (mode === 'livraison') {
-        if (zoneSel) lines.push('Zone: ' + zoneSel.options[zoneSel.selectedIndex].text);
-        if (f.adresse) lines.push('Adresse: ' + f.adresse);
+        if (zoneSel) lines.push(CART_LABELS.zone + ': ' + zoneSel.options[zoneSel.selectedIndex].text);
+        if (f.adresse) lines.push(CART_LABELS.address + ': ' + f.adresse);
       }
-      lines.push('Sous-total: ' + fmt(sub) + ' FCFA');
-      if (mode === 'livraison') lines.push('Livraison: ' + (fee === 0 ? 'Offerte' : fmt(fee) + ' FCFA'));
-      lines.push('Total: ' + fmt(sub + fee) + ' FCFA');
-      if (f.nom) lines.push('Nom: ' + f.nom);
-      if (f.tel) lines.push('Tél: ' + f.tel);
+      lines.push(CART_LABELS.subtotal + ': ' + fmt(sub) + ' FCFA');
+      if (mode === 'livraison') lines.push(CART_LABELS.delivery + ': ' + (fee === 0 ? CART_LABELS.free : fmt(fee) + ' FCFA'));
+      lines.push(CART_LABELS.total + ': ' + fmt(sub + fee) + ' FCFA');
+      if (f.nom) lines.push(CART_LABELS.name + ': ' + f.nom);
+      if (f.tel) lines.push(CART_LABELS.phone + ': ' + f.tel);
       waLink.href = waUrl(lines.join('\n'));
     }
 
@@ -449,19 +464,6 @@
     });
   }
 
-  /* ---------- newsletter (local uniquement — TODO brancher un service d'emailing) ---------- */
-  function setupNewsletter() {
-    document.querySelectorAll('form[data-newsletter-form]').forEach(function (form) {
-      var confirmEl = form.querySelector('.form-sent') || (form.parentElement && form.parentElement.querySelector('.form-sent'));
-      var submitBtn = form.querySelector('button[type="submit"]');
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (submitBtn) submitBtn.disabled = true;
-        if (confirmEl) confirmEl.classList.add('is-on');
-      });
-    });
-  }
-
   /* ---------- comparateur jour / nuit ---------- */
   function setupCompare() {
     document.querySelectorAll('.cmp-wrap').forEach(function (wrap) {
@@ -477,11 +479,27 @@
     });
   }
 
-  /* ---------- vidéos autoplay en sourdine ---------- */
+  /* ---------- vidéos autoplay en sourdine (léger : chargement différé, désactivé sur mobile/données limitées) ---------- */
   function setupVideos() {
-    document.querySelectorAll('video[autoplay]').forEach(function (v) {
+    var videos = document.querySelectorAll('video[autoplay]');
+    if (!videos.length) return;
+    var isMobile = window.matchMedia('(max-width: 760px)').matches;
+    var saveData = !!(navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || '')));
+    videos.forEach(function (v) {
       v.muted = true; v.loop = true;
-      v.play().catch(function () {});
+      v.removeAttribute('autoplay');
+      if (isMobile || saveData) return; /* reste sur l'image poster, pas de téléchargement auto */
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) v.play().catch(function () {});
+            else v.pause();
+          });
+        }, { threshold: 0.25 });
+        io.observe(v);
+      } else {
+        v.play().catch(function () {});
+      }
     });
   }
 
@@ -502,7 +520,6 @@
     setupReserveDrawer();
     setupCigarCart();
     setupWaForms();
-    setupNewsletter();
     setupCompare();
     setupVideos();
     setupWaLinks();

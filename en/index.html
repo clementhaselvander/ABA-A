@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aba’a Mvoé Lodge — The House of Welcome and Peace | Akanda, Libreville</title>
+<meta name="description" content="Aba’a Mvoé Lodge — authentic African hospitality and contemporary refinement on the Atlantic shore, in Akanda, Libreville. Suites, dining, pool and forest.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aba’a Mvoé Lodge — The House of Welcome and Peace">
+<meta property="og:description" content="Hospitality, terroir and serenity — Aba’a Mvoé Lodge, Akanda, Libreville.">
+<meta property="og:image" content="../assets/lounge-wide.png">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aba’a Mvoé Lodge — The House of Welcome and Peace">
+<meta name="twitter:description" content="Hospitality, terroir and serenity — Aba’a Mvoé Lodge, Akanda, Libreville.">
+<meta name="twitter:image" content="../assets/lounge-wide.png">
+<!-- TODO: add <link rel="canonical" href="https://[production-domain]/en/"> once the site is deployed to its final domain. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Aba’a Mvoé Lodge",
+  "image": "../assets/lounge-wide.png",
+  "description": "Aba’a Mvoé Lodge — authentic African hospitality and contemporary refinement, on the Atlantic shore, in Akanda, Libreville.",
+  "address": { "@type": "PostalAddress", "streetAddress": "Seafront", "addressLocality": "Akanda", "addressRegion": "Libreville", "addressCountry": "GA" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
+  "telephone": "+241 66 83 63 54",
+  "email": "audemengome@gmail.com",
+  "sameAs": ["https://www.instagram.com/abaa.mvoelodge/"],
+  "priceRange": "$$$"
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="../assets/lounge-wide.png" fetchpriority="high">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .home-hero { position: relative; height: 92vh; min-height: 600px; display: flex; align-items: flex-end; overflow: hidden; }
+  .home-hero-media { position: absolute; inset: 0; z-index: 0; }
+  .home-hero-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(1.02); }
+  .home-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(20,15,11,.96) 0%, rgba(20,15,11,.14) 46%, rgba(20,15,11,.5) 100%), linear-gradient(90deg, rgba(20,15,11,.55) 0%, rgba(20,15,11,0) 55%); }
+  .home-hero-body { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 clamp(20px,5vw,72px) clamp(56px,7vw,90px); }
+  .home-hero-crumb { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .home-hero-crumb i { display: block; width: 44px; height: 1px; background: var(--gold); }
+  .home-hero-crumb span { font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: rgba(245,239,230,.72); }
+  .home-hero-title { font-size: clamp(58px,10vw,150px); line-height: .88; }
+  .home-hero-sign { margin-top: 26px; max-width: 480px; font-size: clamp(17px,1.8vw,24px); }
+  .home-hero .btn-row { margin-top: 34px; }
+  .signature-band { position: relative; min-height: 46vh; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
+  .signature-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.4) saturate(1.05); }
+  .signature-band::after { content: ''; position: absolute; inset: 0; background: rgba(20,15,11,.35); }
+  .signature-band h2 { position: relative; z-index: 1; font-size: clamp(38px,7vw,96px); letter-spacing: .04em; }
+  .signature-band span { position: relative; z-index: 1; display: block; margin-top: 14px; font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .ig-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 1px; background: var(--line-strong); }
+  .ig-grid a { position: relative; overflow: hidden; aspect-ratio: 1; }
+  .ig-grid img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.7); transition: transform 1.1s cubic-bezier(.16,1,.3,1); }
+  .ig-grid a:hover img { transform: scale(1.08); filter: brightness(.9); }
+  @media (max-width: 760px) { .ig-grid { grid-template-columns: repeat(3,1fr); } }
+</style>
+</head>
+<body data-page="home">
+
+<header class="site-header">
+  <a href="index.html" class="brand"><img src="../assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="club.html" data-page="club">The Lodge</a>
+    <div class="nav-drop">
+      <a href="experience.html" data-page="experience">Experiences</a>
+      <div class="nav-drop-panel">
+        <a href="cigares.html" data-page="cigares">The Hearth</a>
+        <a href="spiritueux.html" data-page="spiritueux">Cellar &amp; Terroir</a>
+        <a href="carte.html" data-page="carte">The Menu</a>
+        <a href="table.html" data-page="table">The Table</a>
+        <a href="poolside.html" data-page="poolside">Pool &amp; Nature</a>
+      </div>
+    </div>
+    <a href="evenements.html" data-page="evenements">Events</a>
+    <a href="privatisation.html" data-page="privatisation">Private Hire</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <div class="nav-lang"><a href="../index.html" data-track="lang_fr">FR</a><i>/</i><span class="is-active">EN</span></div>
+    <a href="#" data-reserve="membership" data-track="reserve_header" class="nav-cta">Book</a>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-head">
+    <span class="brand"><img src="../assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></span>
+    <button class="mobile-menu-close" aria-label="Close menu">×</button>
+  </div>
+  <nav aria-label="Mobile navigation">
+    <a href="index.html" data-page="home">Home</a>
+    <a href="club.html" data-page="club">The Lodge</a>
+    <a href="experience.html" data-page="experience">Experiences</a>
+    <a href="cigares.html" data-page="cigares" class="is-sub">The Hearth</a>
+    <a href="spiritueux.html" data-page="spiritueux" class="is-sub">Cellar &amp; Terroir</a>
+    <a href="carte.html" data-page="carte" class="is-sub">The Menu</a>
+    <a href="table.html" data-page="table" class="is-sub">The Table</a>
+    <a href="poolside.html" data-page="poolside" class="is-sub">Pool &amp; Nature</a>
+    <a href="evenements.html" data-page="evenements">Events</a>
+    <a href="privatisation.html" data-page="privatisation">Private Hire</a>
+    <a href="contact.html" data-page="contact">Contact</a>
+  </nav>
+  <div class="mobile-lang"><a href="../index.html">FR</a><i>/</i><span class="is-active">EN</span></div>
+  <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Book a stay</a>
+</div>
+
+<main>
+
+  <section class="home-hero">
+    <div class="home-hero-media"><img src="../assets/lounge-wide.png" alt="The main lounge at Aba’a Mvoé Lodge, Akanda" fetchpriority="high"></div>
+    <div class="home-hero-scrim"></div>
+    <div class="home-hero-body">
+      <div class="home-hero-crumb"><i></i><span>Akanda · Libreville · Gabon</span></div>
+      <h1 class="home-hero-title">ABA’A<br><em>MVOÉ LODGE</em></h1>
+      <p class="sign home-hero-sign">The house of welcome and peace — on the Atlantic shore, at the edge of the forest.</p>
+      <div class="btn-row">
+        <a href="#" data-reserve="membership" data-track="reserve_hero" class="btn btn-solid">Book a stay <span>→</span></a>
+        <a href="club.html" class="btn btn-line">Discover the Lodge</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="frame grid-2" style="align-items:center">
+      <div class="reveal" data-reveal>
+        <span class="eyebrow">01 — The Lodge</span>
+        <h2>More than a place,<br><em>a home.</em></h2>
+        <p class="lede" style="margin-top:20px">A fire that welcomes. A table. A few words exchanged. The pool, the forest, a conversation that lingers. And time found again.</p>
+        <div class="stat-row" style="max-width:420px">
+          <div><span class="stat-val">12</span><span class="stat-label">Suites &amp; rooms</span></div>
+          <div><span class="stat-val">3 ha</span><span class="stat-label">Wooded grounds</span></div>
+          <div><span class="stat-val">24/7</span><span class="stat-label">Front desk</span></div>
+        </div>
+        <a href="club.html" class="card-cta" style="display:inline-block;margin-top:24px">Discover the Lodge <span>→</span></a>
+      </div>
+      <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:4/5">
+        <video src="../assets/lounge-cigar-ember.mp4" poster="../assets/lounge-chesterfield.png" autoplay muted loop playsinline preload="none" aria-label="The fire at The Hearth, Aba’a Mvoé Lodge" style="width:100%;height:100%;object-fit:cover;filter:brightness(.86)"></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="frame">
+      <div class="reveal" data-reveal style="max-width:640px;margin-bottom:44px">
+        <span class="eyebrow">02 — The Aba’a experiences</span>
+        <h2>One house.<br>Several rituals.</h2>
+        <p class="lede" style="margin-top:16px">Hospitality stays at the centre. Around it, four experiences shape the stay.</p>
+      </div>
+      <div class="grid-3 reveal" data-reveal style="grid-template-columns:repeat(5,1fr)">
+        <a class="tile" href="cigares.html">
+          <video src="../assets/cigar-ritual.mp4" poster="../assets/cigar-hand.png" autoplay muted loop playsinline preload="none" aria-label="An evening by the fire, The Hearth, Aba’a Mvoé Lodge"></video>
+          <div class="tile-body"><span class="tile-num">01</span><span class="tile-name">The Hearth</span><span class="tile-tag">Le Foyer</span></div>
+        </a>
+        <a class="tile" href="spiritueux.html">
+          <img loading="lazy" src="../assets/spirits-bottle.png" alt="Cellar &amp; Terroir, Aba’a Mvoé Lodge">
+          <div class="tile-body"><span class="tile-num">02</span><span class="tile-name">The Cellar</span><span class="tile-tag">La Cave</span></div>
+        </a>
+        <a class="tile" href="table.html">
+          <img loading="lazy" src="../assets/gastronomy.png" alt="The Table, Aba’a Mvoé Lodge">
+          <div class="tile-body"><span class="tile-num">03</span><span class="tile-name">The Table</span><span class="tile-tag">La Table</span></div>
+        </a>
+        <a class="tile" href="poolside.html">
+          <img loading="lazy" src="../assets/pool-dusk.png" alt="Pool and forest at dusk, Aba’a Mvoé Lodge">
+          <div class="tile-body"><span class="tile-num">04</span><span class="tile-name">Nature</span><span class="tile-tag">Nature</span></div>
+        </a>
+        <a class="tile" href="evenements.html">
+          <img loading="lazy" src="../assets/lounge-portrait.png" alt="An evening at Aba’a Mvoé Lodge">
+          <div class="tile-body"><span class="tile-num">05</span><span class="tile-name">Events</span><span class="tile-tag">Événements</span></div>
+        </a>
+      </div>
+      <div style="margin-top:36px;text-align:right">
+        <a href="experience.html" class="card-cta">See all experiences <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="frame">
+      <div class="reveal" data-reveal style="max-width:520px;margin-bottom:32px">
+        <span class="eyebrow">— Two lights</span>
+        <h2>Dawn fades,<br><em>dusk settles in.</em></h2>
+      </div>
+      <div class="cmp-wrap reveal" data-reveal>
+        <img loading="lazy" class="cmp-base" src="../assets/pool-day.png" alt="The pool at Aba’a Mvoé Lodge by day">
+        <div class="cmp-after"><img loading="lazy" src="../assets/pool-dusk.png" alt="The pool at Aba’a Mvoé Lodge at dusk"></div>
+        <div class="cmp-handle" style="left:50%"><span>⇔</span></div>
+        <span class="cmp-tag cmp-tag-l">Day</span>
+        <span class="cmp-tag cmp-tag-r">Evening</span>
+        <input class="cmp-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare Aba’a by day and by evening">
+      </div>
+      <div style="margin-top:24px;text-align:right">
+        <a href="poolside.html" class="card-cta">Discover Pool &amp; Nature <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="signature-band">
+    <img loading="lazy" src="../assets/lounge-wide.png" alt="Aba’a Mvoé Lodge at nightfall">
+    <div>
+      <h2>THE HOUSE<br>OF WELCOME.</h2>
+      <span>Akanda · Libreville</span>
+    </div>
+  </section>
+
+  <!-- TODO: sample testimonials — replace with real guest reviews once collected. -->
+  <section class="section section-alt">
+    <div class="frame">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px" class="reveal" data-reveal>
+        <div>
+          <span class="eyebrow">— They were here</span>
+          <h2>Stays<br><em>you remember.</em></h2>
+        </div>
+        <div class="rail-nav">
+          <button aria-label="Previous" onclick="this.closest('section').querySelector('.tst-rail').scrollBy({left:-360,behavior:'smooth'})">←</button>
+          <button aria-label="Next" onclick="this.closest('section').querySelector('.tst-rail').scrollBy({left:360,behavior:'smooth'})">→</button>
+        </div>
+      </div>
+      <div class="tst-rail reveal" data-reveal>
+        <article class="tst-card">
+          <p class="tst-quote">“The welcome is on another level — you feel expected from the first step. You watch nothing, you simply rest.”</p>
+          <div><span class="tst-name">A. Nguema</span><span class="tst-role">Stay, July 2026</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">“The pool at sunset, the forest close by, and Libreville fading away. Aba’a has its own gravity.”</p>
+          <div><span class="tst-name">S. Mabika</span><span class="tst-role">Pool &amp; Nature, August 2026</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">“We hired the lodge privately for a corporate seminar — flawless organisation, complete discretion.”</p>
+          <div><span class="tst-name">C. Ondo</span><span class="tst-role">Private event, June 2026</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">“Evenings at The Hearth rival the finest guesthouses on the continent. The silence of the forest does the rest.”</p>
+          <div><span class="tst-name">R. Okouyi</span><span class="tst-role">Suite stay</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="frame">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:32px" class="reveal" data-reveal>
+        <h2 style="font-size:clamp(28px,3.2vw,44px)">@abaa.mvoelodge</h2>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" class="card-cta">Follow Aba’a Mvoé Lodge <span>→</span></a>
+      </div>
+      <div class="ig-grid reveal" data-reveal>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/cigar-macro.png" alt=""></a>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/lounge-chesterfield.png" alt=""></a>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/pool-day.png" alt=""></a>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/cigars-table.png" alt=""></a>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/beach.png" alt=""></a>
+        <a href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener" aria-label="Aba’a Mvoé Lodge on Instagram"><img loading="lazy" src="../assets/gastronomy.png" alt=""></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fcta">
+    <img loading="lazy" src="../assets/pool-dusk.png" alt="The pool at Aba’a Mvoé Lodge at dusk">
+    <div class="fcta-body">
+      <span class="fcta-kicker">Welcome</span>
+      <h2 class="fcta-title">Come in,<br>you are home.</h2>
+      <div class="btn-row">
+        <a href="#" data-reserve="membership" data-track="reserve_final" class="btn btn-solid">Book a stay <span>→</span></a>
+        <a href="#" data-wa-link="Hello Aba’a Mvoé Lodge, I would like to book a stay." class="btn btn-wa">WhatsApp <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="ftr-top">
+    <div class="ftr-brand"><span class="ftr-word">ABA’A</span><span class="ftr-word-sub">Mvoé Lodge</span></div>
+    <span class="ftr-tag">Dining · Wellness · Events</span>
+  </div>
+  <!-- TODO: connect the newsletter form to a real email service (Mailchimp, Brevo…) via a dedicated endpoint. -->
+  <div class="ftr-news">
+    <div>
+      <span class="ftr-label">Newsletter</span>
+      <p>News from the lodge, arrivals in the kitchen and private events — once a month, no more.</p>
+    </div>
+    <div>
+      <form class="ftr-news-form" data-newsletter-form>
+        <input type="email" name="email" placeholder="Coming soon" disabled aria-disabled="true">
+        <button type="submit" disabled aria-disabled="true">Soon →</button>
+      </form>
+      <span class="form-note" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:rgba(245,239,230,.5)">Sign-up coming soon — contact us on WhatsApp to receive Aba’a news.</span>
+    </div>
+  </div>
+  <div class="ftr-mid">
+    <div>
+      <span class="ftr-label">Visit</span>
+      <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
+      <a class="ftr-link" href="https://www.google.com/maps/search/?api=1&query=Aba%27a%20Mvo%C3%A9%20Lodge%20Akanda%20Libreville%20Gabon" target="_blank" rel="noopener">Google Maps →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Contact</span>
+      <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+      <a class="ftr-link" href="mailto:audemengome@gmail.com">audemengome@gmail.com</a>
+      <a class="ftr-link" data-wa-link="Hello Aba’a Mvoé Lodge, I would like more information.">WhatsApp →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Follow</span>
+      <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
+    </div>
+    <div>
+      <span class="ftr-label">Explore</span>
+      <a class="ftr-link" href="club.html">The Lodge</a>
+      <a class="ftr-link" href="experience.html">Experiences</a>
+      <a class="ftr-link" href="carte.html">The Menu</a>
+      <a class="ftr-link" href="evenements.html">Events</a>
+      <a class="ftr-link" href="privatisation.html">Private Hire</a>
+      <a class="ftr-link" href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="ftr-bottom">
+    <span>© 2026 Aba’a Mvoé Lodge — All rights reserved</span>
+    <span>“Come in, you are home.”</span>
+  </div>
+</footer>
+
+<a href="#" data-wa-link="Hello Aba’a Mvoé Lodge, I would like to book a stay." aria-label="WhatsApp" class="wa-fab"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.05 2C6.527 2 2.05 6.477 2.05 12c0 1.82.487 3.578 1.41 5.127L2 22l5.02-1.42A9.94 9.94 0 0 0 12.05 22c5.523 0 10-4.477 10-10S17.573 2 12.05 2zm0 18.2a8.15 8.15 0 0 1-4.174-1.145l-.291-.174-3.06.802.786-2.986-.198-.301A8.19 8.19 0 0 1 3.85 12c0-4.529 3.673-8.2 8.2-8.2 4.528 0 8.2 3.671 8.2 8.2s-3.672 8.2-8.2 8.2z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a8.415 8.415 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>
+
+<div class="mcta">
+  <div class="mcta-inner">
+    <a href="#" data-reserve="membership" data-track="reserve_sticky">Book</a>
+    <a href="#" data-wa-link="Hello Aba’a Mvoé Lodge, I would like to book a stay.">WhatsApp</a>
+  </div>
+</div>
+
+<div class="rsv-overlay"></div>
+<div class="rsv-drawer" role="dialog" aria-modal="true" aria-labelledby="rsv-title">
+  <div class="rsv-head">
+    <button class="rsv-back">← <span>Close</span></button>
+    <span class="rsv-brand">Aba’a Mvoé Lodge</span>
+  </div>
+  <div class="rsv-body">
+    <span class="rsv-kicker">Reservation</span>
+    <h2 class="rsv-title" id="rsv-title">Your table awaits.</h2>
+    <div class="rsv-context" style="display:none">
+      <div><span>Evening</span><strong class="rsv-context-event"></strong></div>
+      <div><span>Date</span><strong class="rsv-context-date"></strong></div>
+    </div>
+    <form class="rsv-form">
+      <label class="field"><span>Name</span><input name="nom" placeholder="Your name"></label>
+      <label class="field"><span>Phone</span><input name="tel" placeholder="+241 …"></label>
+      <div class="rsv-row">
+        <label class="field"><span>Date</span><input name="date" type="date"></label>
+        <label class="field"><span>Time</span><input name="heure" type="time"></label>
+      </div>
+      <label class="field"><span>Guests</span>
+        <div class="rsv-stepper">
+          <button type="button" class="rsv-pax-dec" aria-label="Fewer guests">−</button>
+          <span class="rsv-pax-val">2</span>
+          <button type="button" class="rsv-pax-inc" aria-label="More guests">+</button>
+        </div>
+      </label>
+      <label class="field"><span>Message</span><textarea name="message" rows="2" placeholder="Occasion, preferred lounge, preferences…"></textarea></label>
+      <button type="submit" class="rsv-submit">Request a reservation</button>
+      <span class="rsv-or">— or —</span>
+      <a class="rsv-wa" href="#" target="_blank" rel="noopener">● Continue on WhatsApp →</a>
+    </form>
+    <div class="rsv-sent" style="display:none">
+      <span class="rsv-sent-title">Almost there</span>
+      <p class="rsv-sent-text"></p>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>

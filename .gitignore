@@ -5,3 +5,8 @@
 desktop.ini
 Thumbs.db
 .thumbnail
+
+# Fichiers hors-site confirmés inutiles (doublons obsolètes / archives de build)
+# conservés localement mais retirés du suivi Git — cf. audit du 08/09/2026
+/site.js
+/styles.css

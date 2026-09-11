@@ -10,6 +10,22 @@
 <meta property="og:description" content="Des moments qui commencent par un accueil — Aba’a Mvoé Lodge, Akanda, Libreville.">
 <meta property="og:image" content="assets/pool-dusk.png">
 <meta property="og:locale" content="fr_FR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Aba’a Mvoé Lodge",
+  "image": "assets/pool-dusk.png",
+  "description": "Des moments qui commencent par un accueil — Aba’a Mvoé Lodge, Akanda, Libreville.",
+  "address": { "@type": "PostalAddress", "streetAddress": "Bord de mer", "addressLocality": "Akanda", "addressRegion": "Libreville", "addressCountry": "GA" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
+  "telephone": "+241 66 83 63 54",
+  "email": "audemengome@gmail.com",
+  "sameAs": ["https://www.instagram.com/abaa.mvoelodge/"],
+  "priceRange": "$$$"
+}
+</script>
+<!-- TODO: ajouter <link rel="canonical" href="https://[domaine-de-production]/evenements.html"> une fois le site déployé. -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +76,7 @@
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
   <div class="nav-right">
+    <div class="nav-lang"><span class="is-active">FR</span><i>/</i><a href="en/evenements.html" data-track="lang_en">EN</a></div>
     <a href="#" data-reserve="membership" data-track="reserve_header" class="nav-cta">Réserver</a>
     <button class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu"><span></span></button>
   </div>
@@ -83,13 +100,14 @@
     <a href="privatisation.html" data-page="privatisation">Privatisation</a>
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
+  <div class="mobile-lang"><span class="is-active">FR</span><i>/</i><a href="en/evenements.html">EN</a></div>
   <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver un séjour</a>
 </div>
 
 <main>
 
   <section class="page-hero">
-    <div class="page-hero-media"><img src="assets/lounge-portrait.png" alt="Veillée à Aba’a Mvoé Lodge"></div>
+    <div class="page-hero-media"><img src="assets/lounge-portrait.png" alt="Veillée à Aba’a Mvoé Lodge" fetchpriority="high"></div>
     <div class="page-hero-scrim"></div>
     <div class="page-hero-body">
       <div class="page-hero-crumb"><i></i><span>06 — Le Programme</span></div>
@@ -108,7 +126,7 @@
       </div>
 
       <a class="ev-feat reveal" data-reveal href="#" data-reserve="event" data-reserve-event="Soirée Sunset au Foyer" data-reserve-date="12 Sept · 18h" data-track="reserve_event">
-        <img src="assets/pool-dusk.png" alt="Soirée Sunset au bord de la piscine, Aba’a Mvoé Lodge">
+        <img loading="lazy" src="assets/pool-dusk.png" alt="Soirée Sunset au bord de la piscine, Aba’a Mvoé Lodge">
         <span class="badge"><i></i>RSVP Ouvert</span>
         <div class="ev-feat-body">
           <span class="ev-feat-tag">Aba'a Présente</span>
@@ -119,7 +137,7 @@
 
       <div class="grid-3 reveal" data-reveal style="margin-top:40px">
         <a class="ev-card" href="#" data-reserve="event" data-reserve-event="Veillée du Foyer — Dégustation" data-reserve-date="20 Sept" data-track="reserve_event">
-          <div class="ev-card-media"><img src="assets/cigars-table.png" alt="Veillée du Foyer, dégustation, Aba’a Mvoé Lodge"></div>
+          <div class="ev-card-media"><img loading="lazy" src="assets/cigars-table.png" alt="Veillée du Foyer, dégustation, Aba’a Mvoé Lodge"></div>
           <span class="badge"><i></i>Places limitées</span>
           <span class="ev-card-date">20.09</span>
           <span class="ev-card-cat">Foyer</span>
@@ -127,7 +145,7 @@
           <span class="ev-card-sub">Cigares &amp; spiritueux · 20 Sept</span>
         </a>
         <a class="ev-card" href="#" data-reserve="event" data-reserve-event="Soirée Contes & Feu" data-reserve-date="27 Sept" data-track="reserve_event">
-          <div class="ev-card-media"><img src="assets/lounge-chesterfield.png" alt="Soirée Contes & Feu, salon feutré, Aba’a Mvoé Lodge"></div>
+          <div class="ev-card-media"><img loading="lazy" src="assets/lounge-chesterfield.png" alt="Soirée Contes & Feu, salon feutré, Aba’a Mvoé Lodge"></div>
           <span class="badge is-sold"><i></i>Complet</span>
           <span class="ev-card-date">27.09</span>
           <span class="ev-card-cat">Culture</span>
@@ -135,7 +153,7 @@
           <span class="ev-card-sub">Conteur invité · jusqu'à la lune</span>
         </a>
         <a class="ev-card" href="#" data-reserve="event" data-reserve-event="Table du Chef" data-reserve-date="2 Oct · 19h30" data-track="reserve_event">
-          <div class="ev-card-media"><img src="assets/gastronomy-table-lanterns.png" alt="Table du Chef, dîner privé, Aba’a Mvoé Lodge"></div>
+          <div class="ev-card-media"><img loading="lazy" src="assets/gastronomy-table-lanterns.png" alt="Table du Chef, dîner privé, Aba’a Mvoé Lodge"></div>
           <span class="badge is-private"><i></i>Événement privé</span>
           <span class="ev-card-date">02.10</span>
           <span class="ev-card-cat">Dîner · Privé</span>
@@ -143,7 +161,7 @@
           <span class="ev-card-sub">12 couverts · menu 4 services</span>
         </a>
         <a class="ev-card" href="#" data-reserve="event" data-reserve-event="Journée Bien-être" data-reserve-date="18 Oct · 09h" data-track="reserve_event">
-          <div class="ev-card-media"><img src="assets/wine-white.png" alt="Journée Bien-être, Aba’a Mvoé Lodge"></div>
+          <div class="ev-card-media"><img loading="lazy" src="assets/wine-white.png" alt="Journée Bien-être, Aba’a Mvoé Lodge"></div>
           <span class="badge"><i></i>RSVP Ouvert</span>
           <span class="ev-card-date">18.10</span>
           <span class="ev-card-cat">Bien-être</span>
@@ -151,19 +169,19 @@
           <span class="ev-card-sub">Soins et rituels avant le coucher du soleil</span>
         </a>
         <a class="ev-card" href="#" data-reserve="event" data-reserve-event="Brunch Jazz du Dimanche" data-reserve-date="25 Oct · 12h" data-track="reserve_event">
-          <div class="ev-card-media"><img src="assets/pool-day.png" alt="Brunch Jazz du Dimanche, Aba’a Mvoé Lodge"></div>
+          <div class="ev-card-media"><img loading="lazy" src="assets/pool-day.png" alt="Brunch Jazz du Dimanche, Aba’a Mvoé Lodge"></div>
           <span class="badge"><i></i>RSVP Ouvert</span>
           <span class="ev-card-date">25.10</span>
-          <span class="ev-card-cat">Brunch · Live</span>
+          <span class="ev-card-cat">Brunch · Concert</span>
           <h3>Brunch Jazz du Dimanche</h3>
-          <span class="ev-card-sub">Trio jazz live, bord de piscine, dès 12h</span>
+          <span class="ev-card-sub">Trio jazz, bord de piscine, dès 12h</span>
         </a>
       </div>
     </div>
   </section>
 
   <section class="fcta">
-    <img src="assets/lounge-wide.png" alt="Aba’a Mvoé Lodge, en soirée">
+    <img loading="lazy" src="assets/lounge-wide.png" alt="Aba’a Mvoé Lodge, en soirée">
     <div class="fcta-body">
       <span class="fcta-kicker">Découvrir la suite</span>
       <h2 class="fcta-title">L'accueil<br>continue.</h2>
@@ -183,34 +201,35 @@
   </div>
   <div class="ftr-news">
     <div>
-      <span class="ftr-label">Newsletter</span>
+      <span class="ftr-label">Actualités</span>
       <p>Les nouvelles du lodge, les arrivées en cuisine et les événements privés — une fois par mois, pas plus.</p>
     </div>
     <div>
       <form class="ftr-news-form" data-newsletter-form>
-        <input type="email" name="email" required placeholder="Votre email">
-        <button type="submit">S'inscrire →</button>
+        <input type="email" name="email" placeholder="Bientôt disponible" disabled aria-disabled="true">
+        <button type="submit" disabled aria-disabled="true">Bientôt →</button>
       </form>
-      <span class="form-sent" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:#D5A464">Merci — vous êtes inscrit(e) à la newsletter Aba’a.</span>
+      <span class="form-note" style="display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:rgba(245,239,230,.5)">Inscription bientôt disponible — contactez-nous via WhatsApp pour recevoir nos actualités.</span>
     </div>
   </div>
   <div class="ftr-mid">
     <div>
-      <span class="ftr-label">Visit</span>
+      <span class="ftr-label">Adresse</span>
       <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
       <a class="ftr-link" href="https://www.google.com/maps/search/?api=1&query=Aba%27a%20Mvo%C3%A9%20Lodge%20Akanda%20Libreville%20Gabon" target="_blank" rel="noopener">Google Maps →</a>
     </div>
     <div>
       <span class="ftr-label">Contact</span>
       <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+      <a class="ftr-link" href="mailto:audemengome@gmail.com">audemengome@gmail.com</a>
       <a class="ftr-link" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite plus d’informations.">WhatsApp →</a>
     </div>
     <div>
-      <span class="ftr-label">Follow</span>
+      <span class="ftr-label">Réseaux</span>
       <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
     </div>
     <div>
-      <span class="ftr-label">Explore</span>
+      <span class="ftr-label">Découvrir</span>
       <a class="ftr-link" href="club.html">Le Lodge</a>
       <a class="ftr-link" href="experience.html">Expériences</a>
       <a class="ftr-link" href="carte.html">La Carte</a>
@@ -225,7 +244,7 @@
   </div>
 </footer>
 
-<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab">WA</a>
+<a href="#" data-wa-link="Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour." aria-label="WhatsApp" class="wa-fab"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.05 2C6.527 2 2.05 6.477 2.05 12c0 1.82.487 3.578 1.41 5.127L2 22l5.02-1.42A9.94 9.94 0 0 0 12.05 22c5.523 0 10-4.477 10-10S17.573 2 12.05 2zm0 18.2a8.15 8.15 0 0 1-4.174-1.145l-.291-.174-3.06.802.786-2.986-.198-.301A8.19 8.19 0 0 1 3.85 12c0-4.529 3.673-8.2 8.2-8.2 4.528 0 8.2 3.671 8.2 8.2s-3.672 8.2-8.2 8.2z"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a8.415 8.415 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg></a>
 
 <div class="mcta">
   <div class="mcta-inner">
@@ -267,7 +286,7 @@
       <a class="rsv-wa" href="#" target="_blank" rel="noopener">● Continuer sur WhatsApp →</a>
     </form>
     <div class="rsv-sent" style="display:none">
-      <span class="rsv-sent-title">Demande envoyée</span>
+      <span class="rsv-sent-title">Presque terminé</span>
       <p class="rsv-sent-text"></p>
     </div>
   </div>
