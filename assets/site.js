@@ -124,19 +124,19 @@
   var COPY_FR = {
     table: { kicker: 'Réservation', title: 'Votre table vous attend.', submit: 'Demander une réservation', placeholder: 'Occasion, préférences, allergies…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre réservation.' },
     event: { kicker: 'Aba’a Événements', title: 'Réserver ce moment.', submit: 'Demander une réservation', placeholder: 'Précisions sur votre venue…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre réservation.' },
-    membership: { kicker: 'Séjour', title: 'Réserver votre séjour.', submit: 'Demander une réservation', placeholder: 'Dates souhaitées, type de suite, occasion…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre séjour.' },
+    membership: { kicker: 'Votre venue', title: 'Préparer votre venue.', submit: 'Demander une réservation', placeholder: 'Date souhaitée, espace, occasion…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous pour confirmer votre réservation.' },
     privatisation: { kicker: 'Privatisation', title: 'Privatiser Aba’a.', submit: 'Envoyer ma demande', placeholder: 'Occasion, espace souhaité, préférences…', confirm: 'Il vous reste à envoyer le message WhatsApp qui vient de s’ouvrir — l’équipe Aba’a reviendra ensuite vers vous au sujet de votre événement privé.' }
   };
   var COPY_EN = {
     table: { kicker: 'Reservation', title: 'Your table awaits.', submit: 'Request a reservation', placeholder: 'Occasion, preferences, allergies…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your reservation.' },
     event: { kicker: 'Aba’a Events', title: 'Reserve this moment.', submit: 'Request a reservation', placeholder: 'Details about your visit…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your reservation.' },
-    membership: { kicker: 'Stay', title: 'Reserve your stay.', submit: 'Request a reservation', placeholder: 'Preferred dates, suite type, occasion…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your stay.' },
+    membership: { kicker: 'Your visit', title: 'Plan your visit.', submit: 'Request a reservation', placeholder: 'Preferred date, space, occasion…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you to confirm your reservation.' },
     privatisation: { kicker: 'Private hire', title: 'Book Aba’a exclusively.', submit: 'Send my request', placeholder: 'Occasion, space wanted, preferences…', confirm: 'One step left: send the WhatsApp message that just opened — the Aba’a team will then get back to you about your private event.' }
   };
   var COPY = LANG === 'en' ? COPY_EN : COPY_FR;
   var RSV_LABELS = LANG === 'en'
-    ? { greeting: { table: 'Hello Aba’a Mvoé Lodge, I would like to reserve a table.', membership: 'Hello Aba’a Mvoé Lodge, I would like to reserve a stay.', privatisation: 'Hello Aba’a Mvoé Lodge, I would like to book the lodge exclusively.', event: 'Hello Aba’a Mvoé Lodge, I would like to reserve for ' }, name: 'Name', guests: 'Guests', date: 'Date', time: 'Time', phone: 'Phone' }
-    : { greeting: { table: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.', membership: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver un séjour.', privatisation: 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le lodge.', event: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' }, name: 'Nom', guests: 'Personnes', date: 'Date', time: 'Heure', phone: 'Tél' };
+    ? { greeting: { table: 'Hello Aba’a Mvoé Lodge, I would like to reserve a table.', membership: 'Hello Aba’a Mvoé Lodge, I would like to plan my visit.', privatisation: 'Hello Aba’a Mvoé Lodge, I would like to book the lodge exclusively.', event: 'Hello Aba’a Mvoé Lodge, I would like to reserve for ' }, name: 'Name', guests: 'Guests', date: 'Date', time: 'Time', phone: 'Phone' }
+    : { greeting: { table: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.', membership: 'Bonjour Aba’a Mvoé Lodge, je souhaite organiser ma venue.', privatisation: 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le lodge.', event: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' }, name: 'Nom', guests: 'Personnes', date: 'Date', time: 'Heure', phone: 'Tél' };
 
   function setupReserveDrawer() {
     var overlay = document.querySelector('.rsv-overlay');
@@ -245,10 +245,10 @@
     }
   }
 
-  /* ---------- boutique du foyer (panier cigares + livraison) ---------- */
+  /* ---------- boutique de cigares (panier cigares + livraison) ---------- */
   var CART_LABELS = LANG === 'en'
-    ? { less: 'Less', more: 'More', remove: 'Remove', free: 'Free', delivery: 'Delivery', pickup: 'Pickup at The Hearth', greeting: 'Hello Aba’a Mvoé Lodge, I would like to order from The Hearth:', mode: 'Method', zone: 'Zone', address: 'Address', subtotal: 'Subtotal', total: 'Total', name: 'Name', phone: 'Phone' }
-    : { less: 'Moins', more: 'Plus', remove: 'Retirer', free: 'Offerte', delivery: 'Livraison', pickup: 'Retrait au Foyer', greeting: 'Bonjour Aba’a Mvoé Lodge, je souhaite commander au Foyer :', mode: 'Mode', zone: 'Zone', address: 'Adresse', subtotal: 'Sous-total', total: 'Total', name: 'Nom', phone: 'Tél' };
+    ? { less: 'Less', more: 'More', remove: 'Remove', free: 'Free', delivery: 'Delivery', pickup: 'Pickup at the cigar cellar', greeting: 'Hello Aba’a Mvoé Lodge, I would like to order cigars:', mode: 'Method', zone: 'Zone', address: 'Address', subtotal: 'Subtotal', total: 'Total', name: 'Name', phone: 'Phone' }
+    : { less: 'Moins', more: 'Plus', remove: 'Retirer', free: 'Offerte', delivery: 'Livraison', pickup: 'Retrait au cave à cigares', greeting: 'Bonjour Aba’a Mvoé Lodge, je souhaite commander des cigares :', mode: 'Mode', zone: 'Zone', address: 'Adresse', subtotal: 'Sous-total', total: 'Total', name: 'Nom', phone: 'Tél' };
 
   function setupCigarCart() {
     var rows = document.querySelectorAll('.price-row[data-cigar]');

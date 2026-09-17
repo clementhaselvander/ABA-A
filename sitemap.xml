@@ -17,11 +17,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/experience.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://[domaine-de-production]/cigares.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -47,11 +42,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/evenements.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://[domaine-de-production]/privatisation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -63,11 +53,6 @@
   </url>
   <url>
     <loc>https://[domaine-de-production]/en/club.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://[domaine-de-production]/en/experience.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -95,11 +80,6 @@
     <loc>https://[domaine-de-production]/en/poolside.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://[domaine-de-production]/en/evenements.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://[domaine-de-production]/en/privatisation.html</loc>
