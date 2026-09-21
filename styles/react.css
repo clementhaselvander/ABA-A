@@ -1,0 +1,12 @@
+/* No Preflight: the existing static site's reset remains authoritative. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../components";
+@source "../src";
+@theme inline {
+  --color-card: var(--bg);
+  --color-card-foreground: var(--fg);
+  --color-muted-foreground: var(--fg-dim);
+  --color-border: var(--line);
+}

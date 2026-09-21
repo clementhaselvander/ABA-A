@@ -103,21 +103,287 @@
     });
   }
 
-  /* ---------- reveal au scroll ---------- */
+  /* ---------- reveal au scroll ----------
+     Langage de mouvement commun à toutes les sections courantes. Quand un bloc
+     [data-reveal] atteint ~20 % de visibilité, ses éléments apparaissent l'un après
+     l'autre dans l'ordre de lecture — surtitre doré, titre, ligne dorée, paragraphe,
+     bouton — avec un décalage de 120 ms (90 ms sur smartphone). Les grands titres
+     montent depuis l'intérieur de leur emplacement (masque overflow: hidden posé le
+     temps de l'apparition seulement). Les blocs sans en-tête de section (médias,
+     grilles de vignettes, cartes, rails) conservent la révélation d'ensemble d'origine.
+     Joué une seule fois ; à la fin, toutes les classes et le masque sont retirés, donc
+     rien ne subsiste qui pourrait retarder les effets hover existants.
+     Styles : bloc « .rv » de site.css. */
+
+  /* éléments animables d'un bloc : on traverse les simples div de regroupement */
+  function revealItems(root, depth, out) {
+    var kids = root.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      if (el.tagName === 'BR' || el.hidden) continue;
+      if (depth < 2 && el.tagName === 'DIV' && !el.className && !el.getAttribute('style')) {
+        revealItems(el, depth + 1, out);
+      } else {
+        out.push(el);
+      }
+    }
+    return out;
+  }
+
+  /* un bloc n'entre en cascade que s'il porte un en-tête de section */
+  function revealCascade(block) {
+    var items = revealItems(block, 0, []);
+    if (items.length < 2 || items.length > 8) return null;
+    var hasHead = items.some(function (el) {
+      return el.tagName === 'H1' || el.tagName === 'H2' ||
+        el.classList.contains('eyebrow') || el.classList.contains('lede');
+    });
+    return hasHead ? items : null;
+  }
+
+  /* grand titre : son contenu est glissé dans un conteneur masqué, le temps de monter */
+  function revealMask(h) {
+    var inner = document.createElement('span');
+    inner.className = 'rv-mask-inner';
+    while (h.firstChild) inner.appendChild(h.firstChild);
+    h.appendChild(inner);
+    h.classList.add('rv-mask');
+    return inner;
+  }
+
+  function revealUnmask(h) {
+    var inner = h.firstElementChild;
+    h.classList.remove('rv-mask');
+    if (!inner || !inner.classList.contains('rv-mask-inner')) return;
+    while (inner.firstChild) h.insertBefore(inner.firstChild, inner);
+    h.removeChild(inner);
+  }
+
   function setupReveal() {
     var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
     if (!els.length) return;
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      els.forEach(function (el) { el.classList.add('is-in'); });
+      /* aucune animation ici : le filtre est retiré dans la foulée */
+      els.forEach(function (el) { el.classList.add('is-in'); el.classList.add('rv-clear'); });
       return;
     }
-    els.forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 0.09 + 's'; });
+
+    /* smartphone : décalages et durée resserrés, la fluidité prime */
+    var narrow = window.matchMedia('(max-width: 760px)').matches;
+    var STEP = narrow ? 90 : 120;   /* décalage entre deux éléments (ms) */
+    var DUR = narrow ? 650 : 800;   /* durée d'apparition d'un élément (ms) */
+
+    /* blocs d'ensemble : le décalage ne vaut que pour des frères qui apparaissent
+       ensemble, c'est-à-dire les enfants d'une grille ou d'une rangée — cartes et
+       tuiles. Le décalage s'y compte par parent : un compteur tenu sur la liste
+       entière de la page faisait tourner le modulo au milieu d'un rang, et les cartes
+       d'une même grille partaient dans le désordre.
+       Une pile verticale n'est pas un groupe : les blocs de prix de la carte se
+       succèdent sur toute la hauteur de la page et arrivent chacun à leur tour au fil
+       du défilement ; leur imposer un décalage ne ferait que retarder leur venue. */
+    var rowParents = [], rowIsRow = [], rowCounts = [];
+
+    function groupRank(el) {
+      var parent = el.parentNode;
+      if (!parent || parent.nodeType !== 1) return 0;
+      var g = rowParents.indexOf(parent);
+      if (g < 0) {
+        g = rowParents.length;
+        var cs = window.getComputedStyle(parent), disp = cs.display;
+        rowParents.push(parent);
+        rowIsRow.push(disp === 'grid' || disp === 'inline-grid' ||
+          ((disp === 'flex' || disp === 'inline-flex') && cs.flexDirection.indexOf('column') !== 0));
+        rowCounts.push(0);
+      }
+      return rowIsRow[g] ? rowCounts[g]++ : 0;
+    }
+
+    els.forEach(function (el) {
+      var items = revealCascade(el);
+      if (!items) {
+        /* bloc d'ensemble : dans une grille, les frères se succèdent dans l'ordre de
+           lecture ; ailleurs, le bloc part sans attendre. */
+        /* plafonné : une grille longue ne doit pas traîner sur toute sa longueur */
+        var d = Math.min(groupRank(el), 5) * 0.09;
+        el.style.transitionDelay = d + 's';
+        el._rvPlainEnd = d * 1000 + 900 + 100;  /* .9s de transition (site.css) + marge */
+        return;
+      }
+      el.classList.add('rv-split');
+      var masked = [], targets = [];
+      items.forEach(function (item, n) {
+        /* le délai reste porté par l'élément lui-même : le masque du grand titre
+           en hérite, alors que la remontée revient à son contenu */
+        item.style.setProperty('--rv-d', (STEP * n) + 'ms');
+        var target = item;
+        if (item.tagName === 'H1' || item.tagName === 'H2') {
+          target = revealMask(item);
+          masked.push(item);
+        }
+        target.classList.add('rv-i');
+        targets.push(target);
+      });
+      el._rvItems = items;
+      el._rvTargets = targets;
+      el._rvMasked = masked;
+      el._rvEnd = STEP * (items.length - 1) + DUR + 200;
+    });
+
+    /* une fois l'apparition terminée, on efface toute trace de l'animation */
+    function revealCleanup(el) {
+      if (!el._rvItems) return;
+      el.classList.remove('rv-split');
+      el._rvTargets.forEach(function (t) { t.classList.remove('rv-i'); });
+      el._rvItems.forEach(function (item) { item.style.removeProperty('--rv-d'); });
+      el._rvMasked.forEach(revealUnmask);
+      el._rvItems = el._rvTargets = el._rvMasked = null;
+    }
+
+    function revealIn(el) {
+      el.classList.add('is-in');
+      if (el._rvEnd) setTimeout(function () { revealCleanup(el); }, el._rvEnd);
+      /* bloc d'ensemble : le flou dissipé, on retire le filtre pour de bon (« .rv-clear ») */
+      if (el._rvPlainEnd) setTimeout(function () { el.classList.add('rv-clear'); }, el._rvPlainEnd);
+    }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var r = e.boundingClientRect;
+        var tall = r.height > vh * 0.8 && e.intersectionRatio > 0 && r.top < vh * 0.75;
+        /* déclenchement à ~20 % de visibilité ; les blocs plus hauts que l'écran et les
+           sections déjà dépassées (saut d'ancre) sont affichés sans attendre ce seuil */
+        if (e.intersectionRatio >= 0.2 || tall || r.bottom < 0) {
+          revealIn(e.target);
+          io.unobserve(e.target);
+        }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: [0, 0.2], rootMargin: '0px 0px -5% 0px' });
     els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- transitions cinématographiques : noir → photographie → contenu ----------
+     Sections plein cadre (hero de page, bandeau signature, appel final) : la photo émerge du noir,
+     puis surtitre / titre / texte / boutons suivent en cascade, la ligne dorée se dessine.
+     Joué une seule fois, à ~20 % de visibilité. Styles : bloc « .cine » de site.css. */
+  function setupCinematic() {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var SPECS = [
+      { sel: '.page-hero', base: 150, items: ['.page-hero-crumb', '.page-hero-title', '.page-hero-lede'] },
+      { sel: '.signature-band', base: 350, items: ['h2', 'span'] },
+      { sel: '.fcta', base: 350, items: ['.fcta-kicker', '.fcta-title', '.btn-row'] }
+    ];
+    var STEP = 130; /* décalage entre deux éléments (ms) */
+    var targets = [];
+    SPECS.forEach(function (spec) {
+      document.querySelectorAll(spec.sel).forEach(function (section) {
+        section.classList.add('cine');
+        if (section.querySelector('img')) section.classList.add('cine-photo');
+        var n = 0;
+        spec.items.forEach(function (sel) {
+          var el = section.querySelector(sel);
+          if (!el) return;
+          el.classList.add('cine-item');
+          el.style.setProperty('--cine-d', (spec.base + STEP * n++) + 'ms');
+        });
+        section.style.setProperty('--cine-line-d', (spec.base + 200) + 'ms');
+        targets.push(section);
+      });
+    });
+    if (!targets.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        /* section déjà dépassée (saut d'ancre) : on l'affiche sans animation visible */
+        if (e.isIntersecting || e.boundingClientRect.bottom < 0) {
+          e.target.classList.add('cine-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+
+  /* ---------- parallaxe discrète sur les grandes photographies immersives ----------
+     Réservé aux vues d'ensemble du lieu en plein cadre (salon, piscine, bord de mer) :
+     pendant le scroll, la photo se déplace un peu moins vite que le contenu placé devant
+     elle — 20 px au maximum sur desktop, 8 px sur smartphone. On écrit la propriété
+     `translate` (et non `transform`) pour laisser intactes les animations Ken Burns et
+     les transitions cinématographiques. Le relais est pris en douceur : rien ne bouge
+     tant que la révélation de la section n'est pas terminée, puis l'amplitude monte
+     progressivement depuis zéro, sans saut possible. Styles : bloc « .pxl » de site.css. */
+  function setupParallax() {
+    if (!('IntersectionObserver' in window)) return;
+    if (!(window.CSS && CSS.supports && CSS.supports('translate', '0 1px'))) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* photographies immersives retenues ; macros cigares, assiettes et bouteilles restent fixes */
+    var IMMERSIVE = /(lounge-wide|lounge-chesterfield|lounge-portrait|pool-dusk|pool-day|pool-night-tree|beach)\./;
+    var SETTLE = 900; /* laisse la section, la photo, le titre et la ligne dorée se poser */
+    var RAMP = 700;   /* puis le parallaxe monte de 0 à son amplitude */
+
+    var items = [];
+    document.querySelectorAll('.home-hero-media > img, .page-hero-media > img, .fcta > img, .signature-band > img')
+      .forEach(function (img) {
+        if (!IMMERSIVE.test(img.getAttribute('src') || '')) return;
+        img.classList.add('pxl');
+        /* le parent porte déjà le cadre de la section (inset: 0 pour les hero) */
+        items.push({ img: img, box: img.parentNode, visible: false, since: 0, y: null });
+      });
+    if (!items.length) return;
+
+    function now() { return window.performance && performance.now ? performance.now() : Date.now(); }
+    function amplitude() {
+      var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pxl-range'));
+      return (v > 0 ? v : 40) / 2;
+    }
+
+    var amp = amplitude();
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var t = now();
+      var ramping = false;
+      items.forEach(function (it) {
+        if (!it.visible) return;
+        var r = it.box.getBoundingClientRect();
+        var span = (vh + r.height) / 2;
+        if (span <= 0) return;
+        /* -1 : section sous le pli · 0 : centrée · 1 : sortie par le haut */
+        var p = (vh / 2 - (r.top + r.height / 2)) / span;
+        p = p < -1 ? -1 : (p > 1 ? 1 : p);
+        /* montée progressive (smoothstep) : démarre à 0, donc aucun à-coup à la prise de relais */
+        var k = (t - it.since) / RAMP;
+        if (k < 1) ramping = true;
+        k = k <= 0 ? 0 : (k >= 1 ? 1 : k * k * (3 - 2 * k));
+        var y = Math.round(p * amp * k * 100) / 100;
+        if (y !== it.y) { it.y = y; it.img.style.translate = '0 ' + y + 'px'; }
+      });
+      if (ramping) request();
+    }
+
+    function request() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var it = null;
+        for (var i = 0; i < items.length; i++) { if (items[i].box === e.target) { it = items[i]; break; } }
+        if (!it) return;
+        it.visible = e.isIntersecting;
+        if (e.isIntersecting && !it.since) it.since = now() + SETTLE;
+      });
+      request();
+    }, { rootMargin: '15% 0px' });
+    items.forEach(function (it) { io.observe(it.box); });
+
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', function () { amp = amplitude(); request(); }, { passive: true });
+    request();
   }
 
   /* ---------- réservation (drawer) ---------- */
@@ -479,27 +745,92 @@
     });
   }
 
-  /* ---------- vidéos autoplay en sourdine (léger : chargement différé, désactivé sur mobile/données limitées) ---------- */
-  function setupVideos() {
-    var videos = document.querySelectorAll('video[autoplay]');
-    if (!videos.length) return;
-    var isMobile = window.matchMedia('(max-width: 760px)').matches;
-    var saveData = !!(navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || '')));
-    videos.forEach(function (v) {
-      v.muted = true; v.loop = true;
-      v.removeAttribute('autoplay');
-      if (isMobile || saveData) return; /* reste sur l'image poster, pas de téléchargement auto */
-      if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) v.play().catch(function () {});
-            else v.pause();
-          });
-        }, { threshold: 0.25 });
-        io.observe(v);
-      } else {
-        v.play().catch(function () {});
-      }
+  /* ---------- voile de fumée entre deux sections ----------
+     Le voile ne dérive que pendant qu'il traverse l'écran : hors champ,
+     l'animation est mise en pause et l'opacité retombe à zéro, donc aucune page
+     ne fait tourner de fumée en arrière-plan.
+     Mouvement réduit, ou navigateur sans IntersectionObserver : la classe n'est
+     jamais posée, le voile reste invisible et le site est inchangé.
+     Styles : bloc « voile de fumée entre deux sections » de site.css. */
+  function setupSmoke() {
+    var veils = Array.prototype.slice.call(document.querySelectorAll('.smoke-veil'));
+    if (!veils.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle('is-drifting', e.isIntersecting);
+      });
+    }, { rootMargin: '12% 0px' });
+    veils.forEach(function (v) { io.observe(v); });
+  }
+
+  /* ---------- passage de lumière sur le doré ----------
+     Une lumière chaude traverse une seule fois quelques pièces dorées, à
+     l'apparition de la section qui les porte, puis tout redevient stable : la
+     classe est retirée une fois le passage terminé, donc aucune animation ne
+     continue de tourner en arrière-plan de la page.
+
+     Le délai attend d'abord que la ligne ait fini de se dessiner (cinématique
+     pour le hero, cascade de révélation pour le bandeau de chiffres), puis
+     marque une pause d'environ 400 ms. C'est cette pause qui donne la lecture
+     « finition métallique » plutôt que « animation » : le tracé et le reflet ne
+     se confondent pas, ils se succèdent.
+
+     Deux pièces au plus par page : la ligne dorée du hero et, là où il existe,
+     le filet haut du bandeau de chiffres. Les boutons, eux, ne réagissent qu'au
+     survol et relèvent du CSS seul.
+
+     La classe est posée sur le conteneur de la ligne, et non sur la ligne :
+     pendant son tracé celle-ci est à scaleX(0), donc d'aire nulle, et aucun
+     observateur d'intersection ne peut s'y accrocher.
+
+     Mouvement réduit, ou navigateur sans IntersectionObserver : rien n'est posé,
+     le site est strictement inchangé.
+     Styles : bloc « passage de lumière sur le doré » de site.css. */
+  function setupGoldSheen() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* lueur d'ambiance : une seule section par page, la première après le hero.
+       Elle ne dérive que pendant qu'elle traverse l'écran. */
+    var amb = document.querySelector('main:not(.legal-page) > section.section');
+    if (amb) {
+      amb.classList.add('gsheen-amb');
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          e.target.classList.toggle('gsheen-drift', e.isIntersecting);
+        });
+      }, { rootMargin: '10% 0px' }).observe(amb);
+    }
+
+    var PAUSE = 400;    /* respiration entre la fin du tracé et le reflet */
+    var SHEEN = 2100;   /* durée du passage : doit suivre goldSheen dans site.css */
+    /* « draw » = temps que met la ligne à se dessiner, repris des animations en place */
+    var SPECS = [
+      { sel: '.home-hero-crumb', draw: 1050 },                 /* heroContentIn : .15s + .9s */
+      { sel: '.page-hero-crumb', draw: 1050 },                 /* cine : --cine-line-d (350 ms) + .7s */
+      { sel: '.stat-row', draw: 800, cascade: true }            /* révélation : --rv-d + .8s */
+    ];
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target;
+        var wait = el._gsWait;
+        setTimeout(function () { el.classList.add('gsheen-on'); }, wait);
+        /* la trace est effacée : l'élément retrouve son état d'origine, sans reliquat */
+        setTimeout(function () { el.classList.remove('gsheen-on'); }, wait + SHEEN + 120);
+      });
+    }, { threshold: 0.35 });
+
+    SPECS.forEach(function (spec) {
+      document.querySelectorAll(spec.sel).forEach(function (el) {
+        /* le bandeau de chiffres hérite du décalage de cascade posé par setupReveal */
+        var cascade = spec.cascade ? (parseFloat(el.style.getPropertyValue('--rv-d')) || 0) : 0;
+        el._gsWait = spec.draw + cascade + PAUSE;
+        io.observe(el);
+      });
     });
   }
 
@@ -512,16 +843,230 @@
     });
   }
 
+  /* ---------- séquence immersive de l'accueil ----------
+     Pilote la section `[data-immersive]` : une photographie tenue en
+     `position: sticky` pendant que trois phrases s'y succèdent, puis une
+     fermeture au noir qui enchaîne sur la section suivante.
+
+     Le sticky, le cadrage et toute la mise en forme sont faits en CSS (bloc
+     « séquence immersive » de site.css). Ce script ne fait qu'une chose : lire
+     la progression du défilement dans la section et l'écrire sous forme de
+     variables CSS. Il ne touche ni à la mise en page, ni aux dimensions, ni à
+     la position de quoi que ce soit — donc aucun recalcul de rendu n'est
+     déclenché, seulement de la composition.
+
+     Rythme : les mesures sont prises dans une frame d'animation, jamais dans
+     l'écouteur de défilement, et le calcul s'arrête dès que la section quitte
+     l'écran. Même montage que le parallaxe des photos immersives.
+
+     La progression est déduite des hauteurs réellement mesurées (section et
+     scène) plutôt que de `innerHeight` : sur mobile la scène est en `svh` et
+     la fenêtre change de hauteur au repli de la barre d'outils, ce qui
+     décalerait la séquence à chaque fois.
+
+     Mouvement réduit, absence d'IntersectionObserver, ou script non exécuté :
+     rien n'est posé, les valeurs par défaut du CSS s'appliquent et la section
+     reste une photographie fixe surmontée de ses trois phrases. */
+  function setupImmersive() {
+    var sec = document.querySelector('[data-immersive]');
+    if (!sec) return;
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var stage = sec.querySelector('.imm-stage');
+    var words = Array.prototype.slice.call(sec.querySelectorAll('.imm-word'));
+    if (!stage || !words.length) return;
+
+    /* Fenêtre de lecture de chaque phrase, en progression de 0 à 1. Les fenêtres
+       ne se chevauchent jamais et sont séparées par un intervalle vide : entre
+       deux phrases l'écran revient à la seule photographie, ce qui est ce qui
+       donne à chacune son poids. */
+    var WINDOWS = [[.07, .32], [.36, .61], [.64, .88]];
+    var FADE  = .28;   /* part de la fenêtre consacrée à l'apparition, idem à la sortie */
+    var RISE  = 15;    /* px : la phrase monte de 15 px en paraissant */
+    var DRIFT = 10;    /* px : et poursuit doucement sa montée en s'effaçant */
+
+    var SCALE = .04;   /* échelle de la photo : 1 → 1,04 sur toute la séquence */
+    var SHIFT = -16;   /* px : dérive verticale, couverte par le surdimensionnement CSS */
+    var SCRIM = [.25, .45];
+    var BLACK_FROM = .86;  /* la fermeture au noir n'occupe que la toute fin */
+    var BLACK_MAX  = .94;
+
+    var visible = false, queued = false;
+
+    /* smoothstep : accélération et décélération symétriques, sans à-coup aux
+       deux extrémités — c'est ce qui évite qu'une phrase « démarre » à l'œil. */
+    function ease(t) { return t * t * (3 - 2 * t); }
+    function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+    function update() {
+      queued = false;
+      if (!visible) return;
+
+      var travel = sec.offsetHeight - stage.offsetHeight;
+      if (travel <= 0) return;   /* scène aussi haute que la section : rien à parcourir */
+      var p = clamp01(-sec.getBoundingClientRect().top / travel);
+
+      /* mobile : mêmes repères de temps, amplitude de moitié */
+      var soft = window.innerWidth <= 760 ? .5 : 1;
+
+      stage.style.setProperty('--imm-scale', (1 + SCALE * soft * p).toFixed(4));
+      stage.style.setProperty('--imm-shift', (SHIFT * soft * p).toFixed(2) + 'px');
+      stage.style.setProperty('--imm-scrim', (SCRIM[0] + (SCRIM[1] - SCRIM[0]) * p).toFixed(3));
+      stage.style.setProperty('--imm-black',
+        (ease(clamp01((p - BLACK_FROM) / (1 - BLACK_FROM))) * BLACK_MAX).toFixed(3));
+
+      for (var i = 0; i < words.length; i++) {
+        var win = WINDOWS[i];
+        var t = clamp01((p - win[0]) / (win[1] - win[0]));
+        var o, y;
+        if (t <= 0)            { o = 0; y = RISE; }          /* pas encore là */
+        else if (t >= 1)       { o = 0; y = -DRIFT; }        /* déjà partie */
+        else if (t < FADE)     { o = ease(t / FADE);       y = RISE * (1 - o); }
+        else if (t > 1 - FADE) { o = ease((1 - t) / FADE); y = -DRIFT * (1 - o); }
+        else                   { o = 1; y = 0; }             /* pleine lecture */
+        words[i].style.setProperty('--o', o.toFixed(3));
+        words[i].style.setProperty('--y', y.toFixed(2) + 'px');
+      }
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      (window.requestAnimationFrame || setTimeout)(update);
+    }
+
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) queue();
+    }, { rootMargin: '12% 0px' }).observe(sec);
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    queue();
+  }
+
+  /* Stagger testimonials adapté au site statique. Les articles HTML restent la source. */
+  function setupTestimonials() {
+    document.querySelectorAll('[data-testimonials]').forEach(function (section) {
+      var rail = section.querySelector('.tst-rail');
+      var cards = Array.from(rail.querySelectorAll('.tst-card'));
+      if (cards.length < 2) return;
+      var prev = section.querySelector('[data-tst-prev]');
+      var next = section.querySelector('[data-tst-next]');
+      var active = 0;
+      var gesture = null;
+      var suppressClick = false;
+      var status = document.createElement('p');
+      status.className = 'tst-status';
+      status.setAttribute('aria-live', 'polite');
+      status.setAttribute('aria-atomic', 'true');
+      rail.after(status);
+
+      function position(index) {
+        var offset = (index - active + cards.length) % cards.length;
+        return offset > cards.length / 2 ? offset - cards.length : offset;
+      }
+      function render() {
+        cards.forEach(function (card, i) {
+          var offset = position(i);
+          var visible = Math.abs(offset) <= 2;
+          var wasHidden = card.getAttribute('aria-hidden') === 'true';
+          card.classList.toggle('tst-recycle', !visible || wasHidden);
+          card.style.setProperty('--tst-offset', offset);
+          card.style.setProperty('--tst-lift', offset === 0 ? '-26px' : Math.abs(offset) % 2 ? '18px' : '6px');
+          card.style.setProperty('--tst-angle', offset === 0 ? '0deg' : offset % 2 ? '2.5deg' : '-2.5deg');
+          card.style.zIndex = offset === 0 ? '5' : String(3 - Math.min(Math.abs(offset), 3));
+          card.classList.toggle('is-active', offset === 0);
+          card.setAttribute('aria-hidden', String(!visible));
+          card.tabIndex = Math.abs(offset) === 1 ? 0 : -1;
+        });
+        status.textContent = 'Avis de démonstration ' + (active + 1) + ' / ' + cards.length;
+      }
+      function move(steps) {
+        active = (active + steps + cards.length) % cards.length;
+        render();
+        if (cards.indexOf(document.activeElement) !== -1) rail.focus({ preventScroll: true });
+      }
+      cards.forEach(function (card, i) {
+        card.setAttribute('role', 'group');
+        card.setAttribute('aria-roledescription', 'diapositive');
+        card.setAttribute('aria-label', 'Avis ' + (i + 1) + ' sur ' + cards.length);
+        // Monogrammes : pas de portraits de personnes associés aux avis fictifs.
+        var avatar = document.createElement('span');
+        avatar.className = 'tst-monogram';
+        avatar.setAttribute('aria-hidden', 'true');
+        avatar.textContent = card.querySelector('.tst-name').textContent.split(/\s+/).map(function (part) { return part.charAt(0); }).slice(0, 2).join('');
+        card.prepend(avatar);
+        card.addEventListener('click', function () {
+          if (!suppressClick && position(i) !== 0) move(position(i));
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            move(position(i));
+          }
+        });
+      });
+      prev.addEventListener('click', function () { move(-1); });
+      next.addEventListener('click', function () { move(1); });
+      rail.addEventListener('keydown', function (e) {
+        if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(e.key) === -1) return;
+        e.preventDefault();
+        if (e.key === 'Home') move(-active);
+        else if (e.key === 'End') move(cards.length - 1 - active);
+        else move(e.key === 'ArrowRight' ? 1 : -1);
+      });
+      rail.addEventListener('pointerdown', function (e) {
+        if (!e.isPrimary || e.button !== 0) return;
+        suppressClick = false;
+        gesture = { id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0 };
+      });
+      rail.addEventListener('pointermove', function (e) {
+        if (!gesture || gesture.id !== e.pointerId) return;
+        var dx = e.clientX - gesture.x;
+        var dy = e.clientY - gesture.y;
+        if (!suppressClick && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 10) { gesture = null; return; }
+        if (Math.abs(dx) > 8) {
+          suppressClick = true;
+          rail.setPointerCapture(e.pointerId);
+          rail.classList.add('is-dragging');
+          gesture.dx = dx;
+          rail.style.setProperty('--tst-drag', Math.max(-90, Math.min(90, dx * .4)) + 'px');
+        }
+      });
+      function finish(e) {
+        if (!gesture || gesture.id !== e.pointerId) return;
+        var dx = gesture.dx;
+        gesture = null;
+        rail.classList.remove('is-dragging');
+        rail.style.removeProperty('--tst-drag');
+        if (e.type === 'pointerup' && Math.abs(dx) > 40) move(dx < 0 ? 1 : -1);
+        if (rail.hasPointerCapture(e.pointerId)) rail.releasePointerCapture(e.pointerId);
+      }
+      rail.addEventListener('pointerup', finish);
+      rail.addEventListener('pointercancel', finish);
+      rail.addEventListener('lostpointercapture', finish);
+      prev.hidden = next.hidden = false;
+      section.classList.add('tst-stagger');
+      render();
+    });
+  }
   document.addEventListener('DOMContentLoaded', function () {
+    setupTestimonials();
     initAnalytics();
     setupNav();
     setupMobileMenu();
     setupReveal();
+    setupCinematic();
+    setupParallax();
     setupReserveDrawer();
     setupCigarCart();
     setupWaForms();
     setupCompare();
-    setupVideos();
     setupWaLinks();
+    setupSmoke();
+    setupImmersive();
+    setupGoldSheen();
   });
 })();

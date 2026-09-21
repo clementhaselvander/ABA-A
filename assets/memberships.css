@@ -1,0 +1,73 @@
+/* Page membre : tokens et typographies de la charte Aba’a, pp. 9–13. */
+.member-hero { min-height: 76vh; }
+.member-hero .page-hero-media img { object-position: center 55%; }
+.member-hero .page-hero-scrim { background: linear-gradient(90deg, rgba(20,15,11,.86), rgba(20,15,11,.28)), linear-gradient(0deg, var(--bg), transparent 65%); }
+.member-hero .page-hero-title { max-width: 950px; font-size: clamp(40px,6.7vw,88px); line-height: 1.08; }
+.member-hero .page-hero-lede { max-width: 600px; font-size: clamp(19px,2vw,25px); line-height: 1.5; }
+.member-status { display: flex; align-items: center; gap: 14px; color: var(--gold); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; }
+.member-status::before { content: ''; width: 30px; height: 1px; background: var(--gold-dark); }
+.member-hero .member-status { margin: 30px 0 26px; }
+.member-discover { display: inline-flex; gap: 22px; padding-bottom: 8px; border-bottom: 1px solid var(--line-strong); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
+.member-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 52px; }
+.member-intro .lede { margin: 0; max-width: 520px; }
+.member-preview-note { font-size: 12px; line-height: 1.8; color: var(--fg-dim); max-width: 680px; margin: 22px 0 0; }
+.member-plans { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(24px,3.4vw,48px); }
+.member-plan { min-width: 0; display: flex; flex-direction: column; }
+.member-card { position: relative; margin: 0 0 34px; border-radius: 12px; overflow: hidden; box-shadow: 0 16px 30px -15px rgba(0,0,0,.8); }
+.member-card img { width: 100%; height: auto; aspect-ratio: 624 / 405; object-fit: contain; }
+.member-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 18%, rgba(244,205,130,.1) 48%, transparent 75%); opacity: 0; }
+.member-plan-body { display: flex; flex-direction: column; flex: 1; }
+.member-level { display: block; color: var(--gold-dark); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; }
+.member-plan-title { font-family: var(--display); font-weight: 400; font-size: clamp(18px,2vw,24px); letter-spacing: .07em; margin: 12px 0 16px; }
+.member-price { margin: 0 0 16px; color: var(--gold); font-family: var(--display); font-size: clamp(23px,2.2vw,31px); white-space: nowrap; }
+.member-price span { font-family: var(--sans); font-size: 10px; letter-spacing: .1em; }
+.member-description { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--fg-dim); margin: 0 0 24px; }
+.member-benefits { margin-top: auto; padding: 23px 0; border-top: 1px solid var(--line-strong); }
+.member-benefits h4 { margin: 0 0 12px; color: var(--fg); font-size: 10px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; }
+.member-benefits p, .member-benefits ul { font-size: 13px; line-height: 1.8; color: var(--fg-dim); margin: 0; }
+.member-benefits ul { padding-left: 18px; }
+.member-cta { align-self: flex-start; justify-content: center; min-height: 46px; }
+.member-cta:disabled { cursor: default; opacity: .7; color: var(--gold); background: transparent; border-color: var(--line-strong); transform: none; box-shadow: none; }
+.member-cta:disabled::before, .member-cta:disabled::after { display: none; }
+.member-terms { margin: 34px 0 0; padding-top: 24px; border-top: 1px solid var(--line); font-size: 12px; color: var(--fg-dim); line-height: 1.8; }
+.member-experience { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(32px,6vw,88px); align-items: center; }
+.member-editorial-image { margin: 0; }
+.member-editorial-image img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.member-values { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 36px; }
+.member-values h3 { font-size: 27px; }
+.member-values p { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--fg-dim); margin: 12px 0 0; }
+.member-path { list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 40px; padding: 0; margin: 44px 0 0; }
+.member-path li { padding-top: 24px; border-top: 1px solid var(--line-strong); }
+.member-path-number { display: block; font-family: var(--display); font-size: 13px; letter-spacing: .18em; color: var(--gold); margin-bottom: 18px; }
+.member-path h3 { font-size: 28px; }
+.member-path p { color: var(--fg-dim); font-size: 14px; line-height: 1.8; }
+.member-closing { text-align: center; }
+.member-closing .member-status { justify-content: center; margin-top: 28px; }
+.member-closing .lede { margin: 22px auto 0; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .member-card { transition: transform .8s cubic-bezier(.16,1,.3,1), box-shadow .8s ease; }
+  .member-card::after { transition: opacity .8s ease; }
+  .member-card:hover { transform: translateY(-5px); box-shadow: 0 24px 40px -20px rgba(0,0,0,.95); }
+  .member-card:hover::after { opacity: 1; }
+}
+@media (max-width: 1000px) {
+  .member-plans { grid-template-columns: 1fr; gap: 48px; }
+  .member-plan { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
+  .member-card { margin: 0; }
+  .member-experience { grid-template-columns: 1fr; }
+  .member-editorial-image img { aspect-ratio: 16 / 9; }
+}
+@media (max-width: 640px) {
+  .member-hero { min-height: 680px; min-height: 88svh; }
+  .member-intro, .member-plan, .member-path { grid-template-columns: 1fr; gap: 28px; }
+  .member-values { grid-template-columns: 1fr; gap: 26px; }
+  .member-plans { gap: 44px; }
+  .member-card { max-width: 440px; width: 100%; margin: 0 auto; }
+  .member-path { margin-top: 32px; }
+  .member-plan-title { font-size: 24px; }
+  .member-price { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(body[data-page="membership"]) { scroll-behavior: auto; }
+  .member-card, .member-card::after { transition: none; }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "abaa-memberships", "private": true, "version": "1.0.0",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && esbuild src/memberships.tsx --bundle --minify --format=iife --outfile=assets/memberships-react.js && tailwindcss -i styles/react.css -o assets/memberships-react.css --minify"
+  },
+  "dependencies": { "react": "^19.0.0", "react-dom": "^19.0.0", "motion": "^12.0.0", "clsx": "^2.1.1", "tailwind-merge": "^3.0.0" },
+  "devDependencies": { "typescript": "^5.9.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "esbuild": "^0.25.0", "tailwindcss": "^4.0.0", "@tailwindcss/cli": "^4.0.0" }
+}

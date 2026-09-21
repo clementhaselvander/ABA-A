@@ -10,3 +10,12 @@ Thumbs.db
 # conservés localement mais retirés du suivi Git — cf. audit du 08/09/2026
 /site.js
 /styles.css
+
+# Rendus de contrôle et profils locaux de navigateur
+/tmp/
+
+# Dépendances de compilation de la section React
+/node_modules/
+
+# Sources média brutes (photos/vidéos de travail, non publiées)
+/abaa/

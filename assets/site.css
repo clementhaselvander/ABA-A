@@ -22,7 +22,7 @@
 [hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
-img, video { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; }
 a { color: var(--gold); text-decoration: none; transition: color .35s ease; }
 a:hover { color: var(--fg); }
 ::selection { background: var(--gold-dark); color: var(--bg); }
@@ -34,6 +34,40 @@ input::placeholder, textarea::placeholder { color: rgba(245,239,230,.32); opacit
 ::-webkit-scrollbar-thumb { background: #2B2013; }
 
 /* ---------- utility ---------- */
+/* Essai limité à deux jonctions de index.html, activées par classes explicites.
+   ::after reste distinct du ::before déjà utilisé par la lueur d'ambiance.
+   Aucun mouvement, filtre, changement d'espacement ou masque sur le contenu. */
+.section.section-seam-line,
+.section.section-seam-fade {
+  position: relative;
+  border-top-color: transparent;
+}
+.section-seam-line::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  pointer-events: none;
+}
+.section-seam-fade {
+  --seam-height: clamp(32px, 5vw, 72px);
+  --seam-background: var(--bg-alt);
+}
+.section-seam-fade::after {
+  content: '';
+  position: absolute;
+  top: calc(-1px - var(--seam-height));
+  left: 0;
+  right: 0;
+  height: var(--seam-height);
+  background: linear-gradient(to bottom, transparent, var(--seam-background));
+  pointer-events: none;
+  z-index: 0;
+}
+
 .frame { max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px,5vw,72px); }
 .section { padding: clamp(64px,8vw,120px) 0; border-top: 1px solid var(--line); }
 .section-tight { padding: clamp(44px,5.5vw,80px) 0; }
@@ -47,9 +81,28 @@ h2 em, h1 em { font-style: italic; color: var(--gold); }
 .home-hero-title em, .page-hero-title em, .fcta-title em, .signature-band h2 em { font-style: normal; }
 .lede { font-size: 15px; line-height: 1.85; color: var(--fg-dim); font-weight: 300; max-width: 480px; }
 .sign { font-family: var(--serif); font-style: italic; font-weight: 300; color: rgba(245,239,230,.8); }
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-.reveal.is-in { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) { .reveal { transition: none; opacity: 1; transform: none; } }
+.reveal { opacity: 0; transform: translateY(22px); filter: blur(4px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1), scale .9s cubic-bezier(.16,1,.3,1); }
+.reveal.is-in { opacity: 1; transform: translateY(0); filter: blur(0); }
+/* apparition terminée : le filtre est retiré pour de bon (blur(0) n'est pas none — il
+   laisserait un contexte d'empilement et un calque GPU sur chaque bloc). Classe posée
+   par site.js ; sans JS, .is-in suffit et l'aspect est identique. */
+.reveal.rv-clear { filter: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { transition: none; opacity: 1; transform: none; filter: none; } }
+
+/* cartes et tuiles : elles se posent en plus de s'élever — le langage de la cascade des
+   textes, porté aux grilles. Les frères d'une même grille se succèdent de gauche à
+   droite ; les délais sont posés par site.js (setupReveal), comptés par parent.
+   Propriété `scale` autonome, comme pour les transitions cinématographiques : elle se
+   compose avec le `transform: translateY` de .reveal au lieu de le remplacer, et avec
+   le `transform: scale()` des survols, porté par l'image à l'intérieur de la carte.
+   Sous mouvement réduit, aucune valeur n'est posée : il n'y a rien à réinitialiser. */
+@media (prefers-reduced-motion: no-preference) {
+  .card.reveal, .tile.reveal { scale: .94; }
+  .card.reveal.is-in, .tile.reveal.is-in { scale: 1; }
+  /* apparition terminée : `scale: 1` n'est pas `none` et laisserait, lui aussi, un
+     contexte d'empilement sur chaque carte (voir .rv-clear plus haut). */
+  .card.reveal.rv-clear, .tile.reveal.rv-clear { scale: none; }
+}
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,3.4vw,64px); }
 .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(20px,2.6vw,40px); }
@@ -149,8 +202,8 @@ h2 em, h1 em { font-style: italic; color: var(--gold); }
 .card-cta { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
 
 .tile { position: relative; overflow: hidden; aspect-ratio: 3/4; display: flex; align-items: flex-end; }
-.tile img, .tile video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.62); transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
-.tile:hover img, .tile:hover video { transform: scale(1.06); }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.62); transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
+.tile:hover img { transform: scale(1.06); }
 .tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(20,15,11,.92) 0%, rgba(20,15,11,.1) 55%); }
 .tile-body { position: relative; z-index: 1; padding: 22px; display: flex; flex-direction: column; gap: 6px; }
 .tile-num { font-size: 10px; letter-spacing: .2em; color: var(--gold); }
@@ -239,6 +292,14 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .ftr-mid a.ftr-link { display: block; font-size: 13px; color: rgba(245,239,230,.72); padding: 4px 0; }
 .ftr-mid a.ftr-link:hover { color: var(--gold); }
 .ftr-bottom { border-top: 1px solid var(--line); max-width: 1400px; margin: 0 auto; padding: 22px clamp(20px,5vw,72px) 40px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; font-size: 11px; color: var(--fg-dimmer); letter-spacing: .04em; }
+.ftr-official-logo { flex: 0 0 auto; margin-left: auto; margin-right: 72px; align-self: center; line-height: 0; }
+.ftr-official-logo img { display: block; width: 112px; max-width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .ftr-bottom { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .ftr-official-logo { margin-right: 64px; }
+  .ftr-official-logo img { width: 92px; }
+}
+@media (max-width: 560px) { .ftr-official-logo img { width: 80px; } }
 @media (max-width: 900px) { .ftr-mid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .ftr-mid { grid-template-columns: 1fr; } }
 
@@ -281,6 +342,31 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .rsv-sent p { margin: 0; font-size: 13px; color: var(--fg-dim); line-height: 1.7; }
 
 /* ---------- testimonials ---------- */
+[data-testimonials] .tst-demo { margin: -12px 0 20px; color: var(--fg-dimmer); font-size: 12px; line-height: 1.6; }
+[data-testimonials] button:focus-visible, [data-testimonials] .tst-rail:focus-visible, [data-testimonials] .tst-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+[data-testimonials].tst-stagger .tst-rail { --tst-size: clamp(280px, 31vw, 365px); --tst-step: calc(var(--tst-size) * .78); position: relative; display: block; height: 465px; padding: 0; overflow: hidden; scroll-snap-type: none; touch-action: pan-y pinch-zoom; cursor: grab; isolation: isolate; }
+[data-testimonials].tst-stagger .tst-card { position: absolute; left: 50%; top: 50%; width: var(--tst-size); height: 340px; margin: 0; padding: 30px; gap: 18px; border-color: var(--line-strong); background: var(--bg-alt); clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%); transform: translate(-50%, -50%) translateX(calc(var(--tst-step) * var(--tst-offset) + var(--tst-drag, 0px))) translateY(var(--tst-lift)) rotate(var(--tst-angle)); transition: transform .6s cubic-bezier(.22,1,.36,1), background-color .6s ease, border-color .6s ease; cursor: pointer; }
+[data-testimonials].tst-stagger .tst-card::after { content: ''; position: absolute; right: -1px; top: 29px; width: 43px; height: 1px; background: var(--gold); transform-origin: right center; transform: rotate(45deg); }
+[data-testimonials].tst-stagger .tst-card.is-active { background: var(--gold); border-color: var(--gold); cursor: default; }
+[data-testimonials].tst-stagger .is-active .tst-quote, [data-testimonials].tst-stagger .is-active .tst-name { color: var(--bg); }
+[data-testimonials].tst-stagger .is-active .tst-role { color: var(--bg); opacity: .75; }
+[data-testimonials].tst-stagger .tst-quote { flex: 1; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.45; }
+[data-testimonials] .tst-monogram { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border: 1px solid var(--gold); color: var(--gold); font-family: var(--serif); font-size: 20px; }
+[data-testimonials] .is-active .tst-monogram { color: var(--bg); border-color: var(--bg); }
+[data-testimonials] .tst-status { text-align: center; margin: 0; color: var(--fg-dimmer); font-size: 11px; letter-spacing: .12em; }
+[data-testimonials].tst-stagger .tst-card[aria-hidden="true"] { visibility: hidden; pointer-events: none; }
+[data-testimonials].tst-stagger .tst-recycle { transition: none; }
+[data-testimonials].tst-stagger .is-dragging { cursor: grabbing; user-select: none; }
+[data-testimonials].tst-stagger .is-dragging .tst-card { transition: none; cursor: grabbing; }
+@media (max-width: 600px) {
+  [data-testimonials].tst-stagger .tst-rail { --tst-size: min(290px, 84%); --tst-step: calc(var(--tst-size) * .94); height: 435px; }
+  [data-testimonials].tst-stagger .tst-card { height: 330px; padding: 24px; gap: 14px; }
+  [data-testimonials].tst-stagger .tst-quote { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-testimonials].tst-stagger .tst-card { transition: none; }
+  [data-testimonials].tst-stagger .tst-rail { --tst-drag: 0px !important; }
+}
 .tst-rail { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; }
 .tst-card { flex: none; width: clamp(260px,32vw,380px); scroll-snap-align: start; background: var(--bg-alt); border: 1px solid var(--line); padding: 26px; display: flex; flex-direction: column; gap: 18px; justify-content: space-between; }
 .tst-quote { margin: 0; font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.6; color: rgba(245,239,230,.86); }
@@ -560,4 +646,702 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   .mobile-menu-close, .rail-nav button, .rsv-stepper button,
   .cart-item-ctrl button, .cigar-add, .rsv-back, .cart-back):not(:disabled):not([aria-disabled="true"]):is(:hover, :active),
   .btn:not(:disabled):hover > span:not(.pv-spin) { transform: none; }
+}
+/* Private events: compact spaces, occasions and non-interactive ideas. */
+.pv-spaces .card-media { aspect-ratio: 4/3; }
+.pv-occasions, .pv-ideas { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.pv-occasions > h2 { font-size: clamp(28px,3vw,38px); }
+.pv-occasion-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px 32px; margin-top: 24px; }
+.pv-occasion-grid h3, .pv-ideas h3 { font-size: 23px; }
+.pv-occasion-grid p { font-size: 13px; line-height: 1.7; color: var(--fg-dim); margin: 8px 0 0; }
+.pv-idea-tags { display: flex; flex-wrap: wrap; gap: 10px 20px; list-style: none; padding: 0; margin: 18px 0; }
+.pv-idea-tags li { color: var(--gold); font-size: 12px; }
+#pv-form { scroll-margin-top: 110px; }
+@media (max-width: 900px) { .pv-occasion-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 480px) { .pv-occasion-grid { grid-template-columns: 1fr; gap: 18px; } }
+/* ---------- Ken Burns : mouvement très lent sur les grandes photos immersives ---------- */
+@keyframes kbZoomCenter { from { transform: scale(1); } to { transform: scale(1.04); } }
+@keyframes kbZoomDriftLeft { from { transform: scale(1) translate3d(0,0,0); } to { transform: scale(1.04) translate3d(-.6%,0,0); } }
+@keyframes kbZoomDriftRight { from { transform: scale(1) translate3d(0,0,0); } to { transform: scale(1.04) translate3d(.6%,-.3%,0); } }
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero-media img { transform-origin: 50% 60%; animation: kbZoomCenter 14s cubic-bezier(.45,.05,.55,.95) infinite alternate; will-change: transform; }
+  .fcta img { transform-origin: 40% 50%; animation: kbZoomDriftLeft 15s cubic-bezier(.45,.05,.55,.95) infinite alternate; will-change: transform; }
+  .signature-band img { transform-origin: 60% 45%; animation: kbZoomDriftRight 13s cubic-bezier(.45,.05,.55,.95) infinite alternate; will-change: transform; }
+}
+
+/* ---------- apparition progressive des contenus textuels (cascade de section) ----------
+   Langage de mouvement commun à toutes les sections courantes. Les classes .rv-split /
+   .rv-i / .rv-mask sont posées par site.js (setupReveal) puis retirées une fois
+   l'apparition terminée : sans JS ou avec prefers-reduced-motion, rien n'est masqué, et
+   après coup il ne subsiste ni transition ni délai susceptibles de gêner les effets
+   hover existants. Uniquement opacity, transform et filter: blur(). */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal.rv-split {
+    --rv-y: 15px;        /* remontée des textes courants */
+    --rv-ty: 18px;       /* remontée du grand titre, à l'intérieur de son masque */
+    --rv-blur: 4px;      /* flou de départ, dissipé pendant la remontée */
+    --rv-dur: .8s;
+    --rv-ease: cubic-bezier(.22,1,.36,1);
+    opacity: 1; transform: none; transition: none; /* l'apparition passe aux éléments */
+  }
+
+  /* chaque élément suit le précédent ; délais posés en JS via --rv-d */
+  .rv-split .rv-i {
+    opacity: 0; transform: translateY(var(--rv-y)); filter: blur(var(--rv-blur));
+    transition: opacity var(--rv-dur) var(--rv-ease), transform var(--rv-dur) var(--rv-ease), filter var(--rv-dur) var(--rv-ease);
+    transition-delay: var(--rv-d, 0ms);
+    will-change: opacity, transform, filter;
+  }
+  .rv-split.is-in .rv-i { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+  /* grand titre : le texte monte doucement depuis l'intérieur de son emplacement.
+     Le masque est un clip — et non overflow: hidden — afin de garder de la marge en
+     haut et sur les côtés : à cette graisse et avec line-height 1.06, les grandes
+     capitales et les italiennes débordent de leur boîte de ligne. Le bord bas ne
+     s'ouvre qu'une fois le texte arrivé, donc aucun jambage n'apparaît par à-coup.
+     Le masque disparaît entièrement à la fin de l'apparition. */
+  .rv-split .rv-mask {
+    clip-path: inset(-30% -20% 0 -20%);
+    transition: clip-path calc(var(--rv-dur) * .3) linear;
+    transition-delay: calc(var(--rv-d, 0ms) + var(--rv-dur) * .72);
+  }
+  .rv-split.is-in .rv-mask { clip-path: inset(-30% -20% -30% -20%); }
+  .rv-split .rv-mask-inner { display: block; }
+  .rv-split .rv-mask-inner.rv-i { transform: translateY(var(--rv-ty)); }
+  .rv-split.is-in .rv-mask-inner.rv-i { transform: translateY(0); }
+
+  /* la règle dorée du bandeau de chiffres se dessine de gauche à droite */
+  .rv-split .stat-row.rv-i { position: relative; border-top-color: transparent; }
+  .rv-split .stat-row.rv-i::before {
+    content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+    background: var(--line-strong); transform: scaleX(0); transform-origin: 0 50%;
+    transition: transform var(--rv-dur) var(--rv-ease);
+    transition-delay: var(--rv-d, 0ms);
+  }
+  .rv-split.is-in .stat-row.rv-i::before { transform: scaleX(1); }
+}
+
+/* smartphone : déplacement et durée resserrés, la lisibilité prime */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .reveal.rv-split { --rv-y: 10px; --rv-ty: 12px; --rv-blur: 3px; --rv-dur: .65s; }
+}
+
+/* ---------- transitions cinématographiques entre sections (noir → image → contenu) ----------
+   Les classes .cine / .cine-item sont posées par site.js (setupCinematic) ; sans JS ou avec
+   prefers-reduced-motion, rien n'est masqué. Uniquement opacity + transform (+ propriété `scale`,
+   qui se combine avec les animations Ken Burns existantes sans les remplacer). */
+@media (prefers-reduced-motion: no-preference) {
+  .cine { --cine-y: 20px; --cine-ease: cubic-bezier(.22,1,.36,1); }
+
+  /* 1. la photographie émerge de l'obscurité */
+  .cine.cine-photo > img,
+  .cine.cine-photo .page-hero-media img {
+    opacity: 0; scale: 1.03;
+    transition: opacity 1.1s var(--cine-ease), scale 1.1s var(--cine-ease);
+  }
+  .cine.cine-in.cine-photo > img,
+  .cine.cine-in.cine-photo .page-hero-media img { opacity: 1; scale: 1; }
+
+  /* 2. le contenu suit, élément par élément (délais posés en JS via --cine-d) */
+  .cine-item {
+    opacity: 0; transform: translateY(var(--cine-y));
+    transition: opacity .9s var(--cine-ease), transform .9s var(--cine-ease);
+    transition-delay: var(--cine-d, 0ms);
+  }
+  .cine-in .cine-item { opacity: 1; transform: translateY(0); }
+
+  /* 3. la ligne dorée existante se dessine de gauche à droite */
+  .cine .page-hero-crumb i {
+    transform: scaleX(0); transform-origin: 0 50%;
+    transition: transform .7s var(--cine-ease); transition-delay: var(--cine-line-d, 0ms);
+  }
+  .cine-in .page-hero-crumb i { transform: scaleX(1); }
+
+  /* 4. fondu du noir aux jonctions : la photo se dissout dans le fond des sections voisines */
+  .signature-band.cine::before,
+  .fcta.cine::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, rgba(20,15,11,.55) 38%, rgba(20,15,11,0) 100%) top / 100% clamp(56px,11vh,130px) no-repeat,
+      linear-gradient(0deg, var(--bg) 0%, rgba(20,15,11,.55) 38%, rgba(20,15,11,0) 100%) bottom / 100% clamp(56px,11vh,130px) no-repeat;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .cine { --cine-y: 12px; }
+  .cine.cine-photo > img,
+  .cine.cine-photo .page-hero-media img { scale: 1.02; }
+}
+
+/* ---------- parallaxe discrète sur les grandes photographies immersives ----------
+   La classe .pxl est posée par site.js (setupParallax), uniquement sur les vues
+   d'ensemble du lieu en plein cadre (salon, piscine, bord de mer). Deux principes :
+   — le déplacement passe par la propriété `translate`, appliquée avant `transform`,
+     donc elle se compose avec le Ken Burns (`transform`) et la révélation
+     cinématographique (`scale`) sans jamais les remplacer ;
+   — l'image est étirée de --pxl-range en hauteur et remontée de la moitié, ce qui
+     garde le centre du cadrage inchangé tout en ménageant une marge : le mouvement
+     ne peut pas révéler les bords. object-fit: cover et le cadrage sont conservés. */
+:root { --pxl-range: 40px; }
+.home-hero-media > img.pxl,
+.page-hero-media > img.pxl,
+.fcta > img.pxl,
+.signature-band > img.pxl {
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(var(--pxl-range) / -2);
+  bottom: auto;
+  width: 100%;
+  height: calc(100% + var(--pxl-range));
+  will-change: transform, translate;
+}
+/* smartphone : amplitude fortement réduite, la fluidité prime sur l'effet */
+@media (max-width: 760px) { :root { --pxl-range: 16px; } }
+
+/* ---------- La Cave à cigares : apparition et survol des références ----------
+   Portée : uniquement la boutique de cigares (body[data-page="cigares"]), donc
+   cigares.html et en/cigares.html. Rien n'est ajouté au balisage : l'apparition
+   se greffe sur la classe « is-in » déjà posée par setupReveal (site.js) et le
+   survol reste un effet CSS pur. Le panier, les libellés, les prix et le parcours
+   WhatsApp ne sont pas touchés.
+   — apparition : le nom d'origine puis chaque référence l'une après l'autre
+     (animation, et non transition : le délai de cascade ne retarde donc jamais
+     les effets de survol ensuite) ;
+   — survol (pointeur fin uniquement) : la ligne remonte de 3 px, un liseré doré
+     très discret apparaît derrière elle, l'ombre se creuse, le nom passe au doré ;
+   — reflet doré : un seul passage lent au survol, sur écran large.
+   Uniquement opacity / transform / background-position. */
+
+@media (prefers-reduced-motion: no-preference) {
+  body[data-page="cigares"] .price-block {
+    --cig-step: 90ms;   /* décalage entre deux références */
+    --cig-dur: .72s;    /* durée d'apparition d'une référence */
+    --cig-ease: cubic-bezier(.22,1,.36,1);
+  }
+  /* le bloc ne bouge plus de lui-même : l'apparition revient à ses lignes */
+  body[data-page="cigares"] .price-block.reveal {
+    opacity: 1; transform: none; transition: none;
+  }
+  body[data-page="cigares"] .price-block:not(.is-in) > * { opacity: 0; }
+  body[data-page="cigares"] .price-block.is-in > * {
+    animation: cigCardIn var(--cig-dur) var(--cig-ease) backwards;
+    animation-delay: var(--cig-d, 0ms);
+  }
+  /* en-tête d'origine en premier, puis les références une à une */
+  body[data-page="cigares"] .price-block > :nth-child(2) { --cig-d: calc(var(--cig-step) * 1); }
+  body[data-page="cigares"] .price-block > :nth-child(3) { --cig-d: calc(var(--cig-step) * 2); }
+  body[data-page="cigares"] .price-block > :nth-child(4) { --cig-d: calc(var(--cig-step) * 3); }
+  body[data-page="cigares"] .price-block > :nth-child(5) { --cig-d: calc(var(--cig-step) * 4); }
+  body[data-page="cigares"] .price-block > :nth-child(6) { --cig-d: calc(var(--cig-step) * 5); }
+  body[data-page="cigares"] .price-block > :nth-child(7) { --cig-d: calc(var(--cig-step) * 6); }
+  body[data-page="cigares"] .price-block > :nth-child(8) { --cig-d: calc(var(--cig-step) * 7); }
+  /* plafond : les dernières références n'attendent pas plus de huit temps */
+  body[data-page="cigares"] .price-block > :nth-child(n+9) { --cig-d: calc(var(--cig-step) * 8); }
+
+  @keyframes cigCardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* smartphone : cascade resserrée, la consultation prime sur l'effet */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  body[data-page="cigares"] .price-block { --cig-step: 70ms; --cig-dur: .62s; }
+}
+
+/* survol : réservé aux pointeurs fins ; sur mobile la fiche reste stable */
+@media (hover: hover) and (pointer: fine) {
+  body[data-page="cigares"] .price-row[data-cigar] {
+    position: relative;
+    isolation: isolate;
+    transition: transform .55s cubic-bezier(.22,1,.36,1), border-bottom-color .45s ease;
+  }
+  /* surface dorée posée derrière la ligne : aucune incidence sur la mise en page */
+  body[data-page="cigares"] .price-row[data-cigar]::before {
+    content: '';
+    position: absolute;
+    inset: -5px -14px;
+    z-index: -1;
+    border: 1px solid rgba(213,164,100,.24);
+    border-radius: 3px;
+    background:
+      linear-gradient(105deg, rgba(244,205,130,0) 42%, rgba(244,205,130,.10) 50%, rgba(244,205,130,0) 58%),
+      linear-gradient(180deg, rgba(213,164,100,.07), rgba(213,164,100,.02));
+    background-size: 260% 100%, 100% 100%;
+    background-position: 160% 0, 0 0;
+    background-repeat: no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s ease, box-shadow .45s ease, border-color .45s ease;
+  }
+  /* zone de survol maintenue à sa place : elle compense exactement la remontée,
+     donc le bas de la ligne ne se dérobe pas sous le curseur (pas de clignotement) */
+  body[data-page="cigares"] .price-row[data-cigar]::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 -1px;
+    z-index: -1;
+    transition: transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  body[data-page="cigares"] .price-row[data-cigar]:hover {
+    transform: translateY(-3px);
+    border-bottom-color: rgba(213,164,100,.30);
+  }
+  body[data-page="cigares"] .price-row[data-cigar]:hover::after { transform: translateY(3px); }
+  body[data-page="cigares"] .price-row[data-cigar]:hover::before {
+    opacity: 1;
+    border-color: rgba(213,164,100,.42);
+    box-shadow: 0 14px 30px -18px rgba(0,0,0,.9);
+  }
+  body[data-page="cigares"] .price-row[data-cigar] .price-row-name { transition: color .45s ease; }
+  body[data-page="cigares"] .price-row[data-cigar]:hover .price-row-name { color: var(--gold); }
+  /* bouton de commande : même geste, simplement un peu plus tenu */
+  body[data-page="cigares"] .price-row[data-cigar] .cigar-add {
+    transition: background-color .3s ease, border-color .3s ease, color .3s ease, transform .3s ease;
+  }
+  body[data-page="cigares"] .price-row[data-cigar]:hover .cigar-add {
+    border-color: rgba(213,164,100,.55);
+  }
+}
+
+/* reflet doré : un seul passage lent, écran large et mouvement autorisé */
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  body[data-page="cigares"] .price-row[data-cigar]:hover::before {
+    animation: cigSheen 1.2s cubic-bezier(.32,0,.28,1) 1;
+  }
+  @keyframes cigSheen {
+    from { background-position: 160% 0, 0 0; }
+    to   { background-position: -60% 0, 0 0; }
+  }
+}
+
+/* ---------- voile de fumée entre deux sections ----------
+   Rappel discret de l'univers du cigare, posé sur quelques transitions seulement
+   (deux au plus par page) : un très léger voile gris chaud traverse la zone qui
+   sépare une section de la suivante, dérive, se déforme, puis s'efface.
+
+   Contraintes tenues : aucun impact sur la mise en page — le voile est en position
+   absolue et en z-index négatif, donc il flotte derrière le contenu sans occuper
+   d'espace ni modifier les dimensions des sections. La section hôte se contente de
+   devenir un contexte d'empilement (`isolation`), ce qui ne déplace rien : c'est ce
+   qui retient le z-index: -1 au-dessus du fond de la section plutôt qu'en dessous.
+
+   Intensité : alpha maximal de 10 % sur ordinateur, 4,5 % sur smartphone — dans la
+   fourchette 5–15 % visée, volontairement à sa limite basse. Seuls `opacity` et
+   `transform` sont animés (compositing GPU) ; le flou est rasterisé une fois.
+   La dérive ne tourne que pendant la traversée de l'écran (classe `is-drifting`
+   posée par site.js), jamais en arrière-plan d'une page entière. */
+
+.smoke-host { position: relative; isolation: isolate; }
+
+.smoke-veil {
+  --smoke-peak: .10;          /* alpha max du voile */
+  --smoke-blur: 54px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: clamp(-170px, -13vw, -105px);
+  height: clamp(260px, 28vw, 400px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  /* bords fondus de tous côtés : la fumée n'est jamais coupée au carré */
+  -webkit-mask-image: radial-gradient(124% 82% at 50% 50%, #000 30%, transparent 84%);
+          mask-image: radial-gradient(124% 82% at 50% 50%, #000 30%, transparent 84%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+.smoke-veil.is-drifting { opacity: 1; }
+
+.smoke-veil i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(var(--smoke-blur));
+  will-change: transform, opacity;
+  animation-timing-function: cubic-bezier(.42, 0, .38, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  background: radial-gradient(closest-side,
+    rgba(198,185,167,var(--smoke-peak)) 0%,
+    rgba(198,185,167,calc(var(--smoke-peak) * .46)) 46%,
+    rgba(198,185,167,0) 80%);
+}
+.smoke-veil.is-drifting i { animation-play-state: running; }
+
+/* trois nappes de tailles et de rythmes différents : entrées décalées par des
+   délais négatifs, durées non multiples les unes des autres — la boucle composite
+   ne se répète jamais à l'identique à l'œil */
+.smoke-veil i:nth-child(1) { width: 62%; height: 170%; left: -16%; top: -34%; animation-name: smokeDriftA; animation-duration: 13s; animation-delay: -4.2s; }
+.smoke-veil i:nth-child(2) { width: 48%; height: 150%; left: 32%; top: -22%; animation-name: smokeDriftB; animation-duration: 15s; animation-delay: -9.6s; --smoke-peak: .075; }
+.smoke-veil i:nth-child(3) { width: 42%; height: 138%; right: -12%; top: -16%; animation-name: smokeDriftC; animation-duration: 11s; animation-delay: -1.8s; --smoke-peak: .065; }
+
+/* paliers volontairement irréguliers : la dérive n'est jamais une translation nette,
+   et l'échelle non uniforme fait respirer la forme au passage */
+@keyframes smokeDriftA {
+  0%   { opacity: 0;   transform: translate3d(-5%, 12px, 0) scale(.94, 1.02); }
+  24%  { opacity: .78; transform: translate3d(-2%, 5px, 0)  scale(1.03, .97); }
+  53%  { opacity: 1;   transform: translate3d(1%, -3px, 0)  scale(1.11, 1.04); }
+  76%  { opacity: .52; transform: translate3d(4%, -9px, 0)  scale(1.05, .99); }
+  100% { opacity: 0;   transform: translate3d(6%, -14px, 0) scale(1.15, 1.06); }
+}
+@keyframes smokeDriftB {
+  0%   { opacity: 0;   transform: translate3d(4%, 10px, 0)   scale(1.06, .96); }
+  19%  { opacity: .46; transform: translate3d(2%, 4px, 0)    scale(.99, 1.03); }
+  46%  { opacity: 1;   transform: translate3d(-1%, -2px, 0)  scale(1.09, .98); }
+  71%  { opacity: .64; transform: translate3d(-4%, -8px, 0)  scale(.97, 1.05); }
+  100% { opacity: 0;   transform: translate3d(-6%, -15px, 0) scale(1.12, .99); }
+}
+@keyframes smokeDriftC {
+  0%   { opacity: 0;   transform: translate3d(3%, 8px, 0)    scale(.96, 1.04); }
+  28%  { opacity: .58; transform: translate3d(1%, 2px, 0)    scale(1.07, .98); }
+  57%  { opacity: 1;   transform: translate3d(-2%, -5px, 0)  scale(1.01, 1.06); }
+  82%  { opacity: .44; transform: translate3d(-4%, -10px, 0) scale(1.1, 1.01); }
+  100% { opacity: 0;   transform: translate3d(-5%, -16px, 0) scale(1.04, 1.09); }
+}
+
+/* smartphone : moitié moins dense, flou plus court, une nappe en moins —
+   le scroll reste la priorité */
+@media (max-width: 760px) {
+  .smoke-veil {
+    --smoke-peak: .045;
+    --smoke-blur: 30px;
+    top: -70px;
+    height: 200px;
+  }
+  .smoke-veil i:nth-child(2) { --smoke-peak: .035; }
+  .smoke-veil i:nth-child(3) { display: none; }
+}
+
+/* mouvement réduit : le voile disparaît entièrement, comme la fumée du hero */
+@media (prefers-reduced-motion: reduce) { .smoke-veil { display: none; } }
+
+/* ---------- séquence immersive (une seule fois sur tout le site) ----------
+   Un moment de respiration au milieu de l'accueil : une photographie du lodge
+   quasi plein écran reste devant le visiteur pendant qu'il continue de scroller,
+   et trois phrases courtes s'y succèdent avant que l'image ne se referme sur le
+   noir de la page suivante.
+
+   Parti pris : c'est une pause, pas une attraction. Tout ce qui bouge est lent
+   et de faible amplitude — l'échelle ne gagne que 4 %, la photo ne remonte que
+   de 16 px sur 100 vh de défilement. L'effet doit se lire comme une photographie
+   qui prend doucement vie, jamais comme une animation.
+
+   Rareté assumée : la séquence n'est montée que sur index.html. Répétée, elle
+   perdrait exactement ce qui fait son intérêt.
+
+   Mécanique : la section fait 200 vh, la scène est en `position: sticky` sur
+   100 vh — le système est donc porté par le navigateur, pas par un script. JS ne
+   fait que lire la progression du défilement et écrire des variables CSS
+   (site.js, setupImmersive) : seuls `opacity` et `transform` sont animés, tous
+   deux composités par le GPU. Aucune bibliothèque, aucune vidéo.
+
+   Sans JS, sans IntersectionObserver ou en mouvement réduit : les variables
+   gardent leurs valeurs par défaut, la photo reste fixe et lisible, et les trois
+   phrases s'empilent visiblement (voir le bloc « mouvement réduit » plus bas).
+   La section reste dans tous les cas une belle image légendée. */
+
+.imm { position: relative; height: 200vh; background: var(--bg); }
+
+.imm-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;   /* iOS/Android : hauteur stable malgré la barre d'outils */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imm-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+
+/* surdimensionnement vertical repris du parallaxe (bloc « .pxl ») : la photo est
+   étirée de 32 px et remontée de 16, donc la dérive vers le haut ne peut jamais
+   découvrir un bord, quelle que soit l'échelle en cours. */
+.imm-media img {
+  position: absolute;
+  left: 0;
+  top: -16px;
+  width: 100%;
+  height: calc(100% + 32px);
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: brightness(.92) saturate(1.03);
+  transform: translate3d(0, var(--imm-shift, 0px), 0) scale(var(--imm-scale, 1));
+  transform-origin: 50% 48%;
+  will-change: transform;
+}
+
+/* voile noir piloté par le défilement : 25 % à l'entrée, 45 % en fin de séquence.
+   Volontairement plafonné — la photographie ne doit jamais être écrasée. */
+.imm-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #000;
+  opacity: var(--imm-scrim, .25);
+}
+
+/* dégradés fixes, distincts du voile : ils ne servent pas à assombrir la scène
+   mais à garantir la lisibilité. Haut et bas raccordent la séquence à la section
+   précédente et à la suivante ; le halo central pose les phrases sans toucher
+   aux angles de l'image, qui restent pleinement lisibles. */
+.imm-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(20,15,11,.58) 0%, rgba(20,15,11,.12) 20%, rgba(20,15,11,0) 34%),
+    linear-gradient(0deg,   rgba(20,15,11,.72) 0%, rgba(20,15,11,.10) 26%, rgba(20,15,11,0) 44%),
+    radial-gradient(76% 44% at 50% 48%, rgba(20,15,11,.44) 0%, rgba(20,15,11,0) 100%);
+}
+
+/* fumée : strictement le composant existant (.smoke-veil, mêmes nappes, mêmes
+   keyframes, même observateur dans site.js). Seuls le cadrage et le plan sont
+   redéfinis ici — la scène est un contexte d'empilement, le z-index: -1 du voile
+   le ferait passer derrière la photographie. Intensité abaissée : ici la fumée
+   est un arrière-plan de l'arrière-plan. */
+.imm-stage .smoke-veil {
+  top: auto;
+  bottom: -6%;
+  height: 54%;
+  z-index: 3;
+  --smoke-peak: .05;
+  --smoke-blur: 62px;
+}
+
+/* les trois phrases partagent une seule cellule de grille : elles occupent donc
+   exactement le même centre optique, sans positionnement absolu, et c'est la plus
+   haute des trois qui réserve la place — aucune ne fait sauter les autres.
+   La colonne est explicitement compressible (minmax 0) pour qu'une phrase longue
+   se replie sur un écran étroit plutôt que d'être rognée par le cadre de la scène. */
+.imm-words {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  min-width: 0;
+  padding: 0 clamp(20px,6vw,72px);
+  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.imm-word {
+  grid-area: 1 / 1;
+  justify-self: center;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: clamp(30px,6.4vw,86px);
+  line-height: 1.02;
+  letter-spacing: .1em;
+  color: var(--fg);
+  text-shadow: 0 2px 44px rgba(20,15,11,.6);
+  opacity: var(--o, 0);
+  transform: translate3d(0, var(--y, 15px), 0);
+  will-change: opacity, transform;
+}
+
+/* filet doré : il se tend en même temps que la phrase paraît, sans jamais partir
+   de zéro — un trait qui s'affirme, pas un trait qui se dessine. */
+.imm-word i {
+  display: block;
+  width: clamp(38px,5vw,64px);
+  height: 1px;
+  margin: 0 auto clamp(18px,2.2vw,30px);
+  background: var(--gold);
+  transform: scaleX(calc(.45 + .55 * var(--o, 0)));
+}
+
+/* fermeture au noir : c'est le noir de la page, pas un noir pur — la section
+   suivante se lève donc exactement dans la même valeur, sans marche. */
+.imm-black {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--bg);
+  opacity: var(--imm-black, 0);
+}
+
+/* smartphone : séquence raccourcie, mouvements réduits de moitié (site.js lit la
+   même largeur de rupture), fumée ramenée au niveau du reste du site. */
+@media (max-width: 900px) { .imm { height: 180vh; } }
+
+@media (max-width: 760px) {
+  .imm-stage .smoke-veil { --smoke-peak: .035; --smoke-blur: 34px; bottom: -4%; height: 46%; }
+  .imm-media img { filter: brightness(.88) saturate(1.03); }
+}
+
+@media (max-width: 600px) {
+  .imm { height: 165vh; }
+  .imm-word { font-size: clamp(26px,7.4vw,46px); letter-spacing: .07em; line-height: 1.1; }
+  .imm-vignette { background:
+    linear-gradient(180deg, rgba(20,15,11,.6) 0%, rgba(20,15,11,.14) 22%, rgba(20,15,11,0) 36%),
+    linear-gradient(0deg,   rgba(20,15,11,.74) 0%, rgba(20,15,11,.12) 28%, rgba(20,15,11,0) 46%),
+    radial-gradient(96% 40% at 50% 48%, rgba(20,15,11,.52) 0%, rgba(20,15,11,0) 100%); }
+}
+
+/* mouvement réduit : plus de sticky, plus de séquence, plus de fermeture au noir.
+   La photographie est simplement posée et les trois phrases s'empilent, toutes
+   lisibles — le sens de la section est conservé, son mouvement disparaît. */
+@media (prefers-reduced-motion: reduce) {
+  .imm { height: auto; }
+  .imm-stage { position: static; height: auto; min-height: 76vh; padding: clamp(64px,10vw,120px) 0; }
+  .imm-media img { transform: none; }
+  .imm-scrim { opacity: .4; }
+  .imm-words { display: block; }
+  .imm-word { opacity: 1; transform: none; margin-bottom: clamp(26px,4vw,52px); }
+  .imm-word:last-child { margin-bottom: 0; }
+  .imm-word i { transform: none; }
+  .imm-black { display: none; }
+}
+
+/* ---------- passage de lumière sur le doré ----------
+   Finition métallique : une lumière chaude traverse une fois quelques pièces
+   dorées, puis l'élément redevient parfaitement stable. Rien n'est ajouté au
+   balisage — les reflets sont des pseudo-éléments, et la classe « gsheen-on »
+   est posée puis retirée par site.js (setupGoldSheen) à l'apparition.
+
+   Parti pris : l'effet doit rester une trouvaille, pas une animation de fond.
+   — un seul passage par élément et par page, jamais de boucle ;
+   — deux pièces au plus par page (la ligne dorée du hero, la règle des chiffres) ;
+   — au survol : seulement les deux boutons principaux, pointeur fin uniquement ;
+   — la teinte employée est le doré clair déjà en charte (--gold-light, #F4CD82),
+     posé en surimpression : le doré ne change pas, il s'éclaire au passage.
+
+   Uniquement background-position (bandes de 1 px), transform et opacity.
+   Sous prefers-reduced-motion, aucun de ces pseudo-éléments n'existe. */
+
+/* la bande de lumière : transparent → doré clair → transparent. L'alpha est
+   laissé en variable et n'est résolu que sur l'élément qui pose la bande, ce
+   qui permet de régler l'intensité pièce par pièce sans redire le dégradé. */
+:root {
+  --gsheen-grad: linear-gradient(90deg,
+    rgba(244,205,130,0) 0%,
+    rgba(244,205,130,calc(var(--gsheen-peak) * .55)) 32%,
+    rgba(244,205,130,var(--gsheen-peak)) 50%,
+    rgba(244,205,130,calc(var(--gsheen-peak) * .55)) 68%,
+    rgba(244,205,130,0) 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes goldSheen {
+    from { background-position: -70% 0; }  /* hors cadre à gauche : invisible */
+    to   { background-position: 170% 0; }  /* sorti à droite : plus aucune trace */
+  }
+
+  /* 1. la ligne dorée du hero — le reflet est contenu par la ligne elle-même,
+     donc il n'éclaire que le doré et jamais la photographie derrière */
+  .home-hero-crumb i,
+  .page-hero-crumb i { position: relative; overflow: hidden; }
+  .home-hero-crumb i::after,
+  .page-hero-crumb i::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    --gsheen-peak: .55;
+    background-image: var(--gsheen-grad);
+    background-size: 34% 100%;
+    background-repeat: no-repeat;
+    background-position: -70% 0;
+  }
+
+  /* 2. la règle dorée du bandeau de chiffres — posée sur le filet haut existant.
+     Le ::before reste à la révélation (bloc « .rv-split ») : les deux cohabitent. */
+  .stat-row { position: relative; }
+  .stat-row::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: -1px; height: 1px;   /* exactement sur le filet */
+    pointer-events: none;
+    --gsheen-peak: .42;
+    background-image: var(--gsheen-grad);
+    background-size: 34% 100%;
+    background-repeat: no-repeat;
+    background-position: -70% 0;
+  }
+
+  /* la classe est posée sur le conteneur, jamais sur la ligne elle-même :
+     pendant son tracé la ligne est à scaleX(0), donc d'aire nulle, et aucun
+     observateur d'intersection ne pourrait s'y accrocher. */
+  .home-hero-crumb.gsheen-on i::after,
+  .page-hero-crumb.gsheen-on i::after,
+  .stat-row.gsheen-on::after { animation: goldSheen 2.1s cubic-bezier(.38,0,.3,1) 1 both; }
+}
+
+/* 3. boutons principaux : le reflet ne se déclenche qu'au survol, et seulement
+   au pointeur fin — sur écran tactile il n'aurait pas de sens, et le pseudo-élément
+   n'y est alors même pas créé. L'évolution du doré au survol (fond crème → doré,
+   bordure) est celle déjà en place : elle n'est pas touchée. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .btn-solid, .nav-cta { position: relative; overflow: hidden; }
+  .btn-solid::after,
+  .nav-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: var(--gsheen-grad);
+    background-size: 42% 100%;
+    background-repeat: no-repeat;
+    background-position: -70% 0;
+  }
+  /* fond crème puis doré : la lumière doit rester lisible sans blanchir le bouton */
+  .btn-solid::after { --gsheen-peak: .30; }
+  .nav-cta::after { --gsheen-peak: .26; }
+  .btn-solid:hover::after,
+  .nav-cta:hover::after { animation: goldSheen 1.9s cubic-bezier(.38,0,.3,1) 1 both; }
+}
+
+/* ---------- lueur dorée d'ambiance ----------
+   Une seule section par page (la première après le hero), désignée par site.js.
+   Une lumière chaude très diffuse, à 3,5 % au maximum : sur le noir profond du
+   fond elle se devine à peine, comme une lampe réfléchie dans une pièce sombre.
+   Elle ne dérive que pendant qu'elle traverse l'écran (classe « gsheen-drift »),
+   de quelques pixels seulement, sur une durée très longue.
+   Même montage que le voile de fumée : position absolue et z-index négatif, donc
+   aucune incidence sur la mise en page ni sur les photographies. */
+
+.gsheen-amb { position: relative; isolation: isolate; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .gsheen-amb::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(62% 52% at 24% 26%, rgba(213,164,100,.035), rgba(213,164,100,0) 70%),
+      radial-gradient(48% 44% at 82% 78%, rgba(213,164,100,.022), rgba(213,164,100,0) 72%);
+    will-change: transform;
+    animation: goldAmbientDrift 38s cubic-bezier(.45,.05,.55,.95) infinite alternate;
+    animation-play-state: paused;
+  }
+  .gsheen-amb.gsheen-drift::before { animation-play-state: running; }
+
+  /* dérive de quelques pixels : le mouvement ne se voit pas, il se ressent */
+  @keyframes goldAmbientDrift {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(11px, -8px, 0); }
+  }
+}
+
+/* smartphone : le reflet d'apparition et la lueur sont conservés, en retrait —
+   les effets de survol, eux, ne s'appliquent déjà pas. La fluidité prime. */
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .home-hero-crumb i::after,
+  .page-hero-crumb i::after { --gsheen-peak: .44; }
+  .stat-row::after { --gsheen-peak: .34; }
+  .gsheen-amb::before {
+    background: radial-gradient(70% 48% at 28% 24%, rgba(213,164,100,.024), rgba(213,164,100,0) 72%);
+    animation-duration: 46s;
+  }
 }

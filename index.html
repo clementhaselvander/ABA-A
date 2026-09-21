@@ -38,16 +38,31 @@
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .home-hero { position: relative; height: 92vh; min-height: 600px; display: flex; align-items: flex-end; overflow: hidden; }
-  .home-hero-media { position: absolute; inset: 0; z-index: 0; }
-  .home-hero-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(1.02); }
-  .home-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(20,15,11,.96) 0%, rgba(20,15,11,.14) 46%, rgba(20,15,11,.5) 100%), linear-gradient(90deg, rgba(20,15,11,.55) 0%, rgba(20,15,11,0) 55%); }
-  .home-hero-body { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 clamp(20px,5vw,72px) clamp(56px,7vw,90px); }
-  .home-hero-crumb { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .home-hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .home-hero-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(1.02); transform: scale(1); animation: heroKenBurns 16s ease-in-out infinite alternate; will-change: transform; }
+  .home-hero-smoke { position: absolute; inset: -20%; z-index: 1; overflow: hidden; pointer-events: none; opacity: .4; mix-blend-mode: screen; }
+  .home-hero-smoke i { position: absolute; display: block; border-radius: 50%; filter: blur(46px); background: radial-gradient(circle, rgba(245,235,210,.55) 0%, rgba(245,235,210,0) 72%); }
+  .home-hero-smoke i:nth-child(1) { width: 65%; height: 65%; left: -12%; top: 8%; animation: heroSmoke1 46s ease-in-out infinite; }
+  .home-hero-smoke i:nth-child(2) { width: 55%; height: 55%; right: -14%; top: 28%; animation: heroSmoke2 58s ease-in-out infinite; }
+  .home-hero-smoke i:nth-child(3) { width: 48%; height: 48%; left: 22%; bottom: -16%; animation: heroSmoke3 63s ease-in-out infinite; }
+  .home-hero-scrim { position: absolute; inset: 0; z-index: 2; background: linear-gradient(0deg, rgba(20,15,11,.96) 0%, rgba(20,15,11,.14) 46%, rgba(20,15,11,.5) 100%), linear-gradient(90deg, rgba(20,15,11,.55) 0%, rgba(20,15,11,0) 55%); }
+  .home-hero-body { position: relative; z-index: 3; max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 clamp(20px,5vw,72px) clamp(56px,7vw,90px); }
+  .home-hero-crumb { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; opacity: 0; animation: heroContentIn .9s cubic-bezier(.16,1,.3,1) .15s forwards; }
   .home-hero-crumb i { display: block; width: 44px; height: 1px; background: var(--gold); }
   .home-hero-crumb span { font-size: 10px; letter-spacing: .34em; text-transform: uppercase; color: rgba(245,239,230,.72); }
-  .home-hero-title { font-size: clamp(58px,10vw,150px); line-height: .88; }
-  .home-hero-sign { margin-top: 26px; max-width: 480px; font-size: clamp(17px,1.8vw,24px); }
-  .home-hero .btn-row { margin-top: 34px; }
+  .home-hero-title { font-size: clamp(58px,10vw,150px); line-height: .88; opacity: 0; animation: heroContentIn .9s cubic-bezier(.16,1,.3,1) .32s forwards; }
+  .home-hero-sign { margin-top: 26px; max-width: 480px; font-size: clamp(17px,1.8vw,24px); opacity: 0; animation: heroContentIn .9s cubic-bezier(.16,1,.3,1) .52s forwards; }
+  .home-hero .btn-row { margin-top: 34px; opacity: 0; animation: heroContentIn .9s cubic-bezier(.16,1,.3,1) .7s forwards; }
+  @keyframes heroKenBurns { from { transform: scale(1); } to { transform: scale(1.04); } }
+  @keyframes heroContentIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes heroSmoke1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(6%,-5%) scale(1.12); } }
+  @keyframes heroSmoke2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-7%,4%) scale(1.1); } }
+  @keyframes heroSmoke3 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(4%,-6%) scale(1.08); } }
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero-media img { animation: none; }
+    .home-hero-smoke { display: none; }
+    .home-hero-crumb, .home-hero-title, .home-hero-sign, .home-hero .btn-row { animation: none; opacity: 1; transform: none; }
+  }
   .signature-band { position: relative; min-height: 46vh; display: flex; align-items: center; justify-content: center; overflow: hidden; text-align: center; }
   .signature-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.4) saturate(1.05); }
   .signature-band::after { content: ''; position: absolute; inset: 0; background: rgba(20,15,11,.35); }
@@ -69,6 +84,7 @@
     <a href="cigares.html" data-page="cigares">La Cave à cigares</a>
     <a href="carte.html" data-page="carte">La Carte</a>
     <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="devenir-membre.html" data-page="membership">Devenir membre</a>
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
   <div class="nav-right">
@@ -89,6 +105,7 @@
     <a href="cigares.html" data-page="cigares">La Cave à cigares</a>
     <a href="carte.html" data-page="carte">La Carte</a>
     <a href="privatisation.html" data-page="privatisation">Privatisation</a>
+    <a href="devenir-membre.html" data-page="membership">Devenir membre</a>
     <a href="contact.html" data-page="contact">Contact</a>
   </nav>
   <div class="mobile-lang"><span class="is-active">FR</span><i>/</i><a href="en/index.html">EN</a></div>
@@ -99,6 +116,7 @@
 
   <section class="home-hero">
     <div class="home-hero-media"><img src="assets/lounge-wide.png" alt="Le salon principal d’Aba’a Mvoé Lodge, Akanda" fetchpriority="high"></div>
+    <div class="home-hero-smoke" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="home-hero-scrim"></div>
     <div class="home-hero-body">
       <div class="home-hero-crumb"><i></i><span>Akanda · Libreville · Gabon</span></div>
@@ -111,7 +129,7 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-seam-line">
     <div class="frame grid-2" style="align-items:center">
       <div class="reveal" data-reveal>
         <span class="eyebrow">01 — Le Lodge</span>
@@ -123,12 +141,13 @@
         <a href="club.html" class="card-cta" style="display:inline-block;margin-top:24px">Découvrir le Lodge <span>→</span></a>
       </div>
       <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:4/5">
-        <video src="assets/lounge-cigar-ember.mp4" poster="assets/lounge-chesterfield.png" autoplay muted loop playsinline preload="none" aria-label="Le cave à cigares, Aba’a Mvoé Lodge" style="width:100%;height:100%;object-fit:cover;filter:brightness(.86)"></video>
+        <img loading="lazy" decoding="async" src="assets/lounge-seating.jpg" width="1083" height="1452" alt="Fauteuils de cuir et tables en bois dans le salon Aba’a" style="width:100%;height:100%;object-fit:cover;object-position:50% 60%;filter:brightness(.86)">
       </div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt smoke-host section-seam-fade">
+    <div class="smoke-veil" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="frame">
       <div class="reveal" data-reveal style="max-width:640px;margin-bottom:44px">
         <span class="eyebrow">02 — Les expériences Aba’a</span>
@@ -137,7 +156,7 @@
       </div>
       <div class="grid-3 reveal" data-reveal style="grid-template-columns:repeat(5,1fr)">
         <a class="tile" href="cigares.html">
-          <video src="assets/cigar-ritual.mp4" poster="assets/cigar-hand.png" autoplay muted loop playsinline preload="none" aria-label="Veillée autour du feu, La Cave à cigares, Aba’a Mvoé Lodge"></video>
+          <img loading="lazy" decoding="async" src="assets/cigar-hand.png" width="802" height="487" alt="Gros plan sur l’allumage d’un cigare" style="object-position:50% 45%">
           <div class="tile-body"><span class="tile-num">01</span><span class="tile-name">La Cave à cigares</span><span class="tile-tag">L'Âtre</span></div>
         </a>
         <a class="tile" href="spiritueux.html">
@@ -160,6 +179,27 @@
       <div style="margin-top:36px;text-align:right">
         <a href="club.html#espaces" class="card-cta">Découvrir les espaces du lodge <span>→</span></a>
       </div>
+    </div>
+  </section>
+
+  <!-- Séquence immersive — montée une seule fois sur tout le site, volontairement.
+       Photographie tenue en sticky pendant trois phrases, puis fermeture au noir
+       qui enchaîne sur la section suivante. Styles et script : blocs « séquence
+       immersive » de assets/site.css et assets/site.js. -->
+  <section class="imm" data-immersive aria-label="Aba’a en trois mots">
+    <div class="imm-stage">
+      <div class="imm-media">
+        <img loading="lazy" decoding="async" src="assets/gastronomy-table-lanterns.png" alt="Table dressée sous l’arbre, lanterne allumée à la tombée de la nuit — Aba’a Mvoé Lodge">
+      </div>
+      <div class="imm-scrim" aria-hidden="true"></div>
+      <div class="imm-vignette" aria-hidden="true"></div>
+      <div class="smoke-veil" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="imm-words">
+        <p class="imm-word"><i aria-hidden="true"></i>Un lieu.</p>
+        <p class="imm-word"><i aria-hidden="true"></i>Une atmosphère.</p>
+        <p class="imm-word"><i aria-hidden="true"></i>Une expérience.</p>
+      </div>
+      <div class="imm-black" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -191,8 +231,9 @@
     </div>
   </section>
 
-  <!-- TODO: témoignages d'exemple — à remplacer par de vrais avis clients une fois collectés. -->
-  <section class="section section-alt">
+  <!-- Démonstration uniquement : remplacer les articles par de vrais avis avant publication. -->
+  <section class="section section-alt smoke-host" data-testimonials aria-label="Avis fictifs de démonstration" aria-roledescription="carrousel">
+    <div class="smoke-veil" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="frame">
       <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px" class="reveal" data-reveal>
         <div>
@@ -200,11 +241,12 @@
           <h2>Des moments<br><em>dont on se souvient.</em></h2>
         </div>
         <div class="rail-nav">
-          <button aria-label="Précédent" onclick="this.closest('section').querySelector('.tst-rail').scrollBy({left:-360,behavior:'smooth'})">←</button>
-          <button aria-label="Suivant" onclick="this.closest('section').querySelector('.tst-rail').scrollBy({left:360,behavior:'smooth'})">→</button>
+          <button type="button" aria-label="Avis précédents" aria-controls="demo-testimonials" data-tst-prev hidden>←</button>
+          <button type="button" aria-label="Avis suivants" aria-controls="demo-testimonials" data-tst-next hidden>→</button>
         </div>
       </div>
-      <div class="tst-rail reveal" data-reveal>
+      <p class="tst-demo" id="tst-demo-note">Maquette · Avis fictifs de démonstration, à remplacer par de vrais avis clients.</p>
+      <div class="tst-rail reveal" id="demo-testimonials" tabindex="0" role="group" aria-label="Témoignages fictifs" aria-describedby="tst-demo-note" data-reveal>
         <article class="tst-card">
           <p class="tst-quote">« L'accueil est d'un autre niveau — on se sent attendu dès le premier pas. On ne surveille rien, on se repose. »</p>
           <div><span class="tst-name">A. Nguema</span><span class="tst-role">Visite, Juillet 2026</span></div>
@@ -220,6 +262,38 @@
         <article class="tst-card">
           <p class="tst-quote">« Les veillées au cave à cigares rivalisent avec les plus belles maisons d'hôtes du continent. Le silence de la forêt fait le reste. »</p>
           <div><span class="tst-name">R. Okouyi</span><span class="tst-role">Visite au lodge</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« Une table au calme pour discuter travail. Nous avons pu prendre notre temps, sans être interrompus. »</p>
+          <div><span class="tst-name">M. Assoumou</span><span class="tst-role">Rendez-vous professionnel</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« On était venus pour un verre entre amis. Finalement, on a laissé passer toute la soirée. »</p>
+          <div><span class="tst-name">L. Biyoghe</span><span class="tst-role">Soirée entre amis</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« La lumière en fin de journée, l’air du large… Je retiens surtout ce moment sur la terrasse. »</p>
+          <div><span class="tst-name">P. Moussavou</span><span class="tst-role">Bord de mer</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« Premier cigare pour moi. Des conseils simples, sans me donner l’impression de devoir tout connaître. »</p>
+          <div><span class="tst-name">J. Obame</span><span class="tst-role">Découverte du cigare</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« J’ai aimé les matières, les fauteuils, les lumières basses. Un cadre soigné où l’on se sent à l’aise. »</p>
+          <div><span class="tst-name">E. Ndong</span><span class="tst-role">Au salon</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« Le service sait se faire discret. Un détail qui compte quand on a envie de parler tranquillement. »</p>
+          <div><span class="tst-name">F. Nziengui</span><span class="tst-role">Dîner à deux</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« Une pause après une semaine bien remplie. Le calme m’a fait du bien. »</p>
+          <div><span class="tst-name">D. Mintsa</span><span class="tst-role">Fin de semaine</span></div>
+        </article>
+        <article class="tst-card">
+          <p class="tst-quote">« Nous avons partagé quelques assiettes et beaucoup discuté. Une soirée toute simple, dans un très beau lieu. »</p>
+          <div><span class="tst-name">I. Mouketou</span><span class="tst-role">Moment entre amis</span></div>
         </article>
       </div>
     </div>
@@ -268,13 +342,14 @@
       <a class="ftr-link" href="cigares.html">La Cave à cigares</a>
       <a class="ftr-link" href="carte.html">La Carte</a>
       <a class="ftr-link" href="privatisation.html">Privatisation</a>
+      <a class="ftr-link" href="devenir-membre.html">Devenir membre</a>
       <a class="ftr-link" href="contact.html">Contact</a>
     </div>
   </div>
   <div class="ftr-bottom">
     <a class="ftr-link" href="mentions-legales.html">Mentions légales</a>
     <span>© 2026 Aba’a Mvoé Lodge — Tous droits réservés</span>
-    <span>« Entrez, vous êtes chez vous. »</span>
+    <div class="ftr-official-logo"><img src="assets/logo-abaa.png" width="658" height="451" alt="Aba’a Mvoé Lodge" loading="lazy" decoding="async"></div>
   </div>
 </footer>
 
