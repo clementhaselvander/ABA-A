@@ -1020,7 +1020,7 @@
       rail.addEventListener('pointerdown', function (e) {
         if (!e.isPrimary || e.button !== 0) return;
         suppressClick = false;
-        gesture = { id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0 };
+        gesture = { id: e.pointerId, x: e.clientX, y: e.clientY, dx: 0, touch: e.pointerType !== 'mouse' };
       });
       rail.addEventListener('pointermove', function (e) {
         if (!gesture || gesture.id !== e.pointerId) return;
@@ -1029,7 +1029,9 @@
         if (!suppressClick && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 10) { gesture = null; return; }
         if (Math.abs(dx) > 8) {
           suppressClick = true;
-          rail.setPointerCapture(e.pointerId);
+          // Au toucher le pointeur est déjà capturé implicitement : le recapturer
+          // émettrait lostpointercapture et couperait le geste en cours.
+          if (!gesture.touch) rail.setPointerCapture(e.pointerId);
           rail.classList.add('is-dragging');
           gesture.dx = dx;
           rail.style.setProperty('--tst-drag', Math.max(-90, Math.min(90, dx * .4)) + 'px');
@@ -1037,11 +1039,13 @@
       });
       function finish(e) {
         if (!gesture || gesture.id !== e.pointerId) return;
+        if (e.type === 'lostpointercapture' && gesture.touch) return;
         var dx = gesture.dx;
+        var threshold = Math.min(40, Math.max(24, rail.clientWidth * .08));
         gesture = null;
         rail.classList.remove('is-dragging');
         rail.style.removeProperty('--tst-drag');
-        if (e.type === 'pointerup' && Math.abs(dx) > 40) move(dx < 0 ? 1 : -1);
+        if (e.type === 'pointerup' && Math.abs(dx) > threshold) move(dx < 0 ? 1 : -1);
         if (rail.hasPointerCapture(e.pointerId)) rail.releasePointerCapture(e.pointerId);
       }
       rail.addEventListener('pointerup', finish);
