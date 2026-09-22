@@ -21,8 +21,8 @@
     var image = element('img');
     image.src = plan.cardVisual;
     image.alt = plan.cardAlt;
-    image.width = 624;
-    image.height = 405;
+    image.width = 1081;
+    image.height = 708;
     image.loading = 'lazy';
     image.decoding = 'async';
     figure.appendChild(image);
@@ -33,9 +33,12 @@
     var title = element('h3', 'member-plan-title', plan.name);
     title.id = plan.id + '-title';
     body.appendChild(title);
-    var price = element('p', 'member-price', new Intl.NumberFormat('fr-FR').format(plan.price));
+    // Libellé imprimé sur la carte : ce montant est un crédit, pas un tarif d'adhésion.
+    body.appendChild(element('p', 'member-amount-label', plan.amountLabel));
+    var price = element('p', 'member-price', new Intl.NumberFormat('fr-FR').format(plan.amount));
     price.appendChild(element('span', '', ' FCFA'));
     body.appendChild(price);
+    if (plan.amountNote) body.appendChild(element('p', 'member-amount-note', plan.amountNote));
     body.appendChild(element('p', 'member-description', plan.description));
 
     var benefits = element('div', 'member-benefits');

@@ -401,8 +401,8 @@
   };
   var COPY = LANG === 'en' ? COPY_EN : COPY_FR;
   var RSV_LABELS = LANG === 'en'
-    ? { greeting: { table: 'Hello Aba’a Mvoé Lodge, I would like to reserve a table.', membership: 'Hello Aba’a Mvoé Lodge, I would like to plan my visit.', privatisation: 'Hello Aba’a Mvoé Lodge, I would like to book the lodge exclusively.', event: 'Hello Aba’a Mvoé Lodge, I would like to reserve for ' }, name: 'Name', guests: 'Guests', date: 'Date', time: 'Time', phone: 'Phone' }
-    : { greeting: { table: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.', membership: 'Bonjour Aba’a Mvoé Lodge, je souhaite organiser ma venue.', privatisation: 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le lodge.', event: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' }, name: 'Nom', guests: 'Personnes', date: 'Date', time: 'Heure', phone: 'Tél' };
+    ? { greeting: { table: 'Hello Aba’a Mvoé Lodge, I would like to reserve a table.', membership: 'Hello Aba’a Mvoé Lodge, I would like to plan my visit.', privatisation: 'Hello Aba’a Mvoé Lodge, I would like to book the Business Lounge exclusively.', event: 'Hello Aba’a Mvoé Lodge, I would like to reserve for ' }, name: 'Name', guests: 'Guests', date: 'Date', time: 'Time', phone: 'Phone' }
+    : { greeting: { table: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver une table.', membership: 'Bonjour Aba’a Mvoé Lodge, je souhaite organiser ma venue.', privatisation: 'Bonjour Aba’a Mvoé Lodge, je souhaite privatiser le Business Lounge.', event: 'Bonjour Aba’a Mvoé Lodge, je souhaite réserver pour ' }, name: 'Nom', guests: 'Personnes', date: 'Date', time: 'Heure', phone: 'Tél' };
 
   function setupReserveDrawer() {
     var overlay = document.querySelector('.rsv-overlay');

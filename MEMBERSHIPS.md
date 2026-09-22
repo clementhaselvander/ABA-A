@@ -38,12 +38,16 @@ Le CTA final suit la première formule disponible et utilise sa destination.
 
 ## Modifier les formules
 
-La source unique est `assets/memberships-data.js` : nom, tarif en FCFA,
-description, avantages, visuel, disponibilité, ordre et CTA.
+La source unique est `assets/memberships-data.js` : nom, montant en FCFA,
+libellé du montant, description, avantages, visuel, disponibilité, ordre et CTA.
 
-- Les noms « Adhésion I / II / III » sont provisoires.
+- Les noms sont Bronze, Or et Champagne, repris des cartes imprimées.
+- `amount` n'est **pas** un tarif d'adhésion : les cartes le désignent comme
+  « crédit de consommation », et `amountLabel` reprend ce libellé mot pour mot.
+  Le prix d'une adhésion n'est pas connu ; ne pas présenter `amount` comme tel.
+- `amountNote` reprend la mention « Modalités à confirmer » du recto.
 - Les listes `benefits` sont vides tant que les privilèges ne sont pas validés.
-- Aucune durée ou périodicité n'est présumée pour les tarifs.
+- Aucune durée ou périodicité n'est présumée pour les montants.
 - Pour ouvrir une formule, vérifier sa destination `cta.href`, puis passer
   `available` à `true`. Le bouton désactivé devient un lien « Demander mon
   adhésion ». Les mentions générales de disponibilité sont mises à jour.
@@ -59,11 +63,53 @@ Document examiné intégralement avant développement :
 - Page 10 : Cinzel, Cormorant Garamond et Jost, déjà utilisés par le site.
 - Page 13 : recto noir et or de la **carte de visite**, logo centré et bord fin.
 
-Ce document ne contient pas trois modèles identifiés comme cartes membres.
-Le fichier `assets/membership-card-charte.png` est une extraction du recto de
-la page 13, réutilisée sans inventer de déclinaisons pour les trois niveaux.
-La page indique que ces visuels sont provisoires. Remplacer les trois
-`cardVisual` et `cardAlt` lorsque les modèles membres définitifs sont fournis.
+Ce document ne contenait pas de modèles de cartes membres. Le placeholder
+`assets/membership-card-charte.png` (extrait de la page 13) n'est plus utilisé.
+
+## Cartes membres définitives
+
+Source : dossier `carte membre/` à la racine (PDF print + PNG 300 dpi,
+1081 × 708 px, recto et verso pour chaque niveau).
+
+Les trois **recto** sont servis par `cardVisual` :
+
+| Niveau | Source | Fichier servi | Spécimen |
+| --- | --- | --- | --- |
+| Bronze | `ABAA_carte_membre_Bronze_recto_300dpi.png` | `assets/membership-card-bronze.webp` | Léa Moussavou · 0128 |
+| Or | `ABAA_carte_membre_Or_recto_300dpi.png` | `assets/membership-card-or.webp` | Patrick Ndoumba · 0067 |
+| Champagne | `ABAA_carte_membre_Champagne_recto_300dpi.png` | `assets/membership-card-champagne.webp` | Sarah Békalé · 0009 |
+
+### Génération des spécimens
+
+Les fichiers servis ne sont pas de simples copies. Le gabarit imprimé laisse deux
+champs vierges — « Nom du membre » et « N° ABA'A · 0000 » — qui donnaient sur le
+site l'impression d'une carte non finie. `tools/build-member-cards.cjs` les
+remplace par des valeurs fictives :
+
+```sh
+tmp/runtime/node-v22.23.2-win-x64/node.exe tools/build-member-cards.cjs
+```
+
+Les sources de `carte membre/` ne sont jamais modifiées : le script repart
+d'elles à chaque exécution. Pour changer un nom ou un numéro, éditer la table
+`SPECIMENS` en tête du script et le relancer ; ne pas retoucher les WebP à la main,
+la prochaine exécution écraserait la retouche.
+
+Ces noms sont **fictifs**. La page le dit dans `member-terms` et les `cardAlt` le
+répètent ; ne pas y substituer un membre réel, la page est publique.
+
+Le script relève lui-même la géométrie et les couleurs sur chaque gabarit plutôt
+que de les coder en dur, et s'arrête s'il trouve de l'encre là où il en attend :
+un gabarit redessiné produira une erreur explicite, pas une carte abîmée.
+
+Les **verso** ne sont volontairement pas publiés : leurs fichiers sources portent
+encore une adresse e-mail personnelle et une mention d’hébergement incompatibles
+avec les informations officielles confirmées le 22 septembre 2026.
+Le site utilise désormais La Sablière, Libreville, `aude@abaa-mvoelodge.com`
+et le positionnement Business Lounge haut de gamme, sans hébergement.
+Les fichiers graphiques des verso devront être corrigés avant publication.
+Une fois ces corrections réalisées, le verso pourra être ajouté — par exemple en
+retournement au survol — via un champ `cardVisualBack` dans la source.
 
 ## Navigation et accessibilité
 

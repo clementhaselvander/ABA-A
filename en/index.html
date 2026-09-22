@@ -3,29 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aba’a Mvoé Lodge — The House of Gathering and Peace | Akanda, Libreville</title>
-<meta name="description" content="Aba’a Mvoé Lodge — authentic African hospitality and contemporary refinement on the Atlantic shore, in Akanda, Libreville. Dining, cigar cellar, pool and private spaces.">
+<title>Aba’a Mvoé Lodge — High-end Business Lounge | La Sablière, Libreville</title>
+<meta name="description" content="Aba’a Mvoé Lodge is a high-end Business Lounge in La Sablière, Libreville, with a cigar cellar, dining area, spirits bar, pool area and private event hire.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Aba’a Mvoé Lodge — The House of Gathering and Peace">
-<meta property="og:description" content="Hospitality, terroir and serenity — Aba’a Mvoé Lodge, Akanda, Libreville.">
-<meta property="og:image" content="../assets/lounge-wide.png">
+<meta property="og:title" content="Aba’a Mvoé Lodge — High-end Business Lounge">
+<meta property="og:description" content="Aba’a Mvoé Lodge is a high-end Business Lounge in La Sablière, Libreville, with a cigar cellar, dining area, spirits bar, pool area and private event hire.">
+<meta property="og:image" content="https://[domaine-de-production]/assets/og-accueil.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aba’a Mvoé Lodge — The House of Gathering and Peace">
-<meta name="twitter:description" content="Hospitality, terroir and serenity — Aba’a Mvoé Lodge, Akanda, Libreville.">
-<meta name="twitter:image" content="../assets/lounge-wide.png">
+<meta name="twitter:title" content="Aba’a Mvoé Lodge — High-end Business Lounge">
+<meta name="twitter:description" content="Aba’a Mvoé Lodge is a high-end Business Lounge in La Sablière, Libreville, with a cigar cellar, dining area, spirits bar, pool area and private event hire.">
+<meta name="twitter:image" content="https://[domaine-de-production]/assets/og-accueil.jpg">
 <!-- TODO: add <link rel="canonical" href="https://[production-domain]/en/"> once the site is deployed to its final domain. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LodgingBusiness",
+  "@type": "FoodEstablishment",
   "name": "Aba’a Mvoé Lodge",
-  "image": "../assets/lounge-wide.png",
-  "description": "Aba’a Mvoé Lodge — authentic African hospitality and contemporary refinement, on the Atlantic shore, in Akanda, Libreville.",
-  "address": { "@type": "PostalAddress", "streetAddress": "Seafront", "addressLocality": "Akanda", "addressRegion": "Libreville", "addressCountry": "GA" },
+  "image": "https://[domaine-de-production]/assets/og-accueil.jpg",
+  "description": "Aba’a Mvoé Lodge is a high-end Business Lounge in La Sablière, Libreville, with a cigar cellar, dining area, spirits bar, pool area and private event hire.",
+  "address": { "@type": "PostalAddress", "streetAddress": "La Sablière", "addressLocality": "Libreville", "addressCountry": "GA" },
   "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
   "telephone": "+241 66 83 63 54",
-  "email": "aude@aba-mvoelodge.com",
+  "email": "aude@abaa-mvoelodge.com",
   "sameAs": ["https://www.instagram.com/abaa.mvoelodge/"],
   "priceRange": "$$$"
 }
@@ -34,12 +36,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="../assets/lounge-wide.png" fetchpriority="high">
+<link rel="preload" as="image" href="../assets/lounge-wide-818.webp" imagesrcset="../assets/lounge-wide-480.webp 480w, ../assets/lounge-wide-818.webp 818w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
   .home-hero { position: relative; height: 92vh; min-height: 600px; display: flex; align-items: flex-end; overflow: hidden; }
   .home-hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-  .home-hero-media img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(1.02); transform: scale(1); animation: heroKenBurns 16s ease-in-out infinite alternate; will-change: transform; }
+  .home-hero-media img, .home-hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.6) saturate(1.02); }
+  .home-hero-media img { transform: scale(1); animation: heroKenBurns 16s ease-in-out infinite alternate; will-change: transform; }
+  .home-hero-media video { z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
+  .home-hero-media video.is-ready { opacity: 1; }
   .home-hero-smoke { position: absolute; inset: -20%; z-index: 1; overflow: hidden; pointer-events: none; opacity: .4; mix-blend-mode: screen; }
   .home-hero-smoke i { position: absolute; display: block; border-radius: 50%; filter: blur(46px); background: radial-gradient(circle, rgba(245,235,210,.55) 0%, rgba(245,235,210,0) 72%); }
   .home-hero-smoke i:nth-child(1) { width: 65%; height: 65%; left: -12%; top: 8%; animation: heroSmoke1 46s ease-in-out infinite; }
@@ -60,6 +65,7 @@
   @keyframes heroSmoke3 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(4%,-6%) scale(1.08); } }
   @media (prefers-reduced-motion: reduce) {
     .home-hero-media img { animation: none; }
+    .home-hero-media video { display: none; }
     .home-hero-smoke { display: none; }
     .home-hero-crumb, .home-hero-title, .home-hero-sign, .home-hero .btn-row { animation: none; opacity: 1; transform: none; }
   }
@@ -78,9 +84,9 @@
 <body data-page="home">
 
 <header class="site-header">
-  <a href="index.html" class="brand"><img src="../assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></a>
+  <a href="index.html" class="brand"><img src="../assets/logo-abaa.webp" width="300" height="206" class="brand-logo" alt="Aba’a Mvoé Lodge"></a>
   <nav class="nav-links" aria-label="Main navigation">
-    <a href="club.html" data-page="club">The Lodge</a>
+    <a href="club.html" data-page="club">The Business Lounge</a>
     <a href="cigares.html" data-page="cigares">Cigar Cellar</a>
     <a href="carte.html" data-page="carte">The Menu</a>
     <a href="privatisation.html" data-page="privatisation">Private Hire</a>
@@ -96,12 +102,12 @@
 
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu-head">
-    <span class="brand"><img src="../assets/logo-abaa.png" alt="Aba’a Mvoé Lodge" class="brand-logo"></span>
+    <span class="brand"><img src="../assets/logo-abaa.webp" width="300" height="206" class="brand-logo" alt="Aba’a Mvoé Lodge"></span>
     <button class="mobile-menu-close" aria-label="Close menu">×</button>
   </div>
   <nav aria-label="Mobile navigation">
     <a href="index.html" data-page="home">Home</a>
-    <a href="club.html" data-page="club">The Lodge</a>
+    <a href="club.html" data-page="club">The Business Lounge</a>
     <a href="cigares.html" data-page="cigares">Cigar Cellar</a>
     <a href="carte.html" data-page="carte">The Menu</a>
     <a href="privatisation.html" data-page="privatisation">Private Hire</a>
@@ -115,16 +121,16 @@
 <main>
 
   <section class="home-hero">
-    <div class="home-hero-media"><img src="../assets/lounge-wide.png" alt="The main lounge at Aba’a Mvoé Lodge, Akanda" fetchpriority="high"></div>
+    <div class="home-hero-media"><img src="../assets/lounge-wide-818.webp" srcset="../assets/lounge-wide-480.webp 480w, ../assets/lounge-wide-818.webp 818w" sizes="100vw" width="818" height="550" alt="The main lounge at Aba’a Mvoé Lodge, La Sablière, Libreville" fetchpriority="high"><video class="home-hero-video" data-src="../assets/ABAA_montage_salon_cigare_sans_son.mp4" poster="../assets/lounge-wide-818.webp" autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
     <div class="home-hero-smoke" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="home-hero-scrim"></div>
     <div class="home-hero-body">
-      <div class="home-hero-crumb"><i></i><span>Akanda · Libreville · Gabon</span></div>
+      <div class="home-hero-crumb"><i></i><span>La Sablière, Libreville · Gabon</span></div>
       <h1 class="home-hero-title">ABA’A<br><em>MVOÉ LODGE</em></h1>
-      <p class="sign home-hero-sign">The house of gathering and peace — on the Atlantic shore, at the edge of the forest.</p>
+      <p class="sign home-hero-sign">Your high-end Business Lounge in La Sablière, Libreville.</p>
       <div class="btn-row">
         <a href="#" data-reserve="membership" data-track="reserve_hero" class="btn btn-solid">Make a reservation <span>→</span></a>
-        <a href="club.html" class="btn btn-line">Discover the Lodge</a>
+        <a href="club.html" class="btn btn-line">Discover the Business Lounge</a>
       </div>
     </div>
   </section>
@@ -132,21 +138,21 @@
   <section class="section">
     <div class="frame grid-2" style="align-items:center">
       <div class="reveal" data-reveal>
-        <span class="eyebrow">01 — The Lodge</span>
+        <span class="eyebrow">01 — The Business Lounge</span>
         <h2>More than a place,<br><em>a home.</em></h2>
         <p class="lede" style="margin-top:20px">A fire that welcomes. A table. A few words exchanged. The pool, the forest, a conversation that lingers. And time found again.</p>
         <div class="stat-row" style="max-width:420px">
           <div><span class="stat-val">7 days a week</span><span class="stat-label">Open from 4 pm</span></div>
         </div>
-        <a href="club.html" class="card-cta" style="display:inline-block;margin-top:24px">Discover the Lodge <span>→</span></a>
+        <a href="club.html" class="card-cta" style="display:inline-block;margin-top:24px">Discover the Business Lounge <span>→</span></a>
       </div>
       <div class="reveal" data-reveal style="overflow:hidden;aspect-ratio:4/5">
-        <img loading="lazy" decoding="async" src="../assets/lounge-seating.jpg" width="1083" height="1452" alt="Leather armchairs and wooden tables in the Aba’a lounge" style="width:100%;height:100%;object-fit:cover;object-position:50% 60%;filter:brightness(.86)">
+        <img src="../assets/lounge-seating-768.webp" srcset="../assets/lounge-seating-480.webp 480w, ../assets/lounge-seating-768.webp 768w, ../assets/lounge-seating-1083.webp 1083w" sizes="(max-width: 900px) 100vw, 700px" width="1083" height="1452" alt="Leather armchairs and wooden tables in the Aba’a lounge" style="width:100%;height:100%;object-fit:cover;object-position:50% 60%;filter:brightness(.86)" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
 
-  <section class="section section-alt smoke-host">
+  <section class="section section-alt smoke-host section-seam-fade">
     <div class="smoke-veil" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="frame">
       <div class="reveal" data-reveal style="max-width:640px;margin-bottom:44px">
@@ -156,29 +162,50 @@
       </div>
       <div class="grid-3 reveal" data-reveal style="grid-template-columns:repeat(5,1fr)">
         <a class="tile" href="cigares.html">
-          <img loading="lazy" decoding="async" src="../assets/cigar-hand.png" width="802" height="487" alt="Close-up of a cigar being lit" style="object-position:50% 45%">
+          <img src="../assets/cigar-hand-802.webp" srcset="../assets/cigar-hand-480.webp 480w, ../assets/cigar-hand-802.webp 802w" sizes="(max-width: 900px) 100vw, 300px" width="802" height="487" alt="Close-up of a cigar being lit" style="object-position:50% 45%" loading="lazy" decoding="async">
           <div class="tile-body"><span class="tile-num">01</span><span class="tile-name">Cigar Cellar</span><span class="tile-tag">Cigar Cellar</span></div>
         </a>
         <a class="tile" href="spiritueux.html">
-          <img loading="lazy" src="../assets/spirits-bottle.png" alt="Cellar &amp; Terroir, Aba’a Mvoé Lodge">
+          <img src="../assets/spirits-bottle-717.webp" srcset="../assets/spirits-bottle-480.webp 480w, ../assets/spirits-bottle-717.webp 717w" sizes="(max-width: 900px) 100vw, 300px" width="717" height="866" alt="Cellar &amp; Terroir, Aba’a Mvoé Lodge" loading="lazy">
           <div class="tile-body"><span class="tile-num">02</span><span class="tile-name">The Cellar</span><span class="tile-tag">La Cave</span></div>
         </a>
         <a class="tile" href="table.html">
-          <img loading="lazy" src="../assets/gastronomy.png" alt="The Table, Aba’a Mvoé Lodge">
+          <img src="../assets/gastronomy-768.webp" srcset="../assets/gastronomy-480.webp 480w, ../assets/gastronomy-768.webp 768w, ../assets/gastronomy-1117.webp 1117w" sizes="(max-width: 900px) 100vw, 300px" width="1117" height="1408" alt="The Table, Aba’a Mvoé Lodge" loading="lazy">
           <div class="tile-body"><span class="tile-num">03</span><span class="tile-name">The Table</span><span class="tile-tag">La Table</span></div>
         </a>
         <a class="tile" href="poolside.html">
-          <img loading="lazy" src="../assets/pool-dusk.png" alt="Pool and forest at dusk, Aba’a Mvoé Lodge">
+          <img src="../assets/pool-dusk-493.webp" srcset="../assets/pool-dusk-493.webp 493w" sizes="(max-width: 900px) 100vw, 300px" width="493" height="571" alt="Pool and forest at dusk, Aba’a Mvoé Lodge" loading="lazy">
           <div class="tile-body"><span class="tile-num">04</span><span class="tile-name">Nature</span><span class="tile-tag">Nature</span></div>
         </a>
         <a class="tile" href="carte.html">
-          <img loading="lazy" src="../assets/gastronomy-tapas-platter.png" alt="Tapas">
+          <img src="../assets/gastronomy-tapas-platter-768.webp" srcset="../assets/gastronomy-tapas-platter-480.webp 480w, ../assets/gastronomy-tapas-platter-768.webp 768w, ../assets/gastronomy-tapas-platter-1086.webp 1086w" sizes="(max-width: 900px) 100vw, 300px" width="1086" height="1448" alt="Tapas" loading="lazy">
           <div class="tile-body"><span class="tile-num">05</span><span class="tile-name">The Menu</span><span class="tile-tag">La Carte</span></div>
         </a>
       </div>
       <div style="margin-top:36px;text-align:right">
-        <a href="club.html#espaces" class="card-cta">Discover the lodge spaces <span>→</span></a>
+        <a href="club.html#espaces" class="card-cta">Discover the Business Lounge spaces <span>→</span></a>
       </div>
+    </div>
+  </section>
+
+  <!-- Immersive sequence — deliberately used once across the whole site.
+       Photograph held sticky through three phrases, then a fade to black
+       that leads into the next section. Styles and script: « séquence
+       immersive » blocks in assets/site.css and assets/site.js. -->
+  <section class="imm" data-immersive aria-label="Aba’a in three words">
+    <div class="imm-stage">
+      <div class="imm-media">
+        <img src="../assets/gastronomy-table-lanterns-1024.webp" srcset="../assets/gastronomy-table-lanterns-480.webp 480w, ../assets/gastronomy-table-lanterns-768.webp 768w, ../assets/gastronomy-table-lanterns-1024.webp 1024w, ../assets/gastronomy-table-lanterns-1448.webp 1448w" sizes="100vw" width="1448" height="1086" alt="Table set beneath the tree, lantern lit at nightfall — Aba’a Mvoé Lodge" loading="lazy" decoding="async">
+      </div>
+      <div class="imm-scrim" aria-hidden="true"></div>
+      <div class="imm-vignette" aria-hidden="true"></div>
+      <div class="smoke-veil" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="imm-words">
+        <p class="imm-word"><i aria-hidden="true"></i>One place.</p>
+        <p class="imm-word"><i aria-hidden="true"></i>One atmosphere.</p>
+        <p class="imm-word"><i aria-hidden="true"></i>One experience.</p>
+      </div>
+      <div class="imm-black" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -189,8 +216,8 @@
         <h2>Dawn fades,<br><em>dusk settles in.</em></h2>
       </div>
       <div class="cmp-wrap cmp-portrait reveal" data-reveal>
-        <img loading="lazy" class="cmp-base" src="../assets/pool-compare-night.png" alt="The illuminated tree and pool at night">
-        <div class="cmp-after"><img loading="lazy" src="../assets/pool-compare-day.png" alt="The tree and pool overlooking the ocean by day"></div>
+        <img src="../assets/pool-compare-night-768.webp" srcset="../assets/pool-compare-night-480.webp 480w, ../assets/pool-compare-night-768.webp 768w, ../assets/pool-compare-night-1086.webp 1086w" sizes="100vw" width="1086" height="1448" class="cmp-base" alt="The illuminated tree and pool at night" loading="lazy">
+        <div class="cmp-after"><img src="../assets/pool-compare-day-768.webp" srcset="../assets/pool-compare-day-480.webp 480w, ../assets/pool-compare-day-768.webp 768w, ../assets/pool-compare-day-1086.webp 1086w" sizes="100vw" width="1086" height="1448" alt="The tree and pool overlooking the ocean by day" loading="lazy"></div>
         <div class="cmp-handle" style="left:50%"><span>⇔</span></div>
         <span class="cmp-tag cmp-tag-l">Day</span>
         <span class="cmp-tag cmp-tag-r">Evening</span>
@@ -203,10 +230,10 @@
   </section>
 
   <section class="signature-band">
-    <img loading="lazy" src="../assets/lounge-wide.png" alt="Aba’a Mvoé Lodge at nightfall">
+    <img src="../assets/lounge-wide-818.webp" srcset="../assets/lounge-wide-480.webp 480w, ../assets/lounge-wide-818.webp 818w" sizes="(max-width: 900px) 100vw, 700px" width="818" height="550" alt="Aba’a Mvoé Lodge at nightfall" loading="lazy">
     <div>
       <h2>THE HOUSE<br>OF WELCOME.</h2>
-      <span>Akanda · Libreville</span>
+      <span>La Sablière, Libreville</span>
     </div>
   </section>
 
@@ -234,12 +261,12 @@
           <div><span class="tst-name">S. Mabika</span><span class="tst-role">Pool &amp; Nature, August 2026</span></div>
         </article>
         <article class="tst-card">
-          <p class="tst-quote">“We hired the lodge privately for a corporate seminar — flawless organisation, complete discretion.”</p>
+          <p class="tst-quote">“We hired the Business Lounge privately for a corporate seminar — flawless organisation, complete discretion.”</p>
           <div><span class="tst-name">C. Ondo</span><span class="tst-role">Private event, June 2026</span></div>
         </article>
         <article class="tst-card">
           <p class="tst-quote">“Evenings at the cigar cellar rival the finest guesthouses on the continent. The silence of the forest does the rest.”</p>
-          <div><span class="tst-name">R. Okouyi</span><span class="tst-role">Visit to the lodge</span></div>
+          <div><span class="tst-name">R. Okouyi</span><span class="tst-role">Visit to the Business Lounge</span></div>
         </article>
       </div>
     </div>
@@ -248,7 +275,7 @@
 
 
   <section class="fcta">
-    <img loading="lazy" src="../assets/pool-dusk.png" alt="The pool at Aba’a Mvoé Lodge at dusk">
+    <img src="../assets/pool-dusk-493.webp" srcset="../assets/pool-dusk-493.webp 493w" sizes="(max-width: 900px) 100vw, 700px" width="493" height="571" alt="The pool at Aba’a Mvoé Lodge at dusk" loading="lazy">
     <div class="fcta-body">
       <span class="fcta-kicker">Welcome</span>
       <h2 class="fcta-title">Come in,<br>you are home.</h2>
@@ -262,40 +289,42 @@
 </main>
 
 <footer class="ftr">
-  <div class="ftr-top">
-    <div class="ftr-brand"><span class="ftr-word">ABA’A</span><span class="ftr-word-sub">Mvoé Lodge</span></div>
-    <span class="ftr-tag">Dining · Wellness · Events</span>
-  </div>
   <div class="ftr-mid">
-    <div>
-      <span class="ftr-label">Visit</span>
-      <p>Aba’a Mvoé Lodge<br>Akanda · Libreville, Gabon</p>
-      <a class="ftr-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=0.4621815%2C9.4050848&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps →</a>
+    <div class="ftr-brand">
+      <div class="ftr-logo"><img src="../assets/logo-abaa.webp" width="300" height="206" alt="Aba’a Mvoé Lodge" loading="lazy" decoding="async"></div>
     </div>
-    <div>
-      <span class="ftr-label">Contact</span>
-      <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
-      <a class="ftr-link" href="mailto:aude@aba-mvoelodge.com">aude@aba-mvoelodge.com</a>
-      <a class="ftr-link" data-wa-link="Hello Aba’a Mvoé Lodge, I would like more information.">WhatsApp →</a>
+    <div class="ftr-col">
+      <div class="ftr-group">
+        <span class="ftr-label">Visit</span>
+        <p>Aba’a Mvoé Lodge<br>La Sablière, Libreville, Gabon</p>
+        <a class="ftr-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=0.4621815%2C9.4050848&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps →</a>
+      </div>
+      <div class="ftr-group">
+        <span class="ftr-label">Contact</span>
+        <a class="ftr-link" href="tel:+24166836354">+241 66 83 63 54</a>
+        <a class="ftr-link" href="mailto:aude@abaa-mvoelodge.com">aude@abaa-mvoelodge.com</a>
+        <a class="ftr-link" data-wa-link="Hello Aba’a Mvoé Lodge, I would like more information.">WhatsApp →</a>
+      </div>
     </div>
-    <div>
-      <span class="ftr-label">Follow</span>
-      <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
-    </div>
-    <div>
-      <span class="ftr-label">Explore</span>
-      <a class="ftr-link" href="club.html">The Lodge</a>
-      <a class="ftr-link" href="cigares.html">Cigar Cellar</a>
-      <a class="ftr-link" href="carte.html">The Menu</a>
-      <a class="ftr-link" href="privatisation.html">Private Hire</a>
-      <a class="ftr-link" href="../devenir-membre.html" hreflang="fr">Membership (FR)</a>
-      <a class="ftr-link" href="contact.html">Contact</a>
+    <div class="ftr-col">
+      <div class="ftr-group">
+        <span class="ftr-label">Explore</span>
+        <a class="ftr-link" href="club.html">The Business Lounge</a>
+        <a class="ftr-link" href="cigares.html">Cigar Cellar</a>
+        <a class="ftr-link" href="carte.html">The Menu</a>
+        <a class="ftr-link" href="privatisation.html">Private Hire</a>
+        <a class="ftr-link" href="../devenir-membre.html" hreflang="fr">Membership (FR)</a>
+        <a class="ftr-link" href="contact.html">Contact</a>
+      </div>
+      <div class="ftr-group">
+        <span class="ftr-label">Follow</span>
+        <a class="ftr-link" href="https://www.instagram.com/abaa.mvoelodge/" target="_blank" rel="noopener">@abaa.mvoelodge →</a>
+      </div>
     </div>
   </div>
   <div class="ftr-bottom">
     <a class="ftr-link" href="../mentions-legales.html">Legal notice (FR)</a>
     <span>© 2026 Aba’a Mvoé Lodge — All rights reserved</span>
-    <div class="ftr-official-logo"><img src="../assets/logo-abaa.png" width="658" height="451" alt="Aba’a Mvoé Lodge" loading="lazy" decoding="async"></div>
   </div>
 </footer>
 
@@ -348,5 +377,22 @@
 </div>
 
 <script src="../assets/site.js"></script>
+<script>
+(function () {
+  var v = document.querySelector('.home-hero-video');
+  if (!v) return;
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var conn = navigator.connection || {};
+  if (mq.matches || conn.saveData) return;
+  function start() {
+    v.src = v.getAttribute('data-src');
+    v.addEventListener('playing', function () { v.classList.add('is-ready'); }, { once: true });
+    var play = v.play();
+    if (play && play.catch) play.catch(function () {});
+  }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
+})();
+</script>
 </body>
 </html>

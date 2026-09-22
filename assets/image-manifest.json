@@ -1,0 +1,674 @@
+{
+  "cigar-hand.png": {
+    "width": 802,
+    "height": 487,
+    "entries": [
+      {
+        "w": 480,
+        "h": 291,
+        "size": 5770,
+        "file": "cigar-hand-480.webp"
+      },
+      {
+        "w": 802,
+        "h": 487,
+        "size": 11136,
+        "file": "cigar-hand-802.webp"
+      }
+    ]
+  },
+  "cigar-macro.png": {
+    "width": 801,
+    "height": 495,
+    "entries": [
+      {
+        "w": 480,
+        "h": 297,
+        "size": 7892,
+        "file": "cigar-macro-480.webp"
+      },
+      {
+        "w": 801,
+        "h": 495,
+        "size": 16442,
+        "file": "cigar-macro-801.webp"
+      }
+    ]
+  },
+  "cigars-table.png": {
+    "width": 1122,
+    "height": 1402,
+    "entries": [
+      {
+        "w": 480,
+        "h": 600,
+        "size": 29294,
+        "file": "cigars-table-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 960,
+        "size": 58972,
+        "file": "cigars-table-768.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "size": 99080,
+        "file": "cigars-table-1122.webp"
+      }
+    ]
+  },
+  "cigars-wall-art-clean.png": {
+    "width": 1034,
+    "height": 1521,
+    "entries": [
+      {
+        "w": 480,
+        "h": 706,
+        "size": 28030,
+        "file": "cigars-wall-art-clean-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1130,
+        "size": 49858,
+        "file": "cigars-wall-art-clean-768.webp"
+      },
+      {
+        "w": 1034,
+        "h": 1521,
+        "size": 69702,
+        "file": "cigars-wall-art-clean-1034.webp"
+      }
+    ]
+  },
+  "gastronomy-board.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 29188,
+        "file": "gastronomy-board-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 52632,
+        "file": "gastronomy-board-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 78246,
+        "file": "gastronomy-board-1086.webp"
+      }
+    ]
+  },
+  "gastronomy-charcuterie.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 36044,
+        "file": "gastronomy-charcuterie-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 66598,
+        "file": "gastronomy-charcuterie-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 101022,
+        "file": "gastronomy-charcuterie-1086.webp"
+      }
+    ]
+  },
+  "gastronomy-sliders-wings.png": {
+    "width": 1448,
+    "height": 1086,
+    "entries": [
+      {
+        "w": 480,
+        "h": 360,
+        "size": 56612,
+        "file": "gastronomy-sliders-wings-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "size": 123664,
+        "file": "gastronomy-sliders-wings-768.webp"
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "size": 191804,
+        "file": "gastronomy-sliders-wings-1024.webp"
+      },
+      {
+        "w": 1448,
+        "h": 1086,
+        "size": 310650,
+        "file": "gastronomy-sliders-wings-1448.webp"
+      }
+    ]
+  },
+  "gastronomy-table-lanterns.png": {
+    "width": 1448,
+    "height": 1086,
+    "entries": [
+      {
+        "w": 480,
+        "h": 360,
+        "size": 35822,
+        "file": "gastronomy-table-lanterns-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "size": 78042,
+        "file": "gastronomy-table-lanterns-768.webp"
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "size": 123730,
+        "file": "gastronomy-table-lanterns-1024.webp"
+      },
+      {
+        "w": 1448,
+        "h": 1086,
+        "size": 204460,
+        "file": "gastronomy-table-lanterns-1448.webp"
+      }
+    ]
+  },
+  "gastronomy-tapas-platter.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 50356,
+        "file": "gastronomy-tapas-platter-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 98126,
+        "file": "gastronomy-tapas-platter-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 147950,
+        "file": "gastronomy-tapas-platter-1086.webp"
+      }
+    ]
+  },
+  "gastronomy.png": {
+    "width": 1117,
+    "height": 1408,
+    "entries": [
+      {
+        "w": 480,
+        "h": 605,
+        "size": 33176,
+        "file": "gastronomy-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 968,
+        "size": 67502,
+        "file": "gastronomy-768.webp"
+      },
+      {
+        "w": 1117,
+        "h": 1408,
+        "size": 110756,
+        "file": "gastronomy-1117.webp"
+      }
+    ]
+  },
+  "lounge-chesterfield.png": {
+    "width": 805,
+    "height": 501,
+    "entries": [
+      {
+        "w": 480,
+        "h": 299,
+        "size": 17682,
+        "file": "lounge-chesterfield-480.webp"
+      },
+      {
+        "w": 805,
+        "h": 501,
+        "size": 37620,
+        "file": "lounge-chesterfield-805.webp"
+      }
+    ]
+  },
+  "lounge-seating.jpg": {
+    "width": 1083,
+    "height": 1452,
+    "entries": [
+      {
+        "w": 480,
+        "h": 644,
+        "size": 38798,
+        "file": "lounge-seating-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1030,
+        "size": 79900,
+        "file": "lounge-seating-768.webp"
+      },
+      {
+        "w": 1083,
+        "h": 1452,
+        "size": 131022,
+        "file": "lounge-seating-1083.webp"
+      }
+    ]
+  },
+  "lounge-wide.png": {
+    "width": 818,
+    "height": 550,
+    "entries": [
+      {
+        "w": 480,
+        "h": 323,
+        "size": 24184,
+        "file": "lounge-wide-480.webp"
+      },
+      {
+        "w": 818,
+        "h": 550,
+        "size": 47926,
+        "file": "lounge-wide-818.webp"
+      }
+    ]
+  },
+  "pool-compare-day.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 95926,
+        "file": "pool-compare-day-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 227406,
+        "file": "pool-compare-day-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 387514,
+        "file": "pool-compare-day-1086.webp"
+      }
+    ]
+  },
+  "pool-compare-night.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 83214,
+        "file": "pool-compare-night-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 181410,
+        "file": "pool-compare-night-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 284106,
+        "file": "pool-compare-night-1086.webp"
+      }
+    ]
+  },
+  "pool-day.png": {
+    "width": 475,
+    "height": 567,
+    "entries": [
+      {
+        "w": 475,
+        "h": 567,
+        "size": 66458,
+        "file": "pool-day-475.webp"
+      }
+    ]
+  },
+  "pool-dusk.png": {
+    "width": 493,
+    "height": 571,
+    "entries": [
+      {
+        "w": 493,
+        "h": 571,
+        "size": 63378,
+        "file": "pool-dusk-493.webp"
+      }
+    ]
+  },
+  "spirits-bottle.png": {
+    "width": 717,
+    "height": 866,
+    "entries": [
+      {
+        "w": 480,
+        "h": 580,
+        "size": 13456,
+        "file": "spirits-bottle-480.webp"
+      },
+      {
+        "w": 717,
+        "h": 866,
+        "size": 22800,
+        "file": "spirits-bottle-717.webp"
+      }
+    ]
+  },
+  "spirits-cocktail-blue.png": {
+    "width": 1254,
+    "height": 1254,
+    "entries": [
+      {
+        "w": 480,
+        "h": 480,
+        "size": 38164,
+        "file": "spirits-cocktail-blue-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 768,
+        "size": 80088,
+        "file": "spirits-cocktail-blue-768.webp"
+      },
+      {
+        "w": 1024,
+        "h": 1024,
+        "size": 121064,
+        "file": "spirits-cocktail-blue-1024.webp"
+      },
+      {
+        "w": 1254,
+        "h": 1254,
+        "size": 162038,
+        "file": "spirits-cocktail-blue-1254.webp"
+      }
+    ]
+  },
+  "spirits-cocktail-tray.png": {
+    "width": 1448,
+    "height": 1086,
+    "entries": [
+      {
+        "w": 480,
+        "h": 360,
+        "size": 23336,
+        "file": "spirits-cocktail-tray-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "size": 43646,
+        "file": "spirits-cocktail-tray-768.webp"
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "size": 65454,
+        "file": "spirits-cocktail-tray-1024.webp"
+      },
+      {
+        "w": 1448,
+        "h": 1086,
+        "size": 102950,
+        "file": "spirits-cocktail-tray-1448.webp"
+      }
+    ]
+  },
+  "spirits-rum-art.png": {
+    "width": 537,
+    "height": 763,
+    "entries": [
+      {
+        "w": 537,
+        "h": 763,
+        "size": 21116,
+        "file": "spirits-rum-art-537.webp"
+      }
+    ]
+  },
+  "whisky.png": {
+    "width": 1083,
+    "height": 1453,
+    "entries": [
+      {
+        "w": 480,
+        "h": 644,
+        "size": 49756,
+        "file": "whisky-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1030,
+        "size": 100002,
+        "file": "whisky-768.webp"
+      },
+      {
+        "w": 1083,
+        "h": 1453,
+        "size": 159014,
+        "file": "whisky-1083.webp"
+      }
+    ]
+  },
+  "wine-red-table.png": {
+    "width": 681,
+    "height": 831,
+    "entries": [
+      {
+        "w": 480,
+        "h": 586,
+        "size": 21018,
+        "file": "wine-red-table-480.webp"
+      },
+      {
+        "w": 681,
+        "h": 831,
+        "size": 31578,
+        "file": "wine-red-table-681.webp"
+      }
+    ]
+  },
+  "wine-sharing.png": {
+    "width": 848,
+    "height": 851,
+    "entries": [
+      {
+        "w": 480,
+        "h": 482,
+        "size": 23372,
+        "file": "wine-sharing-480.webp"
+      },
+      {
+        "w": 848,
+        "h": 851,
+        "size": 44594,
+        "file": "wine-sharing-848.webp"
+      }
+    ]
+  },
+  "cigars-cohiba-detail.png": {
+    "width": 1122,
+    "height": 1402,
+    "entries": [
+      {
+        "w": 480,
+        "h": 600,
+        "size": 21650,
+        "file": "cigars-cohiba-detail-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 960,
+        "size": 43220,
+        "file": "cigars-cohiba-detail-768.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "size": 73156,
+        "file": "cigars-cohiba-detail-1122.webp"
+      }
+    ]
+  },
+  "cigars-selection-bar.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 58454,
+        "file": "cigars-selection-bar-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 115766,
+        "file": "cigars-selection-bar-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 175460,
+        "file": "cigars-selection-bar-1086.webp"
+      }
+    ]
+  },
+  "cigars-limited-edition.png": {
+    "width": 1122,
+    "height": 1402,
+    "entries": [
+      {
+        "w": 480,
+        "h": 600,
+        "size": 25040,
+        "file": "cigars-limited-edition-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 960,
+        "size": 50734,
+        "file": "cigars-limited-edition-768.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "size": 84848,
+        "file": "cigars-limited-edition-1122.webp"
+      }
+    ]
+  },
+  "humidor.png": {
+    "width": 1085,
+    "height": 1450,
+    "entries": [
+      {
+        "w": 480,
+        "h": 641,
+        "size": 42388,
+        "file": "humidor-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1026,
+        "size": 90616,
+        "file": "humidor-768.webp"
+      },
+      {
+        "w": 1085,
+        "h": 1450,
+        "size": 145066,
+        "file": "humidor-1085.webp"
+      }
+    ]
+  },
+  "gastronomy-plated-dinner.png": {
+    "width": 1086,
+    "height": 1448,
+    "entries": [
+      {
+        "w": 480,
+        "h": 640,
+        "size": 40138,
+        "file": "gastronomy-plated-dinner-480.webp"
+      },
+      {
+        "w": 768,
+        "h": 1024,
+        "size": 73730,
+        "file": "gastronomy-plated-dinner-768.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "size": 111716,
+        "file": "gastronomy-plated-dinner-1086.webp"
+      }
+    ]
+  },
+  "champagne-toast.png": {
+    "width": 700,
+    "height": 826,
+    "entries": [
+      {
+        "w": 480,
+        "h": 566,
+        "size": 9826,
+        "file": "champagne-toast-480.webp"
+      },
+      {
+        "w": 700,
+        "h": 826,
+        "size": 15378,
+        "file": "champagne-toast-700.webp"
+      }
+    ]
+  },
+  "logo-abaa.png": {
+    "width": 658,
+    "height": 451,
+    "entries": [
+      {
+        "w": 300,
+        "h": 206,
+        "size": 25108,
+        "file": "logo-abaa.webp"
+      }
+    ]
+  }
+}

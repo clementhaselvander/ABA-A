@@ -19,3 +19,19 @@ Thumbs.db
 
 # Sources média brutes (photos/vidéos de travail, non publiées)
 /abaa/
+/uploads/
+
+# Captures et exports bruts déposés à la racine — cf. audit images du 22/09/2026.
+# Tous étaient des copies conformes d'un master de assets/ : conservés sur le
+# disque, retirés du suivi Git.
+/Capture d'écran*.png
+/ChatGPT Image*.png
+/Piscine turquoise immaculée.png
+/Plateau d’amuse-bouches gourmet.png
+/piscine 1.png
+
+# Versions antérieures des visuels, remplacées par les masters de assets/
+# et par les dérivés WebP produits par scripts/build-images.cjs.
+/assets/_previous/
+/assets/pool-night-tree.png
+/assets/cigars-wall-art.png

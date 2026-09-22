@@ -273,12 +273,7 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } .field-wide { grid-column: 1; } .sub-grid-2 { grid-template-columns: 1fr; } }
 
 /* ---------- footer ---------- */
-.ftr { border-top: 1px solid var(--line); background: var(--bg-alt); padding: clamp(56px,7vw,96px) 0 0; }
-.ftr-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 0 clamp(20px,5vw,72px) clamp(32px,4vw,48px); max-width: 1400px; margin: 0 auto; }
-.ftr-brand { display: flex; flex-direction: column; gap: 10px; }
-.ftr-word { font-family: var(--display); font-weight: 600; font-size: clamp(38px,6.4vw,80px); letter-spacing: .05em; line-height: 1; }
-.ftr-word-sub { font-size: 11px; letter-spacing: .42em; text-transform: uppercase; color: var(--gold-dark); }
-.ftr-tag { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--fg-dimmer); }
+.ftr { border-top: 1px solid var(--line); background: var(--bg-alt); padding: 0; }
 .ftr-news { border-top: 1px solid var(--line); padding: clamp(28px,3.6vw,44px) clamp(20px,5vw,72px); max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
 .ftr-news p { margin: 8px 0 0; max-width: 380px; font-size: 13px; line-height: 1.7; color: var(--fg-dim); }
 .ftr-news-form { display: flex; gap: 0; border-bottom: 1px solid rgba(245,239,230,.25); min-width: 280px; }
@@ -286,24 +281,52 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .ftr-news-form input:disabled { opacity: .45; cursor: not-allowed; }
 .ftr-news-form button { background: none; border: 0; color: var(--gold); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; padding: 12px 4px; }
 .ftr-news-form button:disabled { opacity: .45; cursor: not-allowed; }
-.ftr-mid { border-top: 1px solid var(--line); max-width: 1400px; margin: 0 auto; padding: clamp(36px,4.6vw,54px) clamp(20px,5vw,72px); display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; }
-.ftr-label { display: block; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 14px; }
-.ftr-mid p { margin: 0 0 12px; font-size: 13px; line-height: 1.7; color: var(--fg-dim); }
-.ftr-mid a.ftr-link { display: block; font-size: 13px; color: rgba(245,239,230,.72); padding: 4px 0; }
+.ftr-mid { max-width: 1400px; margin: 0 auto; padding: clamp(26px,2.9vw,36px) clamp(20px,5vw,72px) clamp(20px,2.3vw,26px); display: grid; grid-template-columns: 30fr 35fr 35fr; gap: 26px clamp(24px,2.6vw,36px); align-items: start; }
+/* Première colonne : le logo seul, centré verticalement sur la hauteur des deux
+   colonnes de texte. Le fichier est exporté avec une marge transparente
+   uniforme de 12px sur 300, soit 4 % de la largeur rendue : on la neutralise à
+   gauche pour que ce soit le dessin du logo, et non le cadre de l'image, qui
+   s'aligne sur le texte de la page. */
+.ftr-brand { align-self: stretch; display: flex; align-items: center; }
+.ftr-logo { --ftr-logo-w: clamp(196px,17.5vw,240px); --ftr-logo-bleed: calc(var(--ftr-logo-w) * .04); line-height: 0; margin: 0 0 0 calc(var(--ftr-logo-bleed) * -1); }
+.ftr-logo img { display: block; width: var(--ftr-logo-w); max-width: 100%; height: auto; }
+.ftr-label { display: block; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; }
+.ftr-mid p { margin: 0 0 10px; font-size: 13px; line-height: 1.7; color: var(--fg-dim); }
+.ftr-mid a.ftr-link { display: block; font-size: 13px; color: rgba(245,239,230,.72); padding: 3px 0; }
 .ftr-mid a.ftr-link:hover { color: var(--gold); }
-.ftr-bottom { border-top: 1px solid var(--line); max-width: 1400px; margin: 0 auto; padding: 22px clamp(20px,5vw,72px) 40px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; font-size: 11px; color: var(--fg-dimmer); letter-spacing: .04em; }
-.ftr-official-logo { flex: 0 0 auto; margin-left: auto; margin-right: 72px; align-self: center; line-height: 0; }
-.ftr-official-logo img { display: block; width: 112px; max-width: 100%; height: auto; }
+/* Deux groupes d'intitulés par colonne (adresse + contact, découvrir + réseaux) :
+   l'écart vertical les sépare plus nettement que l'interligne des liens, sans
+   rouvrir de vide entre les colonnes. */
+.ftr-group + .ftr-group { margin-top: clamp(22px,2.2vw,30px); }
+.ftr-bottom { border-top: 1px solid var(--line); max-width: 1400px; margin: 0 auto; padding: 16px clamp(20px,5vw,72px) 26px; display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: center; justify-content: space-between; font-size: 11px; color: var(--fg-dimmer); letter-spacing: .04em; }
+/* réserve la place du bouton WhatsApp flottant, qui se superpose à l'angle bas droit */
+@media (min-width: 561px) { .ftr-bottom { padding-right: 104px; } }
 @media (max-width: 900px) {
-  .ftr-bottom { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-  .ftr-official-logo { margin-right: 64px; }
-  .ftr-official-logo img { width: 92px; }
+  /* Sur tablette le logo passe en bandeau au-dessus des deux colonnes de texte,
+     qui restent côte à côte tant que la largeur le permet. */
+  .ftr-mid { grid-template-columns: 1fr 1fr; gap: 26px 30px; }
+  .ftr-brand { grid-column: 1 / -1; align-self: start; }
+  .ftr-logo { --ftr-logo-w: clamp(168px,24vw,206px); }
+  /* dégage la barre d'action mobile (≈63px) + le bouton flottant remonté */
+  .ftr-bottom { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 }
-@media (max-width: 560px) { .ftr-official-logo img { width: 80px; } }
-@media (max-width: 900px) { .ftr-mid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .ftr-mid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .ftr-mid { grid-template-columns: 1fr; gap: 24px; padding-top: 26px; padding-bottom: 20px; }
+  .ftr-group + .ftr-group { margin-top: 22px; }
+  .ftr-logo { --ftr-logo-w: 176px; }
+  .ftr-bottom { justify-content: flex-start; gap: 4px 18px; padding-top: 14px; }
+}
 
-.wa-fab { position: fixed; right: clamp(16px,3vw,28px); bottom: clamp(16px,3vw,28px); z-index: 150; width: 52px; height: 52px; border-radius: 50%; background: #1fae5c; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: .06em; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); }
+/* Hauteur de référence des boutons flottants. Sous 900px la barre d'action
+   mobile occupe le bas de l'écran : les boutons se placent au-dessus d'elle et
+   ne redescendent que lorsqu'elle est rentrée. Si :has() n'est pas supporté, la
+   règle est ignorée et les boutons restent en position haute, donc sûre. */
+:root { --fab-bottom: clamp(16px,3vw,28px); }
+@media (max-width: 900px) {
+  :root { --fab-bottom: calc(78px + env(safe-area-inset-bottom)); }
+  body:not(:has(.mcta.is-on)) { --fab-bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+.wa-fab { position: fixed; right: clamp(16px,3vw,28px); bottom: var(--fab-bottom); z-index: 150; width: 52px; height: 52px; border-radius: 50%; background: #1fae5c; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: .06em; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); transition: bottom .4s cubic-bezier(.16,1,.3,1); }
 .wa-fab:hover { color: #fff; filter: brightness(1.08); }
 
 .mcta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 140; transform: translateY(100%); transition: transform .4s cubic-bezier(.16,1,.3,1); display: none; }
@@ -388,7 +411,7 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .cigar-add { flex: none; width: 26px; height: 26px; border: 1px solid rgba(213,164,100,.35); background: none; color: var(--gold); cursor: pointer; font-size: 14px; line-height: 1; transition: background .3s ease, border-color .3s ease, color .3s ease; }
 .cigar-add:hover { background: rgba(213,164,100,.14); border-color: var(--gold); color: var(--fg); }
 
-.cart-fab { position: fixed; right: clamp(16px,3vw,28px); bottom: clamp(82px,11vw,98px); z-index: 150; width: 52px; height: 52px; border-radius: 50%; background: var(--gold); color: var(--bg); border: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); transform: scale(0); transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease; }
+.cart-fab { position: fixed; right: clamp(16px,3vw,28px); bottom: calc(var(--fab-bottom) + 66px); z-index: 150; width: 52px; height: 52px; border-radius: 50%; background: var(--gold); color: var(--bg); border: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-size: 9px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); transform: scale(0); transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease, bottom .4s cubic-bezier(.16,1,.3,1); }
 .cart-fab.is-on { transform: scale(1); }
 .cart-fab:hover { background: var(--gold-light); }
 .cart-fab-count { position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; border-radius: 50%; background: var(--fg); color: var(--bg); font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
@@ -546,12 +569,20 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .pv-confirm-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 10px; }
 
 /* ---------- final CTA band ---------- */
-.fcta { position: relative; min-height: 62vh; display: flex; align-items: center; overflow: hidden; }
+/* Le bloc de clôture est la dernière chose visible quand la page arrive en butée
+   basse : son contenu est donc ancré en bas de la bande (comme les hero) et non
+   centré, sinon la ballade verticale du centrage fait passer le titre sous le
+   header fixe. Le padding haut réserve la hauteur du header pour les positions
+   de défilement intermédiaires. */
+.fcta { position: relative; min-height: 62vh; display: flex; align-items: flex-end; overflow: hidden; padding: clamp(96px,12vh,140px) 0 clamp(40px,5vh,64px); }
 .fcta img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.42); }
 .fcta::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(20,15,11,.85), rgba(20,15,11,.3)); }
 .fcta-body { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 clamp(20px,5vw,72px); }
 .fcta-kicker { font-size: 10px; letter-spacing: .36em; text-transform: uppercase; color: var(--gold); }
-.fcta-title { font-size: clamp(46px,8vw,110px); line-height: .92; margin-top: 16px; }
+/* le plafond en vh ne s'active que sur les écrans larges ET courts (portables
+   1366x768, fenêtres réduites) : sans lui, trois lignes de titre + footer
+   dépassent la hauteur utile et le titre repasse sous le header. */
+.fcta-title { font-size: clamp(46px,min(8vw,12vh),110px); line-height: .92; margin-top: 16px; }
 .fcta-body .btn-row { margin-top: 30px; }
 
 .map-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 20px; }
@@ -946,6 +977,11 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.8s ease;
+  /* les nappes débordent la boîte à gauche/droite et créaient un défilement
+     horizontal de ~170px : on borne l'axe X (le masque a déjà fondu les bords
+     bien avant, la coupe tombe hors écran et reste invisible). */
+  overflow-x: clip;
+  overflow-y: visible;
   /* bords fondus de tous côtés : la fumée n'est jamais coupée au carré */
   -webkit-mask-image: radial-gradient(124% 82% at 50% 50%, #000 30%, transparent 84%);
           mask-image: radial-gradient(124% 82% at 50% 50%, #000 30%, transparent 84%);

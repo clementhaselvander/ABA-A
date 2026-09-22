@@ -14,13 +14,18 @@
 .member-plans { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(24px,3.4vw,48px); }
 .member-plan { min-width: 0; display: flex; flex-direction: column; }
 .member-card { position: relative; margin: 0 0 34px; border-radius: 12px; overflow: hidden; box-shadow: 0 16px 30px -15px rgba(0,0,0,.8); }
-.member-card img { width: 100%; height: auto; aspect-ratio: 624 / 405; object-fit: contain; }
+.member-card img { width: 100%; height: auto; aspect-ratio: 1081 / 708; object-fit: contain; }
 .member-card::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 18%, rgba(244,205,130,.1) 48%, transparent 75%); opacity: 0; }
 .member-plan-body { display: flex; flex-direction: column; flex: 1; }
 .member-level { display: block; color: var(--gold-dark); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; }
 .member-plan-title { font-family: var(--display); font-weight: 400; font-size: clamp(18px,2vw,24px); letter-spacing: .07em; margin: 12px 0 16px; }
-.member-price { margin: 0 0 16px; color: var(--gold); font-family: var(--display); font-size: clamp(23px,2.2vw,31px); white-space: nowrap; }
+/* Bloc montant : reprend la hiérarchie imprimée au recto de la carte
+ * (libellé capitales fines, montant, mention de réserve). */
+.member-amount-label { margin: 0 0 6px; color: var(--gold-dark); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; }
+.member-price { margin: 0; color: var(--gold); font-family: var(--display); font-size: clamp(23px,2.2vw,31px); white-space: nowrap; }
 .member-price span { font-family: var(--sans); font-size: 10px; letter-spacing: .1em; }
+.member-amount-note { margin: 7px 0 0; color: var(--fg-dim); font-size: 11px; font-style: italic; letter-spacing: .04em; }
+.member-plan-body .member-description { margin-top: 18px; }
 .member-description { font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--fg-dim); margin: 0 0 24px; }
 .member-benefits { margin-top: auto; padding: 23px 0; border-top: 1px solid var(--line-strong); }
 .member-benefits h4 { margin: 0 0 12px; color: var(--fg); font-size: 10px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; }
@@ -70,4 +75,24 @@
 @media (prefers-reduced-motion: reduce) {
   html:has(body[data-page="membership"]) { scroll-behavior: auto; }
   .member-card, .member-card::after { transition: none; }
+}
+
+/* Interactions des formules : inspirées d'une carte tarifaire premium, retenues
+ * pour rester dans la charte Aba’a (or, fond sombre, gestes lents). */
+.member-plan-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; }
+.member-flag { flex: none; padding: 5px 11px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--gold); font-size: 9px; letter-spacing: .18em; line-height: 1.5; text-transform: uppercase; white-space: nowrap; }
+.member-plan.is-featured .member-card { box-shadow: 0 16px 30px -15px rgba(0,0,0,.8), 0 0 0 1px var(--line-strong); }
+.member-plan.is-featured .member-flag { color: var(--bg); background: var(--gold); border-color: var(--gold); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .member-card img { transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
+  /* Toute la colonne devient la zone sensible : survoler le texte lève aussi la carte. */
+  .member-plan:hover .member-card, .member-plan:focus-within .member-card { transform: translateY(-5px); box-shadow: 0 24px 40px -20px rgba(0,0,0,.95); }
+  .member-plan:hover .member-card::after, .member-plan:focus-within .member-card::after { opacity: 1; }
+  .member-plan:hover .member-card img { transform: scale(1.03); }
+}
+@media (max-width: 640px) {
+  .member-flag { font-size: 8px; letter-spacing: .14em; padding: 4px 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .member-card img { transition: none; }
 }
