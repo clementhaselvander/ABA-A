@@ -198,7 +198,13 @@
       return rowIsRow[g] ? rowCounts[g]++ : 0;
     }
 
+    /* section qui suit la séquence immersive : elle se lève dans le fondu, son
+       contenu paraît dès l'entrée à l'écran plutôt qu'à 20 %, sinon le visiteur
+       traverse près d'un écran de fond vide après la fermeture au noir. */
+    var afterImm = document.querySelector('[data-immersive] + section');
+
     els.forEach(function (el) {
+      if (afterImm && afterImm.contains(el)) el._rvEarly = true;
       var items = revealCascade(el);
       if (!items) {
         /* bloc d'ensemble : dans une grille, les frères se succèdent dans l'ordre de
@@ -253,7 +259,7 @@
         var tall = r.height > vh * 0.8 && e.intersectionRatio > 0 && r.top < vh * 0.75;
         /* déclenchement à ~20 % de visibilité ; les blocs plus hauts que l'écran et les
            sections déjà dépassées (saut d'ancre) sont affichés sans attendre ce seuil */
-        if (e.intersectionRatio >= 0.2 || tall || r.bottom < 0) {
+        if (e.intersectionRatio >= 0.2 || tall || r.bottom < 0 || (e.target._rvEarly && e.isIntersecting)) {
           revealIn(e.target);
           io.unobserve(e.target);
         }
@@ -422,6 +428,15 @@
     var waLink = formEl ? formEl.querySelector('.rsv-wa') : null;
     var paxVal = drawer.querySelector('.rsv-pax-val');
     var pax = 2;
+
+    /* Fermé, le tiroir n'était que translaté hors écran : ses champs restaient
+       dans l'ordre de tabulation et son titre dans le plan de la page. */
+    function setInert(on) {
+      if ('inert' in HTMLElement.prototype) drawer.inert = on;
+      else if (on) drawer.setAttribute('aria-hidden', 'true');
+      else drawer.removeAttribute('aria-hidden');
+    }
+    setInert(true);
     var reserveType = 'table';
     var reserveEventName = '';
     var reserveEventDate = '';
@@ -464,6 +479,7 @@
       if (sentEl) sentEl.style.display = 'none';
       if (trackName) track(trackName, evName || reserveType);
       refreshWa();
+      setInert(false);
       overlay.classList.add('is-on');
       drawer.classList.add('is-on');
       document.body.style.overflow = 'hidden';
@@ -478,7 +494,19 @@
       drawer.classList.remove('is-on');
       document.body.style.overflow = '';
       if (lastFocus && lastFocus.focus) lastFocus.focus();
+      setInert(true);
     }
+
+    /* Le focus doit rester dans le tiroir tant qu'il est ouvert. */
+    drawer.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || !drawer.classList.contains('is-on')) return;
+      var f = [].slice.call(drawer.querySelectorAll('a[href],button,input,textarea,select'))
+        .filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
 
     document.addEventListener('click', function (e) {
       var t = e.target.closest('[data-reserve]');
@@ -514,7 +542,7 @@
   /* ---------- boutique de cigares (panier cigares + livraison) ---------- */
   var CART_LABELS = LANG === 'en'
     ? { less: 'Less', more: 'More', remove: 'Remove', free: 'Free', delivery: 'Delivery', pickup: 'Pickup at the cigar cellar', greeting: 'Hello Aba’a Mvoé Lodge, I would like to order cigars:', mode: 'Method', zone: 'Zone', address: 'Address', subtotal: 'Subtotal', total: 'Total', name: 'Name', phone: 'Phone' }
-    : { less: 'Moins', more: 'Plus', remove: 'Retirer', free: 'Offerte', delivery: 'Livraison', pickup: 'Retrait au cave à cigares', greeting: 'Bonjour Aba’a Mvoé Lodge, je souhaite commander des cigares :', mode: 'Mode', zone: 'Zone', address: 'Adresse', subtotal: 'Sous-total', total: 'Total', name: 'Nom', phone: 'Tél' };
+    : { less: 'Moins', more: 'Plus', remove: 'Retirer', free: 'Offerte', delivery: 'Livraison', pickup: 'Retrait à la cave à cigares', greeting: 'Bonjour Aba’a Mvoé Lodge, je souhaite commander des cigares :', mode: 'Mode', zone: 'Zone', address: 'Adresse', subtotal: 'Sous-total', total: 'Total', name: 'Nom', phone: 'Tél' };
 
   function setupCigarCart() {
     var rows = document.querySelectorAll('.price-row[data-cigar]');
@@ -661,6 +689,7 @@
 
     function openDrawer() {
       lastFocus = document.activeElement;
+      setInert(false);
       overlay.classList.add('is-on');
       drawer.classList.add('is-on');
       document.body.style.overflow = 'hidden';
@@ -890,7 +919,7 @@
     var SHIFT = -16;   /* px : dérive verticale, couverte par le surdimensionnement CSS */
     var SCRIM = [.25, .45];
     var BLACK_FROM = .86;  /* la fermeture au noir n'occupe que la toute fin */
-    var BLACK_MAX  = .94;
+    var BLACK_MAX  = 1;    /* opaque : la section suivante prend le relais sans marche */
 
     var visible = false, queued = false;
 

@@ -10,7 +10,7 @@
   --fg-dimmer: rgba(245,239,230,.46);
   --gold: #D5A464;
   --gold-light: #F4CD82;
-  --gold-dark: #A17340;
+  --gold-dark: #A97B46;
   --line: rgba(213,164,100,.16);
   --line-strong: rgba(213,164,100,.32);
   --serif: 'Cormorant Garamond', serif;
@@ -26,6 +26,11 @@ img { display: block; max-width: 100%; }
 a { color: var(--gold); text-decoration: none; transition: color .35s ease; }
 a:hover { color: var(--fg); }
 ::selection { background: var(--gold-dark); color: var(--bg); }
+
+/* Lien d'évitement : hors écran jusqu'à la prise de focus au clavier. */
+.skip-link { position: fixed; top: 0; left: 0; z-index: 500; transform: translateY(-120%); background: var(--gold); color: var(--bg); padding: 12px 20px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; transition: transform .2s ease; }
+.skip-link:focus-visible { transform: translateY(0); color: var(--bg); }
+#contenu:focus { outline: none; }
 input, textarea, select, button { font-family: var(--sans); }
 input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
 input::placeholder, textarea::placeholder { color: rgba(245,239,230,.32); opacity: 1; }
@@ -200,6 +205,7 @@ h2 em, h1 em { font-style: italic; color: var(--gold); }
 .card h3 { font-size: 24px; }
 .card p { margin: 0; font-size: 13px; line-height: 1.8; color: var(--fg-dim); font-weight: 300; }
 .card-cta { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+@media (max-width: 900px) { .card-cta { display: inline-flex; align-items: center; min-height: 44px; } }
 
 .tile { position: relative; overflow: hidden; aspect-ratio: 3/4; display: flex; align-items: flex-end; }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.62); transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
@@ -293,6 +299,7 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 .ftr-label { display: block; font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; }
 .ftr-mid p { margin: 0 0 10px; font-size: 13px; line-height: 1.7; color: var(--fg-dim); }
 .ftr-mid a.ftr-link { display: block; font-size: 13px; color: rgba(245,239,230,.72); padding: 3px 0; }
+@media (max-width: 760px) { .ftr-mid a.ftr-link { padding: 13px 0; } .ftr-bottom a.ftr-link { padding: 14px 0; } }
 .ftr-mid a.ftr-link:hover { color: var(--gold); }
 /* Deux groupes d'intitulés par colonne (adresse + contact, découvrir + réseaux) :
    l'écart vertical les sépare plus nettement que l'interligne des liens, sans
@@ -325,6 +332,9 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 @media (max-width: 900px) {
   :root { --fab-bottom: calc(78px + env(safe-area-inset-bottom)); }
   body:not(:has(.mcta.is-on)) { --fab-bottom: calc(16px + env(safe-area-inset-bottom)); }
+  /* La barre collante porte déjà « WhatsApp » : on retire la pastille tant
+     qu'elle est visible, plutôt que d'empiler deux fois la même action. */
+  body:has(.mcta.is-on) .wa-fab { opacity: 0; pointer-events: none; }
 }
 .wa-fab { position: fixed; right: clamp(16px,3vw,28px); bottom: var(--fab-bottom); z-index: 150; width: 52px; height: 52px; border-radius: 50%; background: #1fae5c; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: .06em; box-shadow: 0 14px 30px -10px rgba(0,0,0,.7); transition: bottom .4s cubic-bezier(.16,1,.3,1); }
 .wa-fab:hover { color: #fff; filter: brightness(1.08); }
@@ -339,8 +349,8 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 /* ---------- reservation drawer ---------- */
 .rsv-overlay { position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,.62); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
 .rsv-overlay.is-on { opacity: 1; pointer-events: auto; }
-.rsv-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 401; width: min(460px,100%); background: var(--bg); border-left: 1px solid var(--line-strong); transform: translateX(100%); transition: transform .45s cubic-bezier(.16,1,.3,1); overflow-y: auto; display: flex; flex-direction: column; }
-.rsv-drawer.is-on { transform: translateX(0); }
+.rsv-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 401; width: min(460px,100%); background: var(--bg); border-left: 1px solid var(--line-strong); transform: translateX(100%); visibility: hidden; transition: transform .45s cubic-bezier(.16,1,.3,1), visibility 0s linear .45s; overflow-y: auto; display: flex; flex-direction: column; }
+.rsv-drawer.is-on { transform: translateX(0); visibility: visible; transition: transform .45s cubic-bezier(.16,1,.3,1), visibility 0s; }
 .rsv-head { display: flex; align-items: center; justify-content: space-between; padding: 22px clamp(20px,4vw,34px); border-bottom: 1px solid var(--line); }
 .rsv-back { background: none; border: 0; color: var(--fg); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; }
 .rsv-brand { font-family: var(--serif); font-size: 15px; letter-spacing: .28em; text-transform: uppercase; color: var(--fg-dimmer); }
@@ -1079,7 +1089,10 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
    phrases s'empilent visiblement (voir le bloc « mouvement réduit » plus bas).
    La section reste dans tous les cas une belle image légendée. */
 
-.imm { position: relative; height: 200vh; background: var(--bg); }
+.imm { position: relative; height: 200vh; background: var(--bg-alt); }
+
+/* la section qui suit se lève dans le fondu : pas de filet doré à la jonction */
+.imm + .section { border-top-color: transparent; }
 
 .imm-stage {
   position: sticky;
@@ -1124,14 +1137,17 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 /* dégradés fixes, distincts du voile : ils ne servent pas à assombrir la scène
    mais à garantir la lisibilité. Haut et bas raccordent la séquence à la section
    précédente et à la suivante ; le halo central pose les phrases sans toucher
-   aux angles de l'image, qui restent pleinement lisibles. */
+   aux angles de l'image, qui restent pleinement lisibles.
+   Le haut part du fond opaque de la section précédente (--bg-alt) : la photo
+   émerge de la page au lieu d'y être coupée net. Une fois la scène tenue, cette
+   bande opaque (~9 %) tombe sous le header fixe et ne se voit plus. */
 .imm-vignette {
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(20,15,11,.58) 0%, rgba(20,15,11,.12) 20%, rgba(20,15,11,0) 34%),
+    linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.58) 9%, rgba(20,15,11,.12) 22%, rgba(20,15,11,0) 34%),
     linear-gradient(0deg,   rgba(20,15,11,.72) 0%, rgba(20,15,11,.10) 26%, rgba(20,15,11,0) 44%),
     radial-gradient(76% 44% at 50% 48%, rgba(20,15,11,.44) 0%, rgba(20,15,11,0) 100%);
 }
@@ -1194,14 +1210,15 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   transform: scaleX(calc(.45 + .55 * var(--o, 0)));
 }
 
-/* fermeture au noir : c'est le noir de la page, pas un noir pur — la section
-   suivante se lève donc exactement dans la même valeur, sans marche. */
+/* fermeture au noir : c'est le fond de la section suivante (.section-alt), pas
+   un noir pur, et le fondu va jusqu'à l'opacité pleine — la section suivante se
+   lève donc exactement dans la même valeur, sans marche ni photo en transparence. */
 .imm-black {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  background: var(--bg);
+  background: var(--bg-alt);
   opacity: var(--imm-black, 0);
 }
 
@@ -1218,7 +1235,7 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   .imm { height: 165vh; }
   .imm-word { font-size: clamp(26px,7.4vw,46px); letter-spacing: .07em; line-height: 1.1; }
   .imm-vignette { background:
-    linear-gradient(180deg, rgba(20,15,11,.6) 0%, rgba(20,15,11,.14) 22%, rgba(20,15,11,0) 36%),
+    linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.6) 9%, rgba(20,15,11,.14) 22%, rgba(20,15,11,0) 36%),
     linear-gradient(0deg,   rgba(20,15,11,.74) 0%, rgba(20,15,11,.12) 28%, rgba(20,15,11,0) 46%),
     radial-gradient(96% 40% at 50% 48%, rgba(20,15,11,.52) 0%, rgba(20,15,11,0) 100%); }
 }

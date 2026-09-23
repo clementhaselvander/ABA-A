@@ -8,17 +8,17 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Contact — Aba’a Mvoé Lodge">
 <meta property="og:description" content="Find us and book — Aba’a Mvoé Lodge, La Sablière, Libreville.">
-<meta property="og:image" content="https://[domaine-de-production]/assets/og-accueil.jpg">
+<meta property="og:image" content="https://www.abaa-mvoelodge.com/assets/og-accueil.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
-<!-- TODO: add <link rel="canonical" href="https://[production-domain]/en/contact.html"> once the site is deployed. -->
+<link rel="canonical" href="https://www.abaa-mvoelodge.com/en/contact.html">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FoodEstablishment",
   "name": "Aba’a Mvoé Lodge",
-  "image": "https://[domaine-de-production]/assets/og-accueil.jpg",
+  "image": "https://www.abaa-mvoelodge.com/assets/og-accueil.jpg",
   "description": "Aba’a Mvoé Lodge is a high-end Business Lounge in La Sablière, Libreville, with a cigar cellar, dining area, spirits bar, pool area and private event hire.",
   "address": { "@type": "PostalAddress", "streetAddress": "La Sablière", "addressLocality": "Libreville", "addressCountry": "GA" },
   "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
@@ -40,6 +40,7 @@
 </style>
 </head>
 <body data-page="contact">
+<a class="skip-link" href="#contenu">Skip to content</a>
 
 <header class="site-header">
   <a href="index.html" class="brand"><img src="../assets/logo-abaa.webp" width="300" height="206" class="brand-logo" alt="Aba’a Mvoé Lodge"></a>
@@ -76,10 +77,10 @@
   <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Make a reservation</a>
 </div>
 
-<main>
+<main id="contenu" tabindex="-1">
 
   <section class="page-hero">
-    <div class="page-hero-media"><img src="../assets/lounge-wide-818.webp" srcset="../assets/lounge-wide-480.webp 480w, ../assets/lounge-wide-818.webp 818w" sizes="100vw" width="818" height="550" alt="Aba’a Mvoé Lodge, La Sablière, Libreville" fetchpriority="high"></div>
+    <div class="page-hero-media"><img src="../assets/lounge-chesterfield-1600.webp" srcset="../assets/lounge-chesterfield-640.webp 640w, ../assets/lounge-chesterfield-1024.webp 1024w, ../assets/lounge-chesterfield-1600.webp 1600w" sizes="100vw" width="1600" height="930" alt="The club lounge at Aba’a Mvoé Lodge, La Sablière, Libreville" fetchpriority="high"></div>
     <div class="page-hero-scrim"></div>
     <div class="page-hero-body">
       <div class="page-hero-crumb"><i></i><span>10 — Find us</span></div>
@@ -117,8 +118,8 @@
         <a href="#" data-wa-link="Hello Aba’a Mvoé Lodge, I would like to plan my visit." class="btn btn-wa" style="margin-top:20px">Book via WhatsApp <span>→</span></a>
       </div>
       <form class="reveal form-grid" data-reveal data-wa-form data-wa-prefix="Hello Aba’a Mvoé Lodge, reservation —">
-        <label class="field"><span>Name</span><input name="nom" placeholder="Your name"></label>
-        <label class="field"><span>Phone</span><input name="tel" placeholder="+241 …"></label>
+        <label class="field"><span>Name</span><input name="nom" required autocomplete="name" placeholder="Your name"></label>
+        <label class="field"><span>Phone</span><input name="tel" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+241 …"></label>
         <label class="field"><span>Guests</span><input name="pax" type="number" min="1" placeholder="2"></label>
         <div class="sub-grid-2">
           <label class="field"><span>Date</span><input name="date" type="date" style="color-scheme:dark"></label>
@@ -198,8 +199,8 @@
       <div><span>Date</span><strong class="rsv-context-date"></strong></div>
     </div>
     <form class="rsv-form">
-      <label class="field"><span>Name</span><input name="nom" placeholder="Your name"></label>
-      <label class="field"><span>Phone</span><input name="tel" placeholder="+241 …"></label>
+      <label class="field"><span>Name</span><input name="nom" required autocomplete="name" placeholder="Your name"></label>
+      <label class="field"><span>Phone</span><input name="tel" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+241 …"></label>
       <div class="rsv-row">
         <label class="field"><span>Date</span><input name="date" type="date"></label>
         <label class="field"><span>Time</span><input name="heure" type="time"></label>

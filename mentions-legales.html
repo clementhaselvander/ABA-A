@@ -18,6 +18,7 @@
 </style>
 </head>
 <body data-page="legal">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <header class="site-header">
   <a href="index.html" class="brand"><img src="assets/logo-abaa.webp" width="300" height="206" class="brand-logo" alt="Aba’a Mvoé Lodge"></a>
@@ -54,7 +55,7 @@
   <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver</a>
 </div>
 
-<main class="legal-page"><section class="section"><div class="frame legal-content">
+<main id="contenu" tabindex="-1" class="legal-page"><section class="section"><div class="frame legal-content">
 <span class="eyebrow">Aba’a Mvoé Lodge</span><h1>Mentions légales</h1>
 <p class="legal-draft">Version de travail — les informations « À compléter » doivent être renseignées avant publication.</p>
 <section><h2>1. Éditeur du site</h2><p>Ce site présente les activités de l’établissement Aba’a Mvoé Lodge.</p>
@@ -130,8 +131,8 @@
       <div><span>Date</span><strong class="rsv-context-date"></strong></div>
     </div>
     <form class="rsv-form">
-      <label class="field"><span>Nom</span><input name="nom" placeholder="Votre nom"></label>
-      <label class="field"><span>Téléphone</span><input name="tel" placeholder="+241 …"></label>
+      <label class="field"><span>Nom</span><input name="nom" required autocomplete="name" placeholder="Votre nom"></label>
+      <label class="field"><span>Téléphone</span><input name="tel" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+241 …"></label>
       <div class="rsv-row">
         <label class="field"><span>Date</span><input name="date" type="date"></label>
         <label class="field"><span>Heure</span><input name="heure" type="time"></label>

@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Cave &amp; Terroir — Aba’a Mvoé Lodge">
 <meta property="og:description" content="Le verre juste, servi lentement — Aba’a Mvoé Lodge, La Sablière, Libreville.">
-<meta property="og:image" content="https://[domaine-de-production]/assets/og-spiritueux.jpg">
+<meta property="og:image" content="https://www.abaa-mvoelodge.com/assets/og-spiritueux.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
@@ -17,7 +17,7 @@
   "@context": "https://schema.org",
   "@type": "FoodEstablishment",
   "name": "Aba’a Mvoé Lodge",
-  "image": "https://[domaine-de-production]/assets/og-spiritueux.jpg",
+  "image": "https://www.abaa-mvoelodge.com/assets/og-spiritueux.jpg",
   "description": "Aba’a Mvoé Lodge est un Business Lounge haut de gamme à La Sablière, Libreville, avec une cave à cigares, un espace de restauration, un bar à spiritueux, un espace piscine et des services de privatisation.",
   "address": { "@type": "PostalAddress", "streetAddress": "La Sablière", "addressLocality": "Libreville", "addressCountry": "GA" },
   "geo": { "@type": "GeoCoordinates", "latitude": 0.475, "longitude": 9.435 },
@@ -27,7 +27,7 @@
   "priceRange": "$$$"
 }
 </script>
-<!-- TODO: ajouter <link rel="canonical" href="https://[domaine-de-production]/spiritueux.html"> une fois le site déployé. -->
+<link rel="canonical" href="https://www.abaa-mvoelodge.com/spiritueux.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23140F0B'/%3E%3Cpath d='M12 28 L32 12 L52 28' fill='none' stroke='%23D5A464' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M20 28v20M44 28v20' stroke='%23D5A464' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M32 31c-3 4.3-4.2 7-1.3 10 1.3-1.3 2.6-1.3 3.9 0 2.8-3 1.7-5.7-2.6-10z' fill='%23F4CD82'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,7 @@
 </style>
 </head>
 <body data-page="spiritueux">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <header class="site-header">
   <a href="index.html" class="brand"><img src="assets/logo-abaa.webp" width="300" height="206" class="brand-logo" alt="Aba’a Mvoé Lodge"></a>
@@ -75,7 +76,7 @@
   <a href="#" data-reserve="membership" data-track="reserve_header" class="btn btn-solid">Réserver</a>
 </div>
 
-<main>
+<main id="contenu" tabindex="-1">
 
   <section class="page-hero">
     <div class="page-hero-media"><img src="assets/whisky-768.webp" srcset="assets/whisky-480.webp 480w, assets/whisky-768.webp 768w, assets/whisky-1083.webp 1083w" sizes="100vw" width="1083" height="1453" alt="Cave &amp; Terroir, Aba’a Mvoé Lodge" fetchpriority="high"></div>
@@ -359,8 +360,8 @@
       <div><span>Date</span><strong class="rsv-context-date"></strong></div>
     </div>
     <form class="rsv-form">
-      <label class="field"><span>Nom</span><input name="nom" placeholder="Votre nom"></label>
-      <label class="field"><span>Téléphone</span><input name="tel" placeholder="+241 …"></label>
+      <label class="field"><span>Nom</span><input name="nom" required autocomplete="name" placeholder="Votre nom"></label>
+      <label class="field"><span>Téléphone</span><input name="tel" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+241 …"></label>
       <div class="rsv-row">
         <label class="field"><span>Date</span><input name="date" type="date"></label>
         <label class="field"><span>Heure</span><input name="heure" type="time"></label>

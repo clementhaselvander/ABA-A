@@ -1,98 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: remplacer [domaine-de-production] par le domaine réel une fois le site déployé (cf. index.html). -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://[domaine-de-production]/</loc>
+    <loc>https://www.abaa-mvoelodge.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/club.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/club.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/cigares.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/cigares.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/spiritueux.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/spiritueux.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/carte.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/carte.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/table.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/table.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/poolside.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/poolside.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/privatisation.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/privatisation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/contact.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/club.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/club.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/cigares.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/cigares.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/spiritueux.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/spiritueux.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/carte.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/carte.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/table.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/table.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/poolside.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/poolside.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/privatisation.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/privatisation.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/en/contact.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/en/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://[domaine-de-production]/devenir-membre.html</loc>
+    <loc>https://www.abaa-mvoelodge.com/devenir-membre.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
