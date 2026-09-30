@@ -921,6 +921,15 @@
     var BLACK_FROM = .86;  /* la fermeture au noir n'occupe que la toute fin */
     var BLACK_MAX  = 1;    /* opaque : la section suivante prend le relais sans marche */
 
+    /* Ouverture, pilotée par l'approche de la section (0 quand son haut paraît en
+       bas de l'écran, 1 quand il atteint le haut, instant où la scène se fige) :
+       la photographie monte comme une fenêtre posée dans le fond de la page, puis
+       s'élargit jusqu'au plein cadre en relâchant un léger surplus d'échelle —
+       l'objectif qui fait sa mise au point, pas un zoom. */
+    var INSET_X = 7;    /* % de retrait latéral de la fenêtre au départ */
+    var INSET_Y = 10;   /* % de retrait vertical */
+    var ZOOM_IN = .06;  /* surplus d'échelle relâché pendant l'ouverture */
+
     var visible = false, queued = false;
 
     /* smoothstep : accélération et décélération symétriques, sans à-coup aux
@@ -928,18 +937,23 @@
     function ease(t) { return t * t * (3 - 2 * t); }
     function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
-    function update() {
+    function update(force) {
       queued = false;
-      if (!visible) return;
+      if (!visible && force !== true) return;
 
       var travel = sec.offsetHeight - stage.offsetHeight;
       if (travel <= 0) return;   /* scène aussi haute que la section : rien à parcourir */
-      var p = clamp01(-sec.getBoundingClientRect().top / travel);
+      var top = sec.getBoundingClientRect().top;
+      var p = clamp01(-top / travel);
+      var e = ease(clamp01(1 - top / stage.offsetHeight));
 
       /* mobile : mêmes repères de temps, amplitude de moitié */
       var soft = window.innerWidth <= 760 ? .5 : 1;
 
-      stage.style.setProperty('--imm-scale', (1 + SCALE * soft * p).toFixed(4));
+      stage.style.setProperty('--imm-in', e.toFixed(3));
+      stage.style.setProperty('--imm-in-x', (INSET_X * soft * (1 - e)).toFixed(3) + '%');
+      stage.style.setProperty('--imm-in-y', (INSET_Y * (1 - e)).toFixed(3) + '%');
+      stage.style.setProperty('--imm-scale', (1 + SCALE * soft * p + ZOOM_IN * soft * (1 - e)).toFixed(4));
       stage.style.setProperty('--imm-shift', (SHIFT * soft * p).toFixed(2) + 'px');
       stage.style.setProperty('--imm-scrim', (SCRIM[0] + (SCRIM[1] - SCRIM[0]) * p).toFixed(3));
       stage.style.setProperty('--imm-black',
@@ -972,7 +986,9 @@
 
     window.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
-    queue();
+    /* premier calcul même hors écran : la fenêtre doit déjà être fermée quand la
+       section paraîtra, sinon la photo entrerait en plein cadre puis sauterait */
+    update(true);
   }
 
   /* Stagger testimonials adapté au site statique. Les articles HTML restent la source. */

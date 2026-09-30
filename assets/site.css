@@ -1103,6 +1103,11 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   display: flex;
   align-items: center;
   justify-content: center;
+  /* ouverture : tant que la section monte vers le haut de l'écran, la scène est
+     une fenêtre découpée dans le fond de la page, qui s'élargit jusqu'au plein
+     cadre à l'instant où elle se fige (site.js, --imm-in-*). Sans script, 0 :
+     plein cadre d'emblée. */
+  clip-path: inset(var(--imm-in-y, 0%) var(--imm-in-x, 0%));
 }
 
 .imm-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
@@ -1147,9 +1152,19 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.58) 9%, rgba(20,15,11,.12) 22%, rgba(20,15,11,0) 34%),
     linear-gradient(0deg,   rgba(20,15,11,.72) 0%, rgba(20,15,11,.10) 26%, rgba(20,15,11,0) 44%),
     radial-gradient(76% 44% at 50% 48%, rgba(20,15,11,.44) 0%, rgba(20,15,11,0) 100%);
+}
+
+/* raccord haut, isolé pour suivre l'ouverture : pendant que la scène n'est encore
+   qu'une fenêtre, un bord supérieur fondu à côté de bords latéraux nets ferait un
+   cadre bancal — il ne paraît donc qu'à mesure que la fenêtre s'ouvre. */
+.imm-vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.58) 9%, rgba(20,15,11,.12) 22%, rgba(20,15,11,0) 34%);
+  opacity: var(--imm-in, 1);
 }
 
 /* fumée : strictement le composant existant (.smoke-veil, mêmes nappes, mêmes
@@ -1234,8 +1249,8 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
 @media (max-width: 600px) {
   .imm { height: 165vh; }
   .imm-word { font-size: clamp(26px,7.4vw,46px); letter-spacing: .07em; line-height: 1.1; }
+  .imm-vignette::before { background: linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.6) 9%, rgba(20,15,11,.14) 22%, rgba(20,15,11,0) 36%); }
   .imm-vignette { background:
-    linear-gradient(180deg, var(--bg-alt) 0%, rgba(27,20,15,.6) 9%, rgba(20,15,11,.14) 22%, rgba(20,15,11,0) 36%),
     linear-gradient(0deg,   rgba(20,15,11,.74) 0%, rgba(20,15,11,.12) 28%, rgba(20,15,11,0) 46%),
     radial-gradient(96% 40% at 50% 48%, rgba(20,15,11,.52) 0%, rgba(20,15,11,0) 100%); }
 }
@@ -1245,7 +1260,8 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
    lisibles — le sens de la section est conservé, son mouvement disparaît. */
 @media (prefers-reduced-motion: reduce) {
   .imm { height: auto; }
-  .imm-stage { position: static; height: auto; min-height: 76vh; padding: clamp(64px,10vw,120px) 0; }
+  .imm-stage { position: static; height: auto; min-height: 76vh; padding: clamp(64px,10vw,120px) 0; clip-path: none; }
+  .imm-vignette::before { opacity: 1; }
   .imm-media img { transform: none; }
   .imm-scrim { opacity: .4; }
   .imm-words { display: block; }
