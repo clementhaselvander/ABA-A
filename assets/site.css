@@ -1435,3 +1435,22 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
     animation-duration: 46s;
   }
 }
+
+/* téléphone en paysage : c'est la hauteur, pas la largeur, qui manque —
+   en-tête resserré, titre d'accueil calé sur la hauteur, menu sur deux colonnes */
+@media (max-height: 500px) {
+  .site-header, .site-header.is-scrolled { padding-top: 8px; padding-bottom: 8px; }
+  .site-header .brand-logo, .site-header.is-scrolled .brand-logo { height: 36px; }
+  main .home-hero { height: 100svh; min-height: 340px; }
+  .home-hero .home-hero-body { padding-bottom: 22px; }
+  .home-hero .home-hero-crumb { margin-bottom: 10px; }
+  .home-hero .home-hero-title { font-size: clamp(40px,14vh,64px); }
+  .home-hero .home-hero-sign { margin-top: 10px; font-size: 16px; }
+  .home-hero .btn-row { margin-top: 14px; }
+  .mobile-menu { justify-content: flex-start; gap: 10px; padding-top: 10px; padding-bottom: 12px; overflow-y: auto; }
+  .mobile-menu-head .brand-logo { height: 32px; }
+  .mobile-menu nav { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; overflow: visible; }
+  .mobile-menu nav a { font-size: 21px; padding: 6px 0; }
+  .mobile-menu .mobile-lang { margin-top: 4px; }
+  .mobile-menu .btn { margin-top: 4px; }
+}
