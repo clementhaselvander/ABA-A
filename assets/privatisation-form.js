@@ -62,7 +62,7 @@
   if (paxInput && paxAlert) {
     paxInput.addEventListener('input', function () {
       var n = parseInt(paxInput.value, 10);
-      paxAlert.hidden = !(n > 165);
+      paxAlert.hidden = !(n > 175);
     });
   }
 
@@ -308,7 +308,7 @@
   function computeEstimate() {
     var d = collectData();
     var rows = [], total = 0, hasAny = false, hasDevis = false;
-    var espacePrices = { "L'espace intérieur": 150000, 'Salon voilé': 20000, 'Salon ordinaire': 20000, 'Site complet': 3500000 };
+    var espacePrices = { "L'espace intérieur": 150000, "L'espace extérieur": 100000, 'Salon voilé': 20000, 'Salon ordinaire': 20000 };
 
     d.espaces.forEach(function (e) {
       if (e === 'Salon privé') {

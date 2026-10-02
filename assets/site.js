@@ -906,12 +906,16 @@
     var words = Array.prototype.slice.call(sec.querySelectorAll('.imm-word'));
     if (!stage || !words.length) return;
 
-    /* Fenêtre de lecture de chaque phrase, en progression de 0 à 1. Les fenêtres
-       ne se chevauchent jamais et sont séparées par un intervalle vide : entre
-       deux phrases l'écran revient à la seule photographie, ce qui est ce qui
-       donne à chacune son poids. */
-    var WINDOWS = [[.07, .32], [.36, .61], [.64, .88]];
-    var FADE  = .28;   /* part de la fenêtre consacrée à l'apparition, idem à la sortie */
+    /* Les phrases défilent seules, sur une minuterie, dès que la fenêtre est
+       ouverte : le visiteur n'a pas à faire défiler pour les lire. Chacune a son
+       créneau, séparé du suivant par un temps de photographie seule — c'est ce qui
+       donne à chacune son poids. Le cycle reprend tant que la scène est à l'écran
+       et repart de la première phrase à chaque nouvelle entrée. */
+    var SLOT  = 3200;  /* ms : durée de lecture d'une phrase, apparition et sortie comprises */
+    var GAP   = 450;   /* ms : photographie seule entre deux phrases */
+    var REST  = 1400;  /* ms : pause supplémentaire avant de reprendre le cycle */
+    var START = .85;   /* ouverture (0 → 1) à partir de laquelle le cycle démarre */
+    var FADE  = .28;   /* part du créneau consacrée à l'apparition, idem à la sortie */
     var RISE  = 15;    /* px : la phrase monte de 15 px en paraissant */
     var DRIFT = 10;    /* px : et poursuit doucement sa montée en s'effaçant */
 
@@ -931,6 +935,8 @@
     var ZOOM_IN = .06;  /* surplus d'échelle relâché pendant l'ouverture */
 
     var visible = false, queued = false;
+    var t0 = null, ticking = false, black = 0;
+    var CYCLE = words.length * (SLOT + GAP) + REST;
 
     /* smoothstep : accélération et décélération symétriques, sans à-coup aux
        deux extrémités — c'est ce qui évite qu'une phrase « démarre » à l'œil. */
@@ -956,21 +962,45 @@
       stage.style.setProperty('--imm-scale', (1 + SCALE * soft * p + ZOOM_IN * soft * (1 - e)).toFixed(4));
       stage.style.setProperty('--imm-shift', (SHIFT * soft * p).toFixed(2) + 'px');
       stage.style.setProperty('--imm-scrim', (SCRIM[0] + (SCRIM[1] - SCRIM[0]) * p).toFixed(3));
-      stage.style.setProperty('--imm-black',
-        (ease(clamp01((p - BLACK_FROM) / (1 - BLACK_FROM))) * BLACK_MAX).toFixed(3));
+      black = ease(clamp01((p - BLACK_FROM) / (1 - BLACK_FROM))) * BLACK_MAX;
+      stage.style.setProperty('--imm-black', black.toFixed(3));
 
+      /* le cycle des phrases démarre quand la fenêtre est presque ouverte */
+      if (t0 === null && e >= START) t0 = now();
+      if (t0 !== null && !ticking) tick();
+    }
+
+    function now() { return window.performance ? performance.now() : Date.now(); }
+
+    function setWord(el, o, y) {
+      el.style.setProperty('--o', o.toFixed(3));
+      el.style.setProperty('--y', y.toFixed(2) + 'px');
+    }
+
+    /* minuterie des phrases : une frame d'animation par image tant que la scène
+       est à l'écran, arrêtée dès qu'elle en sort */
+    function tick() {
+      if (!visible || t0 === null) { ticking = false; return; }
+      ticking = true;
+      var c = (now() - t0) % CYCLE;
       for (var i = 0; i < words.length; i++) {
-        var win = WINDOWS[i];
-        var t = clamp01((p - win[0]) / (win[1] - win[0]));
+        var t = clamp01((c - i * (SLOT + GAP)) / SLOT);
         var o, y;
         if (t <= 0)            { o = 0; y = RISE; }          /* pas encore là */
         else if (t >= 1)       { o = 0; y = -DRIFT; }        /* déjà partie */
         else if (t < FADE)     { o = ease(t / FADE);       y = RISE * (1 - o); }
         else if (t > 1 - FADE) { o = ease((1 - t) / FADE); y = -DRIFT * (1 - o); }
         else                   { o = 1; y = 0; }             /* pleine lecture */
-        words[i].style.setProperty('--o', o.toFixed(3));
-        words[i].style.setProperty('--y', y.toFixed(2) + 'px');
+        /* la fermeture au noir emporte aussi la phrase en cours */
+        setWord(words[i], o * (1 - black), y);
       }
+      (window.requestAnimationFrame || setTimeout)(tick);
+    }
+
+    /* sortie de scène : phrases masquées, le cycle repartira du début */
+    function reset() {
+      t0 = null;
+      for (var i = 0; i < words.length; i++) setWord(words[i], 0, RISE);
     }
 
     function queue() {
@@ -982,6 +1012,7 @@
     new IntersectionObserver(function (entries) {
       visible = entries[0].isIntersecting;
       if (visible) queue();
+      else reset();
     }, { rootMargin: '12% 0px' }).observe(sec);
 
     window.addEventListener('scroll', queue, { passive: true });

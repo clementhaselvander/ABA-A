@@ -54,19 +54,20 @@ Versions anglaises :
 
 ## Mentions conservées et informations à confirmer
 
-- GPS : le JSON-LD indique `0.475, 9.435`, alors que les liens et cartes Google
-  indiquent `0.4621815, 9.4050848`. Aucune coordonnée ni URL de carte n’a été
-  modifiée. Confirmer le point exact avant harmonisation.
+- GPS (harmonisé le 2 octobre 2026) : les 18 blocs JSON-LD utilisent désormais
+  `0.4621815, 9.4050848`, le point des liens « Y aller » et des cartes Google.
+  L’ancienne valeur `0.475, 9.435` se trouvait à environ 3,5 km.
 - Adresse précise : rue, numéro ou repère d’accès officiel à La Sablière à fournir.
-  Le Plus Code existant `FC74+222` des pages Contact reste à confirmer avec le GPS.
+  Le Plus Code des pages Contact est passé de `FC74+222` (point situé ~35 m plus
+  au nord) à `FC64+V2G`, calculé à partir des coordonnées ci-dessus.
 - L’adresse fiscale d’Akanda issue de l’attestation reste conservée dans les
   mentions légales et est explicitement distinguée du lieu d’accueil.
   Confirmer séparément toute mise à jour de cette adresse administrative.
 - Akanda reste une zone de livraison dans les pages Cigares et leur logique de
   tarification ; cette mention ne situe pas l’établissement.
-- « Hébergement du site internet » désigne le prestataire web, pas une activité
-  hôtelière. Son identité et ses coordonnées restent à compléter, ainsi que le
-  capital social, le responsable de publication et les informations de traitement
+- « Hébergement du site internet » désigne le prestataire web (Hostinger), pas une activité
+  hôtelière. Hébergeur et réalisateur (HVD Consulting) sont renseignés ; restent le
+  responsable de publication et les informations de traitement
   des données déjà signalées comme manquantes dans les mentions légales.
 - Le domaine public définitif reste à confirmer pour les URL canoniques.
 
