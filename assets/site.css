@@ -1231,16 +1231,28 @@ input.pill-radio:focus-visible + .pill { outline: 1px solid var(--gold); outline
   transform: scaleX(calc(.45 + .55 * var(--o, 0)));
 }
 
-/* fermeture au noir : c'est le fond de la section suivante (.section-alt), pas
-   un noir pur, et le fondu va jusqu'à l'opacité pleine — la section suivante se
-   lève donc exactement dans la même valeur, sans marche ni photo en transparence. */
+/* sortie : pas un rideau opaque — un fondu qui se referme par le bas. Le pied
+   de la scène prend exactement le fond de la section suivante (.section-alt,
+   même trame de points), tandis que le haut ne fait qu'assombrir la photo.
+   Quand le sticky se relâche, la photo remonte donc avec la section qui la suit,
+   raccordée sans marche, au lieu de laisser défiler un écran de fond vide. */
 .imm-black {
   position: absolute;
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  background: var(--bg-alt);
+  background: linear-gradient(0deg, var(--bg-alt) 0%, var(--bg-alt) 6%, rgba(27,20,15,.62) 34%, rgba(27,20,15,.38) 100%);
   opacity: var(--imm-black, 0);
+}
+/* la trame de points ne vaut que sur la partie opaque : calque masqué */
+.imm-black::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(213,164,100,.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, #000 6%, transparent 30%);
+  mask-image: linear-gradient(0deg, #000 0%, #000 6%, transparent 30%);
 }
 
 /* smartphone : séquence raccourcie, mouvements réduits de moitié (site.js lit la

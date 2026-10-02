@@ -922,8 +922,8 @@
     var SCALE = .04;   /* échelle de la photo : 1 → 1,04 sur toute la séquence */
     var SHIFT = -16;   /* px : dérive verticale, couverte par le surdimensionnement CSS */
     var SCRIM = [.25, .45];
-    var BLACK_FROM = .86;  /* la fermeture au noir n'occupe que la toute fin */
-    var BLACK_MAX  = 1;    /* opaque : la section suivante prend le relais sans marche */
+    var BLACK_FROM = .6;   /* fondu de sortie étalé sur les 40 % finaux : jamais d'un seul cran de molette */
+    var BLACK_MAX  = 1;    /* pied opaque (site.css) : la section suivante prend le relais sans marche */
 
     /* Ouverture, pilotée par l'approche de la section (0 quand son haut paraît en
        bas de l'écran, 1 quand il atteint le haut, instant où la scène se fige) :
